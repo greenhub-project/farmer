@@ -13,6 +13,14 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::group(['prefix' => 'v1'], function() {
+    // Guest
+    Route::get('/public/count/{model}', 'Api\PublicController@count');
+    Route::get('/status', function() {
+        return ['status' => 'Online'];
+    });
+});
+
 // Mobile dedicated endpoints
 Route::group(['prefix' => 'mobile'], function() {
     Route::get('/messages', 'Mobile\ApiController@messages');
