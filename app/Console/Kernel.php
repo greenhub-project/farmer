@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->call(function () {
             Upload::where('stored', 1)->delete();
-        })->daily();
+        })->hourly();
     }
 
     /**

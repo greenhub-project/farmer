@@ -6,4 +6,13 @@
 @import "variables";
 
 // Bootstrap
-@import "~bootstrap/dist/css/bootstrap";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+@import "bootswatch";
+
+// FontAwesome
+@import "~font-awesome/scss/font-awesome";
+
+.no-gutter > [class*='col-'] {
+  padding-right: 0;
+  padding-left: 0;
+}

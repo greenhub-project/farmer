@@ -18,4 +18,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/register/confirm/{token}', 'Auth\RegisterController@confirmEmail')
+    ->name('register.confirm');
 Route::get('/home', 'HomeController@index')->name('home');

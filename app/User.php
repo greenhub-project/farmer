@@ -38,6 +38,7 @@ class User extends Authenticatable
 
         static::creating(function (User $user) {
             $user->email_token = str_random(30);
+            $user->api_token = str_random(60);
         });
     }
 
