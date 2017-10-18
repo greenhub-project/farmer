@@ -4,16 +4,28 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3 col-sm-6">
-            <card/>
+            <card-icon title="Devices"
+                  icon="fa-mobile"
+                  action="{{ url('api/v1/public/count/devices') }}"/>
         </div>
         <div class="col-md-3 col-sm-6">
-            <card/>
+            <card-icon title="Uploads"
+                  icon="fa-cloud-upload"
+                  action="{{ url('api/v1/public/count/samples') }}"/>
         </div>
-        <div class="col-md-3 col-sm-6">
-            <card/>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <chart/>
         </div>
+        <div class="col-md-6">
+            <chart/>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-3 col-sm-6">
-            <card/>
+            <card-stat title="Most popular brand"
+                   action="{{ url('api/v1/public/count/samples') }}"/>
         </div>
     </div>
 </div>

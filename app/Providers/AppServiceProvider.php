@@ -13,7 +13,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        \Blade::if('verified', function () {
+            return auth()->user()->verified;
+        });
     }
 
     /**

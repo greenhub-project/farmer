@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }} @yield('title')</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -36,7 +36,16 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
+                        @guest
                         &nbsp;
+                        @else
+                            <li>
+                                <a href="{{ url('/home') }}">
+                                    <i class="fa fa-dashboard fa-fw" aria-hidden="true"></i>
+                                    Dashboard
+                                </a>
+                            </li>
+                        @endguest
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -53,9 +62,17 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+                                        <a href="{{ route('settings.account') }}">
+                                            <i class="fa fa-cog fa-fw" aria-hidden="true"></i>
+                                            Settings
+                                        </a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
+                                            <i class="fa fa-sign-out fa-fw" aria-hidden="true"></i>
                                             Logout
                                         </a>
 

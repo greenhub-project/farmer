@@ -1,7 +1,7 @@
 <template>
     <div class="panel panel-default">
         <div class="panel-body">
-            I'm an example component!
+            I'm a chart component!
         </div>
     </div>
 </template>
@@ -15,7 +15,4 @@
 </script>
 
 <style lang="scss" scoped>
-    .panel {
-        height: 200px;
-    }
 </style>

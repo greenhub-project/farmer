@@ -14,11 +14,20 @@ use Illuminate\Http\Request;
 */
 
 Route::group(['prefix' => 'v1'], function() {
+    Route::get('/user', 'Api\UserController@login');
+    Route::get('/count/{model}', 'Api\QueryController@count');
+    Route::get('/devices', 'Api\QueryController@devices');
+    Route::get('/samples', 'Api\QueryController@samples');
+    Route::get('/models', 'Api\QueryController@models');
+
     // Guest
     Route::get('/public/count/{model}', 'Api\PublicController@count');
     Route::get('/status', function() {
         return ['status' => 'Online'];
     });
+
+    // CLI only
+    Route::post('/token/new', 'Api\UserController@token');
 });
 
 // Mobile dedicated endpoints

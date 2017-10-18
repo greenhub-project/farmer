@@ -21,3 +21,13 @@ Auth::routes();
 Route::get('/register/confirm/{token}', 'Auth\RegisterController@confirmEmail')
     ->name('register.confirm');
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/settings', 'Settings\PagesController@redirect')->name('settings');
+Route::get('/settings/account', 'Settings\PagesController@account')->name('settings.account');
+Route::get('/settings/password', 'Settings\PagesController@password')->name('settings.password');
+Route::get('/settings/api', 'Settings\PagesController@api')->name('settings.api');
+
+Route::post('/settings/account', 'Settings\UpdateController@account');
+Route::post('/settings/password', 'Settings\UpdateController@password');
+Route::post('/settings/api', 'Settings\UpdateController@api');
+
