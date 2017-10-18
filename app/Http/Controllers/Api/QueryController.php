@@ -349,6 +349,27 @@ class QueryController extends Controller
                 $builder->where('created_at', '<=', $end);
         }
 
+        // If command export has called return a download response instead
+        if ($request->has('export')) {
+            $builder = is_null($builder) ? Sample::all() : $builder->get();
+            $data = $builder->toArray();
+
+            $filename = 'csv/query_' . Carbon::now()->toDateTimeString() . '.csv';
+            $path = storage_path('app/public/' . $filename);
+            \Storage::disk('public')->put($filename, '');
+
+            $fp = fopen($path, 'w');
+            fputcsv($fp, array_keys($data[0])); // TODO: Extract from resource
+
+            foreach ($data as $fields) {
+                fputcsv($fp, $fields);
+            }
+
+            fclose($fp);
+
+            return response()->download($path, 'output.csv')->deleteFileAfterSend(true);
+        }
+
         // Load every model relationship or just specified ones
         if ($request->has('everything')) {
             $builder = is_null($builder) ? Sample::withAll() : $builder->withAll();
