@@ -45,7 +45,7 @@ class User extends Authenticatable
     /**
      * Confirm the user.
      */
-    public function confirmEmail()
+    public function verify()
     {
         $this->verified = true;
         $this->email_token = null;

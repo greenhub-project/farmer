@@ -49,7 +49,7 @@ class NewUserRegistered extends Notification
             ->greeting('Welcome, ' . $this->user->name)
             ->line('Thank you for signing up for GreenHub!')
             ->line('Please verify Your Email Address by clicking the button below.')
-            ->action('Confirm my email', route('register.confirm', $this->user->email_token))
+            ->action('Confirm my email', route('register.verify', $this->user->email_token))
             ->line('Thank you for using our application!');
     }
 

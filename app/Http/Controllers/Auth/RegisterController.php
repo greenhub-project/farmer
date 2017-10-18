@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Notifications\NewUserRegistered;
 use App\User;
 use Carbon\Carbon;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -40,7 +39,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest')->except('verify');
     }
 
     /**
@@ -97,11 +96,12 @@ class RegisterController extends Controller
      * @param  string $token
      * @return mixed
      */
-    public function confirmEmail($token)
+    public function verify($token)
     {
-        User::where('email_token', $token)->firstOrFail()->confirmEmail();
+        $user = User::where('email_token', $token)->firstOrFail();
+        $user->verify();
 
-        flash()->success('You are now confirmed.', 'Please login.');
+        flash()->success('You are now verified.', 'Please login or continue navigation');
 
         return redirect('login');
     }
