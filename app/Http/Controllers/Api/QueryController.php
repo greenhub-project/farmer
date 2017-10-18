@@ -135,7 +135,7 @@ class QueryController extends Controller
     {
         // Get the filters and per page args
         $builder = null;
-        $filters = json_decode($request->filters);
+        $filters = $request->has('filters') ? json_decode($request->filters) : [];
         $perPage = $request->has('per_page') ? $request->per_page : 10;
 
         // Query through any existing filters
@@ -259,7 +259,7 @@ class QueryController extends Controller
 
         // Get the filters and per page args
         $builder = null;
-        $filters = json_decode($request->filters);
+        $filters = $request->has('filters') ? json_decode($request->filters) : [];
         $perPage = $request->has('per_page') ? $request->per_page : 10;
 
         // Query through any existing filters
@@ -316,7 +316,9 @@ class QueryController extends Controller
                     $date = $date->subHours($value);
                     break;
                 default:
-                    return json_encode(['errors' => ['Invalid time interval']]);
+                    return json_encode([
+                        'errors' => ['Invalid time interval']
+                    ]);
             }
 
             $builder = is_null($builder) ? Sample::where('created_at', '>=', $date) :
@@ -351,6 +353,7 @@ class QueryController extends Controller
 
         // If command export has called return a download response instead
         if ($request->has('export')) {
+            \Log::info('Got to export samples part...');
             $builder = is_null($builder) ? Sample::all() : $builder->get();
             $data = $builder->toArray();
 
