@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\MobileMessage;
+use App\Dataset;
 use Illuminate\Http\Request;
 
-class MobileMessageController extends Controller
+class DatasetsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class MobileMessageController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\MobileMessage  $mobileMessage
+     * @param  \App\Dataset  $dataset
      * @return \Illuminate\Http\Response
      */
-    public function show(MobileMessage $mobileMessage)
+    public function show(Dataset $dataset)
     {
         //
     }
@@ -52,10 +52,10 @@ class MobileMessageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\MobileMessage  $mobileMessage
+     * @param  \App\Dataset  $dataset
      * @return \Illuminate\Http\Response
      */
-    public function edit(MobileMessage $mobileMessage)
+    public function edit(Dataset $dataset)
     {
         //
     }
@@ -64,10 +64,10 @@ class MobileMessageController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\MobileMessage  $mobileMessage
+     * @param  \App\Dataset  $dataset
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MobileMessage $mobileMessage)
+    public function update(Request $request, Dataset $dataset)
     {
         //
     }
@@ -75,10 +75,10 @@ class MobileMessageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\MobileMessage  $mobileMessage
+     * @param  \App\Dataset  $dataset
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MobileMessage $mobileMessage)
+    public function destroy(Dataset $dataset)
     {
         //
     }

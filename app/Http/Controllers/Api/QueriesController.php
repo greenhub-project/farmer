@@ -11,7 +11,7 @@ use App\Sample;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class QueryController extends Controller
+class QueriesController extends Controller
 {
     private $availableModels = [
         'devices',

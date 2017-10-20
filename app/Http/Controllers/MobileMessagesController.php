@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Device;
+use App\MobileMessage;
 use Illuminate\Http\Request;
 
-class DeviceController extends Controller
+class MobileMessagesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class DeviceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Device  $device
+     * @param  \App\MobileMessage  $mobileMessage
      * @return \Illuminate\Http\Response
      */
-    public function show(Device $device)
+    public function show(MobileMessage $mobileMessage)
     {
         //
     }
@@ -52,10 +52,10 @@ class DeviceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Device  $device
+     * @param  \App\MobileMessage  $mobileMessage
      * @return \Illuminate\Http\Response
      */
-    public function edit(Device $device)
+    public function edit(MobileMessage $mobileMessage)
     {
         //
     }
@@ -64,10 +64,10 @@ class DeviceController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Device  $device
+     * @param  \App\MobileMessage  $mobileMessage
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Device $device)
+    public function update(Request $request, MobileMessage $mobileMessage)
     {
         //
     }
@@ -75,10 +75,10 @@ class DeviceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Device  $device
+     * @param  \App\MobileMessage  $mobileMessage
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Device $device)
+    public function destroy(MobileMessage $mobileMessage)
     {
         //
     }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Dataset;
+use App\Device;
 use Illuminate\Http\Request;
 
-class DatasetController extends Controller
+class DevicesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class DatasetController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Dataset  $dataset
+     * @param  \App\Device  $device
      * @return \Illuminate\Http\Response
      */
-    public function show(Dataset $dataset)
+    public function show(Device $device)
     {
         //
     }
@@ -52,10 +52,10 @@ class DatasetController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Dataset  $dataset
+     * @param  \App\Device  $device
      * @return \Illuminate\Http\Response
      */
-    public function edit(Dataset $dataset)
+    public function edit(Device $device)
     {
         //
     }
@@ -64,10 +64,10 @@ class DatasetController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Dataset  $dataset
+     * @param  \App\Device  $device
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Dataset $dataset)
+    public function update(Request $request, Device $device)
     {
         //
     }
@@ -75,10 +75,10 @@ class DatasetController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Dataset  $dataset
+     * @param  \App\Device  $device
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Dataset $dataset)
+    public function destroy(Device $device)
     {
         //
     }

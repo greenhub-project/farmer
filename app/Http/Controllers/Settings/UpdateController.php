@@ -17,19 +17,14 @@ class UpdateController extends Controller
         $this->middleware('auth');
     }
 
-    public function profile(Request $request)
+    public function account(Request $request)
     {
-        $this->validate($request, [
+        $data = $request->validate([
             'name' => 'required',
             'email'=> 'required|email',
         ]);
 
-        $user = \Auth::user();
-
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-        ]);
+        auth()->user()->update($data);
 
         flash()->success('Profile updated!', 'The changes were saved successfully');
 
@@ -38,15 +33,13 @@ class UpdateController extends Controller
 
     public function password(Request $request)
     {
-        $this->validate($request, [
+        $data = $request->validate([
             'new_password' => 'required|min:6',
-            'confirm_password'=> 'required|min:6|same:new_password',
+            'repeat_password'=> 'required|min:6|same:new_password',
         ]);
 
-        $user = \Auth::user();
-
-        $user->update([
-            'password' => bcrypt($request->new_password),
+        auth()->user()->update([
+            'password' => bcrypt($data['new_password'])
         ]);
 
         flash()->success('Password changed!', 'The changes were saved successfully');
@@ -56,9 +49,7 @@ class UpdateController extends Controller
 
     public function api()
     {
-        $user = \Auth::user();
-
-        $user->update([
+        auth()->user()->update([
             'api_token' => str_random(60),
         ]);
 

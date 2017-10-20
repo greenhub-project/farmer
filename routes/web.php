@@ -30,3 +30,5 @@ Route::post('/settings/account', 'Settings\UpdateController@account');
 Route::post('/settings/password', 'Settings\UpdateController@password');
 Route::post('/settings/api', 'Settings\UpdateController@api');
 
+Route::get('/stats/count/{model}', 'StatsController@count');
+
