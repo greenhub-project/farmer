@@ -26,7 +26,7 @@
         return colors[keys[ keys.length * Math.random() << 0]];
     };
 
-    const toRgba = (rgb, alpha = '0.4') => rgb.replace(/rgb/i, 'rgba').replace(/\)/i,`, ${alpha})`);
+    const toRgba = (rgb, alpha = '0.5') => rgb.replace(/rgb/i, 'rgba').replace(/\)/i,`, ${alpha})`);
 
     export default {
         props: ['action', 'label'],
@@ -71,6 +71,11 @@
                             borderColor: this.color,
                             data: this.totals
                         }]
+                    },
+                    options: {
+                        legend: {
+                            display: false
+                        }
                     }
                 });
             }
