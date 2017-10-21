@@ -74652,7 +74652,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['action', 'title'],
+    props: ['action', 'icon', 'title'],
     data: function data() {
         return {
             count: 0,
@@ -74687,7 +74687,7 @@ var render = function() {
   return _c("div", { staticClass: "panel panel-default" }, [
     _c("div", { staticClass: "panel-body" }, [
       _c("div", { staticClass: "data" }, [
-        _c("h4", [_vm._v(_vm._s(_vm.title))]),
+        _c("i", { staticClass: "fa fa-3x fa-fw", class: _vm.icon }),
         _vm._v(" "),
         _vm.isLoading
           ? _c("div", { staticClass: "data__loader" }, [

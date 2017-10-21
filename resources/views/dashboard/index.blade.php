@@ -17,12 +17,12 @@
             <div class="row">
                 <div class="col-lg-12">
                     <live-counter-panel
-                            title="Samples"
+                            icon="fa-cloud-upload"
                             action="{{ url('/stats/total/samples') }}"/>
                 </div>
                 <div class="col-lg-12">
                     <live-counter-panel
-                            title="Devices"
+                            icon="fa-mobile"
                             action="{{ url('/stats/total/devices') }}"/>
                 </div>
             </div>
