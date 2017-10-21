@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Farmer\Models\Protocol;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;

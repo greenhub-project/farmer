@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Mobile;
 
-use App\Device;
+use App\Farmer\Models\MobileMessage;
+use App\Farmer\Models\Protocol\Device;
 use App\Http\Controllers\Controller;
 use App\Jobs\ProcessUpload;
-use App\MobileMessage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Farmer\Models\User;
 use App\Http\Controllers\Controller;
 use App\Notifications\NewUserRegistered;
-use App\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;

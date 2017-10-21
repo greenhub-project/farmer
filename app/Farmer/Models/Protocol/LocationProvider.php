@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Farmer\Models\Protocol;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CpuStatus extends Model
+class LocationProvider extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,9 +12,7 @@ class CpuStatus extends Model
      * @var array
      */
     protected $fillable = [
-        'usage',
-        'up_time',
-        'sleep_time'
+        'provider'
     ];
 
     public function sample()

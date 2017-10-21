@@ -2,7 +2,7 @@
 
 namespace App\Console;
 
-use App\Upload;
+use App\Farmer\Models\Upload;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 

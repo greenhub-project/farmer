@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Device;
 use App\Http\Controllers\Controller;
-use App\Sample;
-use App\User;
 
 class PublicController extends Controller
 {
@@ -21,20 +18,10 @@ class PublicController extends Controller
 
     public function count($model)
     {
-        switch ($model) {
-            case 'devices':
-                $total = Device::count();
-                break;
-            case 'samples':
-                $total = Sample::count();
-                break;
-            case 'users':
-                $total = User::count();
-                break;
-            default:
-                $total = -1;
+        try {
+            return \DB::table($model)->count();
+        } catch (\Exception $e) {
+            return -1;
         }
-
-        return json_encode($total);
     }
 }

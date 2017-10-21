@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Device;
+use App\Farmer\Models\Protocol\Device;
 use Illuminate\Http\Request;
 
 class DevicesController extends Controller
@@ -41,7 +41,7 @@ class DevicesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Device  $device
+     * @param  \App\Farmer\Models\Protocol\Device  $device
      * @return \Illuminate\Http\Response
      */
     public function show(Device $device)
@@ -52,7 +52,7 @@ class DevicesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Device  $device
+     * @param  \App\Farmer\Models\Protocol\Device  $device
      * @return \Illuminate\Http\Response
      */
     public function edit(Device $device)
@@ -64,7 +64,7 @@ class DevicesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Device  $device
+     * @param  \App\Farmer\Models\Protocol\Device  $device
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Device $device)
@@ -75,7 +75,7 @@ class DevicesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Device  $device
+     * @param  \App\Farmer\Models\Protocol\Device  $device
      * @return \Illuminate\Http\Response
      */
     public function destroy(Device $device)

@@ -2,8 +2,8 @@
 
 namespace App\Jobs;
 
-use App\Device;
-use App\Upload;
+use App\Farmer\Models\Protocol\Device;
+use App\Farmer\Models\Upload;
 use Illuminate\Bus\Queueable;
 use Illuminate\Database\QueryException;
 use Illuminate\Queue\SerializesModels;

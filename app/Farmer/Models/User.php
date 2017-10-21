@@ -1,7 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Farmer\Models;
 
+use App\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 

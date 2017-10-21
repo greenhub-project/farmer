@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Farmer\Models\Protocol;
 
 use Illuminate\Database\Eloquent\Model;
 
-class StorageDetails extends Model
+class Settings extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,14 +12,13 @@ class StorageDetails extends Model
      * @var array
      */
     protected $fillable = [
-        'free',
-        'total',
-        'free_external',
-        'total_external',
-        'free_system',
-        'total_system',
-        'free_secondary',
-        'total_secondary'
+        'bluetooth_enabled',
+        'location_enabled',
+        'power_saver_enabled',
+        'flashlight_enabled',
+        'nfc_enabled',
+        'unknown_sources',
+        'developer_mode'
     ];
 
     public function sample()

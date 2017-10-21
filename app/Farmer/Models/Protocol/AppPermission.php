@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Farmer\Models\Protocol;
 
 use Illuminate\Database\Eloquent\Model;
 
-class LocationProvider extends Model
+class AppPermission extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,11 +12,11 @@ class LocationProvider extends Model
      * @var array
      */
     protected $fillable = [
-        'provider'
+        'permission'
     ];
 
-    public function sample()
+    public function process()
     {
-        return $this->belongsTo(Sample::class);
+        return $this->belongsTo(AppProcess::class);
     }
 }

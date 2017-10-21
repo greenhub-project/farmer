@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\MobileMessage;
+use App\Farmer\Models\MobileMessage;
 use Illuminate\Http\Request;
 
 class MobileMessagesController extends Controller
@@ -41,7 +41,7 @@ class MobileMessagesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\MobileMessage  $mobileMessage
+     * @param  \App\Farmer\Models\MobileMessage  $mobileMessage
      * @return \Illuminate\Http\Response
      */
     public function show(MobileMessage $mobileMessage)
@@ -52,7 +52,7 @@ class MobileMessagesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\MobileMessage  $mobileMessage
+     * @param  \App\Farmer\Models\MobileMessage  $mobileMessage
      * @return \Illuminate\Http\Response
      */
     public function edit(MobileMessage $mobileMessage)
@@ -64,7 +64,7 @@ class MobileMessagesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\MobileMessage  $mobileMessage
+     * @param  \App\Farmer\Models\MobileMessagee  $mobileMessage
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, MobileMessage $mobileMessage)
@@ -75,7 +75,7 @@ class MobileMessagesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\MobileMessage  $mobileMessage
+     * @param  \App\Farmer\Models\MobileMessage  $mobileMessage
      * @return \Illuminate\Http\Response
      */
     public function destroy(MobileMessage $mobileMessage)

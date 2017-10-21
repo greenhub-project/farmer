@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Farmer\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Upload extends Model
+class MobileMessage extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,6 +12,9 @@ class Upload extends Model
      * @var array
      */
     protected $fillable = [
-        'data',
+        'recipient',
+        'type',
+        'title',
+        'body',
     ];
 }

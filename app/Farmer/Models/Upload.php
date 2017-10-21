@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Farmer\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AppPermission extends Model
+class Upload extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,11 +12,6 @@ class AppPermission extends Model
      * @var array
      */
     protected $fillable = [
-        'permission'
+        'data',
     ];
-
-    public function process()
-    {
-        return $this->belongsTo(AppProcess::class);
-    }
 }
