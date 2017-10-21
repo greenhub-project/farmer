@@ -39,7 +39,7 @@
                         @guest
                         &nbsp;
                         @else
-                            <li>
+                            <li class="{{ set_active('home') }}">
                                 <a href="{{ url('/home') }}">
                                     <i class="fa fa-dashboard fa-fw" aria-hidden="true"></i>
                                     Dashboard

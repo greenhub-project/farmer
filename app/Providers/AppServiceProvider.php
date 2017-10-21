@@ -16,6 +16,10 @@ class AppServiceProvider extends ServiceProvider
         \Blade::if('verified', function () {
             return auth()->user()->verified;
         });
+
+        \Blade::if('admin', function () {
+            return auth()->user()->hasRole('admin');
+        });
     }
 
     /**

@@ -49,12 +49,12 @@ class UpdateController extends Controller
 
     public function api()
     {
-        auth()->user()->update([
+        $user = auth()->user();
+
+        $user->update([
             'api_token' => str_random(60),
         ]);
 
-        flash()->success('New token generated', 'Make sure to keep it in a secure place.');
-
-        return back();
+        return json_encode($user->api_token);
     }
 }

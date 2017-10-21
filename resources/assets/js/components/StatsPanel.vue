@@ -3,6 +3,11 @@
         <ul class="list-group stats__list">
             <li class="list-group-item">
                 <h3 class="list-group-item-heading">{{ title }}</h3>
+                <div class="pull-right">
+                    <button type="button" class="btn btn-xs btn-info" title="Refresh" @click="refreshData">
+                        <i class="fa fa-refresh"></i>
+                    </button>
+                </div>
             </li>
             <li class="list-group-item">
                 Today's
@@ -30,6 +35,9 @@
         methods: {
             setInterval(name) {
                 return this.action + '?interval=' + name
+            },
+            refreshData() {
+                this.$children.filter(child => child.$emit('refresh'));
             }
         }
     }

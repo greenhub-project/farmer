@@ -23,31 +23,23 @@
                     </div>
                 </div>
                 <div class="col-sm-9">
-                    <div id="profile" class="panel panel-default">
+                    <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-key fa-fw" aria-hidden="true"></i>&nbsp; API Credentials
+                            <i class="fa fa-cubes fa-fw" aria-hidden="true"></i>&nbsp; API Credentials
                         </div>
+                        @verified
+                        <api-form
+                                title="Generate new token"
+                                token="{{ $user->api_token }}"
+                                action="{{ url('/settings/api') }}"/>
+                        @else
                         <div class="panel-body">
-                            <table class="table table-striped">
-                                <thead>
-                                <th>API token</th>
-                                <th>&nbsp;</th>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td><code>{{ $user->api_token }}</code></td>
-                                    <td>
-                                        <form method="post" action="{{ url('/settings/api') }}">
-                                            {{ csrf_field() }}
-                                            <button type="submit" class="btn btn-default" title="Generate new token">
-                                                <i class="fa fa-refresh"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            <div class="alert alert-dismissible alert-danger">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                Please verify your email to see your API token!
+                            </div>
                         </div>
+                        @endverified
                     </div>
                 </div>
             </div>

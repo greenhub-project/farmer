@@ -20,6 +20,7 @@
         },
         mounted() {
             this.getData();
+            this.$on('refresh', () => this.getData());
         },
         methods: {
             getData() {

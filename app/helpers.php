@@ -1,4 +1,7 @@
 <?php
+
+use \Illuminate\Support\Facades\Request;
+
 /**
  * Flash Helper.
  *
@@ -13,4 +16,9 @@ function flash($title = null, $text = null)
         return $flash;
     }
     return $flash->info($title, $text);
+}
+
+function set_active($path, $active = 'active')
+{
+    return Request::is($path) ? $active : '';
 }
