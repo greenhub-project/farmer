@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Farmer\Traits;
 
 use App\Farmer\Models\Permission;
 use App\Farmer\Models\Role;

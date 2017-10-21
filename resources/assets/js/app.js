@@ -17,8 +17,8 @@ window.Vue = require('vue');
 
 Vue.component('stats-panel', require('./components/StatsPanel.vue'));
 Vue.component('api-form', require('./components/ApiForm.vue'));
-Vue.component('chart', require('./components/Chart.vue'));
+Vue.component('chart-panel', require('./components/ChartPanel.vue'));
 
-const app = new Vue({
+new Vue({
     el: '#app'
 });

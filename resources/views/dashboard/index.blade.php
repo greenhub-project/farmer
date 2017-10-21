@@ -15,7 +15,16 @@
         </div>
     </div>
     <div class="row">
-
+        <div class="col-md-6">
+            <chart-panel
+                    label="Uploads received last 7 days"
+                    action="{{ url('/stats/weekly/samples') }}"/>
+        </div>
+        <div class="col-md-6">
+            <chart-panel
+                    label="Devices installs last 7 days"
+                    action="{{ url('/stats/weekly/devices') }}"/>
+        </div>
     </div>
 </div>
 @endsection

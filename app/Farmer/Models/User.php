@@ -2,7 +2,7 @@
 
 namespace App\Farmer\Models;
 
-use App\HasRoles;
+use App\Farmer\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 

@@ -39,8 +39,8 @@
                         @guest
                         &nbsp;
                         @else
-                            <li class="{{ set_active('home') }}">
-                                <a href="{{ url('/home') }}">
+                            <li class="{{ set_active('dashboard') }}">
+                                <a href="{{ url('/dashboard') }}">
                                     <i class="fa fa-dashboard fa-fw" aria-hidden="true"></i>
                                     Dashboard
                                 </a>
