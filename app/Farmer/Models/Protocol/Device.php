@@ -37,10 +37,17 @@ class Device extends Model
         return $this->hasMany(Sample::class);
     }
 
+    public function isActive()
+    {
+        return !! $this->samples()
+            ->where('created_at', '>=', Carbon::now()->subHours(24))
+            ->count();
+    }
+
     public function scopeActive($query)
     {
         return $query->whereHas('samples', function ($query) {
-            $query->where('created_at', '>=', Carbon::now()->subDays(1));
+            $query->where('created_at', '>=', Carbon::now()->subHours(24));
         });
     }
 }

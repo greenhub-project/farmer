@@ -45,12 +45,18 @@
                                     Dashboard
                                 </a>
                             </li>
-                                <li class="{{ set_active('devices') }}">
-                                    <a href="{{ url('/devices') }}">
-                                        <i class="fa fa-dashboard fa-fw" aria-hidden="true"></i>
-                                        Devices
-                                    </a>
-                                </li>
+                            <li class="{{ set_active('devices') }}">
+                                <a href="{{ url('/devices') }}">
+                                    <i class="fa fa-mobile fa-fw" aria-hidden="true"></i>
+                                    Devices
+                                </a>
+                            </li>
+                            <li class="{{ set_active('samples') }}">
+                                <a href="{{ url('/samples') }}">
+                                    <i class="fa fa-cloud-upload fa-fw" aria-hidden="true"></i>
+                                    Samples
+                                </a>
+                            </li>
                         @endguest
                     </ul>
 

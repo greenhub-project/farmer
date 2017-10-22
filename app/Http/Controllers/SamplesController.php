@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Farmer\Models\Protocol\Device;
 use Illuminate\Http\Request;
 
-class DevicesController extends Controller
+class SamplesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,19 +13,17 @@ class DevicesController extends Controller
      */
     public function index()
     {
-        $devices = Device::simplePaginate();
-
-        return view('devices.index', compact('devices'));
+        return view('samples.index');
     }
 
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Farmer\Models\Protocol\Device  $device
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Device $device)
+    public function show($id)
     {
         //
     }
@@ -35,10 +32,10 @@ class DevicesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Farmer\Models\Protocol\Device  $device
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Device $device)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -46,10 +43,10 @@ class DevicesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Farmer\Models\Protocol\Device  $device
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Device $device)
+    public function destroy($id)
     {
         //
     }

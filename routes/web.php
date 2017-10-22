@@ -22,6 +22,9 @@ Route::get('/register/verify/{token}', 'Auth\RegisterController@verify')->name('
 
 Route::get('/dashboard', 'Dashboard\PagesController@dashboard')->name('dashboard');
 
+Route::resource('devices', 'DevicesController')->only(['index', 'show', 'update', 'destroy']);
+Route::resource('samples', 'SamplesController')->only(['index', 'show', 'update', 'destroy']);
+
 Route::get('/settings', 'Settings\PagesController@redirect')->name('settings');
 Route::get('/settings/account', 'Settings\PagesController@account')->name('settings.account');
 Route::get('/settings/password', 'Settings\PagesController@password')->name('settings.password');
