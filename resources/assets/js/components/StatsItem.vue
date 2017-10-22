@@ -19,11 +19,11 @@
             }
         },
         mounted() {
-            this.getData();
+            this.fetchData();
             this.$on('refresh', () => this.getData());
         },
         methods: {
-            getData() {
+            fetchData() {
                 this.isLoading = true;
                 axios.get(this.action)
                     .then(response => {

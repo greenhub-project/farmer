@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Farmer\Models\Protocol\Sample;
 use Illuminate\Http\Request;
 
 class SamplesController extends Controller
@@ -9,11 +10,30 @@ class SamplesController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('samples.index');
+        $samples = null;
+
+        $params = $request->validate([
+            'q' => 'nullable'
+        ]);
+
+        $noParams = ! $request->has('q') or is_null($params['q']);
+
+        if ($noParams) {
+            $samples = Sample::simplePaginate();
+        } else {
+            $params['q'] = '%' . $params['q'] . '%';
+            $samples = Sample::where('model', 'like', $params['q'])
+                ->orWhere('brand', 'like', $params['q'])
+                ->orWhere('os_version', 'like', $params['q'])
+                ->simplePaginate();
+        }
+
+        return view('samples.index', compact('samples'));
     }
 
 

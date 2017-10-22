@@ -10,11 +10,28 @@ class DevicesController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $devices = Device::simplePaginate();
+        $devices = null;
+
+        $params = $request->validate([
+            'q' => 'nullable'
+        ]);
+
+        $noParams = ! $request->has('q') or is_null($params['q']);
+
+        if ($noParams) {
+            $devices = Device::simplePaginate();
+        } else {
+            $params['q'] = '%' . $params['q'] . '%';
+            $devices = Device::where('model', 'like', $params['q'])
+                ->orWhere('brand', 'like', $params['q'])
+                ->orWhere('os_version', 'like', $params['q'])
+                ->simplePaginate();
+        }
 
         return view('devices.index', compact('devices'));
     }

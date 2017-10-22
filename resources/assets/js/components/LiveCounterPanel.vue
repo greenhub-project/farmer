@@ -2,7 +2,7 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="data">
-                <i class="fa fa-3x fa-fw" :class="icon" @click="getData"></i>
+                <i class="fa fa-3x fa-fw" :class="icon" @click="fetchData"></i>
                 <div class="data__loader" v-if="isLoading">
                     <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
                     <span class="sr-only">Loading...</span>
@@ -24,10 +24,10 @@
             }
         },
         mounted() {
-            this.getData();
+            this.fetchData();
         },
         methods: {
-            getData() {
+            fetchData() {
                 this.isLoading = true;
                 axios.get(this.action)
                     .then(response => {

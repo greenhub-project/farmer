@@ -24,12 +24,27 @@ class Sample extends Model
         'memory_user',
         'triggered_by',
         'network_status',
-        'distance',
         'screen_brightness',
         'screen_on',
         'timezone',
         'country_code'
     ];
+
+    public function isScreenOn()
+    {
+        return $this->screen_on == 1;
+    }
+
+    public function memoryActive()
+    {
+        $memory = $this->memory_active / 1024;
+
+        if ($memory < 1024) {
+            return round($memory, 2) . ' MB';
+        } else {
+            return round($memory / 1024, 2) . ' GB';
+        }
+    }
 
     public function device()
     {

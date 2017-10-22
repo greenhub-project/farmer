@@ -47,10 +47,10 @@
         },
         mounted() {
             this.color = randomProperty();
-            this.getData();
+            this.fetchData();
         },
         methods: {
-            getData() {
+            fetchData() {
                 this.isLoading = true;
                 axios.get(this.action)
                     .then(response => {

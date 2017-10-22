@@ -16,6 +16,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('api-form', require('./components/ApiForm.vue'));
+Vue.component('search-box', require('./components/SearchBox.vue'));
 Vue.component('stats-panel', require('./components/StatsPanel.vue'));
 Vue.component('chart-panel', require('./components/ChartPanel.vue'));
 Vue.component('live-counter-panel', require('./components/LiveCounterPanel.vue'));
