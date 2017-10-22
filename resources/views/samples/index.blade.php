@@ -7,7 +7,12 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="page-header">
-                    <h1>Samples</h1>
+                    <h1>
+                        Samples
+                        @query(Request::get('q'))
+                            <small>Results for '{{ Request::get('q') }}'</small>
+                        @endquery
+                    </h1>
                     <search-box
                             action="{{ route('samples.index') }}"/>
                 </div>

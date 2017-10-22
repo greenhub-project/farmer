@@ -20,6 +20,10 @@ class AppServiceProvider extends ServiceProvider
         \Blade::if('admin', function () {
             return auth()->user()->hasRole('admin');
         });
+
+        \Blade::if('query', function ($param) {
+            return ! is_null($param) and $param != '';
+        });
     }
 
     /**
