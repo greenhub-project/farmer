@@ -49,11 +49,16 @@ class StatsCounterController extends Controller
      * from given model and group them by date
      *
      * @param string $model model name
+     * @param Request $request
      * @return array
      */
-    public function weekly($model)
+    public function weekly($model, Request $request)
     {
         $today = Carbon::today();
+
+        $params = $request->validate([
+            'device' => 'nullable'
+        ]);
 
         $data = \DB::table($model)
             ->selectRaw('count(*) as total, DATE(created_at) as day')
@@ -66,7 +71,7 @@ class StatsCounterController extends Controller
             return $elem;
         });
 
-        return json_encode($data);
+        return json_encode($data);;
     }
 
     /**

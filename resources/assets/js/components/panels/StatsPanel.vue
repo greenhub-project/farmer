@@ -1,6 +1,6 @@
 <template>
     <div class="panel panel-default">
-        <ul class="list-group stats__list">
+        <ul class="list-group list-group--spaced">
             <li class="list-group-item">
                 <h3 class="list-group-item-heading">{{ title }}</h3>
                 <div class="pull-right">
@@ -42,10 +42,3 @@
         }
     }
 </script>
-
-<style lang="scss" scoped>
-    .stats__list > .list-group-item {
-        display: flex;
-        justify-content: space-between;
-    }
-</style>

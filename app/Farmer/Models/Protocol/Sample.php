@@ -30,6 +30,8 @@ class Sample extends Model
         'country_code'
     ];
 
+    // Helpers
+
     public function isScreenOn()
     {
         return $this->screen_on == 1;
@@ -45,6 +47,8 @@ class Sample extends Model
             return round($memory / 1024, 2) . ' GB';
         }
     }
+
+    // Relationships
 
     public function device()
     {

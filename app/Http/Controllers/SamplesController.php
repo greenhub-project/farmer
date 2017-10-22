@@ -8,6 +8,16 @@ use Illuminate\Http\Request;
 class SamplesController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -41,12 +51,12 @@ class SamplesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Sample $sample
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Sample $sample)
     {
-        //
+        return view('samples.show', compact('sample'));
     }
 
     /**

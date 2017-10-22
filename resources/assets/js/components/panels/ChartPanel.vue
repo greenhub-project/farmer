@@ -10,7 +10,7 @@
 </template>
 
 <script>
-    import LineChart from './LineChart.vue';
+    import LineChart from '../charts/LineChart.vue';
     export default {
         props: ['action', 'label'],
         components: {
@@ -18,6 +18,3 @@
         }
     }
 </script>
-
-<style lang="scss" scoped>
-</style>

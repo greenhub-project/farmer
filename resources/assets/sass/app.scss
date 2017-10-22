@@ -11,3 +11,8 @@
 
 // FontAwesome
 @import "~font-awesome/scss/font-awesome";
+
+.list-group--spaced > .list-group-item {
+  display: flex;
+  justify-content: space-between;
+}

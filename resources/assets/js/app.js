@@ -15,11 +15,11 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('api-form', require('./components/ApiForm.vue'));
-Vue.component('search-box', require('./components/SearchBox.vue'));
-Vue.component('stats-panel', require('./components/StatsPanel.vue'));
-Vue.component('chart-panel', require('./components/ChartPanel.vue'));
-Vue.component('live-counter-panel', require('./components/LiveCounterPanel.vue'));
+Vue.component('api-form', require('./components/forms/ApiForm.vue'));
+Vue.component('search-box', require('./components/forms/SearchBox.vue'));
+Vue.component('stats-panel', require('./components/panels/StatsPanel.vue'));
+Vue.component('chart-panel', require('./components/panels/ChartPanel.vue'));
+Vue.component('live-counter-panel', require('./components/panels/LiveCounterPanel.vue'));
 
 new Vue({
     el: '#app'
