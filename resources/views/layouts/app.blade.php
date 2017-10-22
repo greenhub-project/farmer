@@ -45,6 +45,12 @@
                                     Dashboard
                                 </a>
                             </li>
+                                <li class="{{ set_active('devices') }}">
+                                    <a href="{{ url('/devices') }}">
+                                        <i class="fa fa-dashboard fa-fw" aria-hidden="true"></i>
+                                        Devices
+                                    </a>
+                                </li>
                         @endguest
                     </ul>
 

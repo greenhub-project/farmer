@@ -74621,7 +74621,7 @@ exports = module.exports = __webpack_require__(6)(undefined);
 
 
 // module
-exports.push([module.i, "\n.fa[data-v-f80b98cc] {\n  color: #2C3E50;\n}\n.data[data-v-f80b98cc] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  min-height: 48px;\n}\n.data .counter[data-v-f80b98cc] {\n    font-size: 2.4rem;\n    font-weight: 700;\n}\n", ""]);
+exports.push([module.i, "\n.fa[data-v-f80b98cc] {\n  color: #2C3E50;\n  transition: all .2s ease-in-out;\n}\n.fa[data-v-f80b98cc]:hover {\n  transform: scale(1.2);\n  cursor: pointer;\n}\n.data[data-v-f80b98cc] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  min-height: 48px;\n}\n.data .counter[data-v-f80b98cc] {\n    font-size: 2.4rem;\n    font-weight: 700;\n}\n", ""]);
 
 // exports
 
@@ -74687,7 +74687,11 @@ var render = function() {
   return _c("div", { staticClass: "panel panel-default" }, [
     _c("div", { staticClass: "panel-body" }, [
       _c("div", { staticClass: "data" }, [
-        _c("i", { staticClass: "fa fa-3x fa-fw", class: _vm.icon }),
+        _c("i", {
+          staticClass: "fa fa-3x fa-fw",
+          class: _vm.icon,
+          on: { click: _vm.getData }
+        }),
         _vm._v(" "),
         _vm.isLoading
           ? _c("div", { staticClass: "data__loader" }, [

@@ -1,18 +1,10 @@
 @extends('layouts.app')
 
+@section('title', ' - Account')
+
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
-            <stats-panel
-                title="Samples Received"
-                action="{{ url('/stats/count/samples') }}"/>
-        </div>
-        <div class="col-md-4">
-            <stats-panel
-                title="Devices Installs"
-                action="{{ url('/stats/count/devices') }}"/>
-        </div>
         <div class="col-md-4">
             <div class="row">
                 <div class="col-lg-12">
@@ -26,6 +18,16 @@
                             action="{{ url('/stats/total/devices') }}"/>
                 </div>
             </div>
+        </div>
+        <div class="col-md-4">
+            <stats-panel
+                title="Samples Received"
+                action="{{ url('/stats/count/samples') }}"/>
+        </div>
+        <div class="col-md-4">
+            <stats-panel
+                title="Devices Installs"
+                action="{{ url('/stats/count/devices') }}"/>
         </div>
     </div>
     <div class="row">

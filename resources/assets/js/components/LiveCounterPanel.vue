@@ -2,7 +2,7 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="data">
-                <i class="fa fa-3x fa-fw" :class="icon"></i>
+                <i class="fa fa-3x fa-fw" :class="icon" @click="getData"></i>
                 <div class="data__loader" v-if="isLoading">
                     <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
                     <span class="sr-only">Loading...</span>
@@ -44,6 +44,11 @@
 
     .fa {
         color: $brand-primary;
+        transition: all .2s ease-in-out;
+    }
+    .fa:hover {
+        transform: scale(1.2);
+        cursor: pointer;
     }
     .data {
         display: flex;
