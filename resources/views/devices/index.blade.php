@@ -52,7 +52,7 @@
                         @endforeach
                         </tbody>
                     </table>
-                    {{ $devices->links() }}
+                    {{ $devices->appends(Request::except('page'))->links() }}
                 @else
                     <p class="text-primary">There are no matching rows</p>
                 @endif

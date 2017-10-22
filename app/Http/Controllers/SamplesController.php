@@ -27,9 +27,10 @@ class SamplesController extends Controller
             $samples = Sample::simplePaginate();
         } else {
             $params['q'] = '%' . $params['q'] . '%';
-            $samples = Sample::where('model', 'like', $params['q'])
-                ->orWhere('brand', 'like', $params['q'])
-                ->orWhere('os_version', 'like', $params['q'])
+            $samples = Sample::where('battery_state', 'like', $params['q'])
+                ->orWhere('battery_level', 'like', $params['q'])
+                ->orWhere('network_status', 'like', $params['q'])
+                ->orWhere('timezone', 'like', $params['q'])
                 ->simplePaginate();
         }
 

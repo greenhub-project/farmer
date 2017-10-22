@@ -1,7 +1,7 @@
 <template>
     <form class="form-inline" :action="action" role="search">
         <div class="form-group">
-            <input type="text" class="form-control" name="q" autofocus autocomplete="off">
+            <input type="text" class="form-control" name="q" autofocus autocomplete="off" @keyup.esc="reset">
         </div>
         <div class="btn-group" role="group">
             <button type="submit" class="btn btn-primary">

@@ -8,6 +8,8 @@
             <div class="col-lg-12">
                 <div class="page-header">
                     <h1>Samples</h1>
+                    <search-box
+                            action="{{ route('samples.index') }}"/>
                 </div>
                 <table class="table table-striped table-hover">
                     <thead>
@@ -51,7 +53,7 @@
                     @endforeach
                     </tbody>
                 </table>
-                {{ $samples->links() }}
+                {!! $samples->appends(Request::except('page'))->links() !!}
             </div>
         </div>
     </div>
