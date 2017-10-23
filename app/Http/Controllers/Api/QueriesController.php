@@ -123,7 +123,7 @@ class QueriesController extends Controller
         ]);
     }
 
-    public function models(Request $request)
+    public function models()
     {
         return json_encode([
             'data' => $this->availableModels
@@ -242,12 +242,7 @@ class QueriesController extends Controller
             $builder = is_null($builder) ? Device::with($request->with) : $builder->with($request->with);
         }
 
-        // Load every result in a single output or paginate results
-        if ($request->has('all')) {
-            $builder = is_null($builder) ? Device::all() : $builder->get();
-        } else {
-            $builder = is_null($builder) ? Device::paginate($perPage) : $builder->paginate($perPage);
-        }
+        $builder = is_null($builder) ? Device::paginate($perPage) : $builder->paginate($perPage);
 
         return DeviceResource::collection($builder);
     }
@@ -389,12 +384,7 @@ class QueriesController extends Controller
                 $builder->with($request->with);
         }
 
-        // Load every result in a single output or paginate results
-        if ($request->has('all')) {
-            $builder = is_null($builder) ? Sample::all() : $builder->get();
-        } else {
-            $builder = is_null($builder) ? Sample::paginate($perPage) : $builder->paginate($perPage);
-        }
+        $builder = is_null($builder) ? Sample::paginate($perPage) : $builder->paginate($perPage);
 
         return SampleResource::collection($builder);
     }

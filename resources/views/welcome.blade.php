@@ -41,16 +41,63 @@
                 position: relative;
             }
 
+            .top-right {
+                position: absolute;
+                right: 10px;
+                top: 18px;
+            }
+
             .content {
                 text-align: center;
+            }
+
+            .nav {
+                font-size: small;
+            }
+
+            .nav > a {
+                color: #636b6f;
+                text-decoration: underline;
+            }
+
+            .links > a {
+                color: #636b6f;
+                padding: 0 25px;
+                font-size: 12px;
+                letter-spacing: .1rem;
+                text-decoration: none;
+                text-transform: uppercase;
+            }
+
+            .m-b-md {
+                margin-bottom: 30px;
             }
         </style>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
+            @if(Route::has('login'))
+                <div class="top-right nav">
+                    @auth
+                        <a href="{{ url('/dashboard') }}">Dashboard</a>
+                    @else
+                        Want to join?
+                        <a href="{{ route('login') }}">Login</a>
+                        or
+                        <a href="{{ route('register') }}">register</a>
+                        in seconds.
+                    @endauth
+                </div>
+            @endif
             <div class="content">
-                <h1>GreenHub Farmer</h1>
-                <p>Under maintenance </p>
+                <h1 class="m-b-md">GreenHub Farmer</h1>
+                <div class="links">
+                    <a href="https://docs.greenhubproject.org">Documentation</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.hmatalonga.greenhub">BatteryHub</a>
+                    <a href="https://www.npmjs.com/package/greenhub-cli">Lumberjack</a>
+                    <a href="https://medium.com/greenhub-blog">Blog</a>
+                    <a href="https://github.com/greenhub-project">GitHub</a>
+                </div>
             </div>
         </div>
     </body>
