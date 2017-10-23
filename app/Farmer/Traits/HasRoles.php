@@ -27,6 +27,22 @@ trait HasRoles {
             Role::whereName($role)->firstOrFail()
         );
     }
+
+    /**
+     * Toggle the given role to the user
+     *
+     * @param mixed $role
+     */
+    public function toggleRole($role)
+    {
+        if (is_string($role)) {
+            $result = Role::whereName($role)->firstOrFail();
+            $this->roles()->toggle([ $result->id ]);
+            return;
+        }
+        $this->roles()->toggle([ $role->id ]);
+    }
+
     /**
      * Determine if the user has the given role.
      *

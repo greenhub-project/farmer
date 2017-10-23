@@ -57,6 +57,14 @@
                                     Samples
                                 </a>
                             </li>
+                            @admin
+                            <li class="{{ set_active('members') }}">
+                                <a href="{{ url('/members') }}">
+                                    <i class="fa fa-users fa-fw" aria-hidden="true"></i>
+                                    Members
+                                </a>
+                            </li>
+                            @endadmin
                         @endguest
                     </ul>
 

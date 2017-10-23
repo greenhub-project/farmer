@@ -26,8 +26,8 @@ Route::resource('devices', 'DevicesController')->only(['index', 'show', 'update'
 Route::get('devices/fetch', 'DevicesController@fetch');
 
 Route::resource('samples', 'SamplesController')->only(['index', 'show', 'update', 'destroy']);
-
 Route::resource('messages', 'MobileMessagesController');
+Route::resource('members', 'Dashboard\MembersController')->only(['index', 'update']);
 
 Route::get('/settings', 'Settings\PagesController@redirect')->name('settings');
 Route::get('/settings/account', 'Settings\PagesController@account')->name('settings.account');
