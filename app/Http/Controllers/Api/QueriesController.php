@@ -256,7 +256,9 @@ class QueriesController extends Controller
     {
         if (! $request->has('cli')) return [];
 
-        // Get the filters and per page args
+        $debug = $request->has('debug');
+
+            // Get the filters and per page args
         $builder = null;
         $filters = $request->has('filters') ? json_decode($request->filters) : [];
         $perPage = $request->has('per_page') ? $request->per_page : 10;
@@ -352,9 +354,16 @@ class QueriesController extends Controller
 
         // If command export has called return a download response instead
         if ($request->has('export')) {
-            \Log::info('Got to export samples part...');
+
+            if ($debug) \Log::info('Got to export samples part...');
+
             $builder = is_null($builder) ? Sample::all() : $builder->get();
+
+            if ($debug) \Log::info('Done query!');
+
             $data = $builder->toArray();
+
+            if ($debug) \Log::info('Converted to Array!');
 
             $filename = 'csv/query_' . Carbon::now()->toDateTimeString() . '.csv';
             $path = storage_path('app/public/' . $filename);
