@@ -74695,7 +74695,7 @@ exports = module.exports = __webpack_require__(8)(undefined);
 
 
 // module
-exports.push([module.i, "\n.fa[data-v-a5a15b9c] {\n  transition: all .2s ease-in-out;\n}\n.fa[data-v-a5a15b9c]:hover {\n  transform: scale(1.2);\n  cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.fa[data-v-a5a15b9c] {\n  transition: all .2s ease-in-out;\n}\n.fa[data-v-a5a15b9c]:hover {\n  transform: scale(1.4);\n  cursor: pointer;\n}\n", ""]);
 
 // exports
 

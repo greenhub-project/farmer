@@ -34,7 +34,7 @@
         transition: all .2s ease-in-out;
     }
     .fa:hover {
-        transform: scale(1.2);
+        transform: scale(1.4);
         cursor: pointer;
     }
 </style>

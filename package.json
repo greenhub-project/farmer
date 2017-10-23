@@ -1,4 +1,6 @@
 {
+    "name": "greenhub-farmer",
+    "version": "0.1.0",
     "private": true,
     "scripts": {
         "dev": "npm run development",
