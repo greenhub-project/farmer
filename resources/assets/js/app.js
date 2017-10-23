@@ -20,8 +20,12 @@ Vue.component('search-box', require('./components/forms/SearchBox.vue'));
 Vue.component('stats-panel', require('./components/panels/StatsPanel.vue'));
 Vue.component('chart-panel', require('./components/panels/ChartPanel.vue'));
 Vue.component('role-toggler', require('./components/forms/RoleToggler.vue'));
+Vue.component('about-dialog', require('./components/dialogs/AboutDialog.vue'));
 Vue.component('live-counter-panel', require('./components/panels/LiveCounterPanel.vue'));
 
 new Vue({
-    el: '#app'
+    el: '#app',
+    data: {
+        showAboutDialog: false
+    }
 });

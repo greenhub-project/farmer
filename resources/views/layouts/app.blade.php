@@ -87,6 +87,12 @@
                                             Settings
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="#" @click="showAboutDialog = true">
+                                            <i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>
+                                            About
+                                        </a>
+                                    </li>
                                     <li class="divider"></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
@@ -109,6 +115,8 @@
         </nav>
 
         @yield('content')
+
+        <about-dialog v-if="showAboutDialog" @close="showAboutDialog = false"/>
     </div>
 
     <!-- Scripts -->
