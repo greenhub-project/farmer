@@ -41,11 +41,10 @@
                             </td>
                             @foreach($roles as $role)
                                 <td>
-                                    @if($user->hasRole($role->name))
-                                        <i class="fa fa-check-circle text-success"></i>
-                                    @else
-                                        <i class="fa fa-times-circle text-danger"></i>
-                                    @endif
+                                    <role-toggler
+                                        role="{{ $role->name }}"
+                                        has="{{ $user->hasRole($role->name) }}"
+                                        action="{{ route('members.update', $user->id) }}"/>
                                 </td>
                             @endforeach
                             <td>{{ $user->created_at }}</td>

@@ -79,20 +79,18 @@ class MembersController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  User $user
+     * @param  User $member
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $member)
     {
         $params = $request->validate([
             'role' => 'required'
         ]);
 
-        $user->toggleRole($params['role']);
+        $member->toggleRole($params['role']);
 
-        return back()->with([
-            'changed' => $user->hasRole($params['role'])
-        ]);
+        return json_encode(['changed' => $member->hasRole($params['role'])]);
     }
 
     /**
