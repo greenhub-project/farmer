@@ -27,6 +27,8 @@ Route::get('devices/fetch', 'DevicesController@fetch');
 
 Route::resource('samples', 'SamplesController')->only(['index', 'show', 'update', 'destroy']);
 
+Route::resource('messages', 'MobileMessagesController');
+
 Route::get('/settings', 'Settings\PagesController@redirect')->name('settings');
 Route::get('/settings/account', 'Settings\PagesController@account')->name('settings.account');
 Route::get('/settings/password', 'Settings\PagesController@password')->name('settings.password');
