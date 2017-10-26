@@ -31,7 +31,7 @@ class QueriesController extends Controller
     {
         if (! in_array($model, $this->availableModels)) {
             return json_encode([
-                'errors' => ['Unknown model']
+                'message' => 'Unknown model'
             ]);
         }
 
@@ -242,7 +242,7 @@ class QueriesController extends Controller
             $builder = is_null($builder) ? Device::with($request->with) : $builder->with($request->with);
         }
 
-        $builder = is_null($builder) ? Device::paginate($perPage) : $builder->paginate($perPage);
+        $builder = is_null($builder) ? Device::simplePaginate($perPage) : $builder->simplePaginate($perPage);
 
         return DeviceResource::collection($builder);
     }
@@ -384,7 +384,7 @@ class QueriesController extends Controller
                 $builder->with($request->with);
         }
 
-        $builder = is_null($builder) ? Sample::paginate($perPage) : $builder->paginate($perPage);
+        $builder = is_null($builder) ? Sample::simplePaginate($perPage) : $builder->simplePaginate($perPage);
 
         return SampleResource::collection($builder);
     }

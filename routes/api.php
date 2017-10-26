@@ -14,7 +14,9 @@ use Illuminate\Http\Request;
 */
 
 Route::group(['prefix' => 'v1'], function() {
-    Route::get('/user', 'Api\UsersController@login');
+    Route::get('/me', 'Api\UsersController@index');
+    Route::put('/me/token', 'Api\UsersController@token');
+
     Route::get('/count/{model}', 'Api\QueriesController@count');
     Route::get('/devices', 'Api\QueriesController@devices');
     Route::get('/samples', 'Api\QueriesController@samples');
@@ -27,7 +29,7 @@ Route::group(['prefix' => 'v1'], function() {
     });
 
     // CLI only
-    Route::post('/token/new', 'Api\UsersController@token');
+    Route::put('/token/new', 'Api\UsersController@update');
 });
 
 // Mobile dedicated endpoints

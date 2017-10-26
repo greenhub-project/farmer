@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Farmer\Models\User;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -17,19 +19,50 @@ class UsersController extends Controller
         $this->middleware('auth:api');
     }
 
-    public function login(Request $request)
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  Request  $request
+     * @return UserResource
+     */
+    public function index(Request $request)
     {
-        return $request->user();
+        $user = $request->user();
+
+        return UserResource::make($user);
     }
 
-    public function token()
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  Request  $request
+     * @return UserResource
+     */
+    public function update(Request $request)
     {
-        $user = auth()->user();
+        $request->validate([
+            'cli' => 'required'
+        ]);
 
-        $user->api_token = str_random(60);
+        $user = $request->user();
 
-        $user->save();
+        $user->update([
+            'api_token' => str_random(60)
+        ]);
 
-        return json_encode($user->api_token);
+        return UserResource::make($user);
+    }
+
+    public function token(Request $request)
+    {
+        $user = $request->user();
+
+        $user->update([
+            'api_token' => str_random(60)
+        ]);
+
+        return json_encode([
+            'api_token' => $user->api_token
+        ]);
     }
 }

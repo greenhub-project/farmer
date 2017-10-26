@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\MobileMessage::class, function (Faker $faker) {
+$factory->define(App\Farmer\Models\MobileMessage::class, function (Faker $faker) {
     return [
         //
     ];
