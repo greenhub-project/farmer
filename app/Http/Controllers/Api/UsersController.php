@@ -62,7 +62,9 @@ class UsersController extends Controller
         ]);
 
         return json_encode([
-            'api_token' => $user->api_token
+            'data' => [
+                'api_token' => $user->api_token
+            ]
         ]);
     }
 }
