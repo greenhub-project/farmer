@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-endpoint=$1
-token=cDVvggNxfMjcSkbtYv5jhDiZT393u5onoJG3nMDwa1y7mlW6bSNOjORnBrN2
-wrong=dfkhdfskjdfhsfdshYFUYFsbdckjsdfbifduhgui
-
-http get http://greenhub-farmer.dev/api/v1${e} "Authorization:Bearer $token" --json
