@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Farmer\Models\Protocol\Device;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\DeviceResource;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class DevicesController extends Controller
 {
@@ -23,7 +24,7 @@ class DevicesController extends Controller
      */
     public function index()
     {
-        return DeviceResource::collection(Device::simplePaginated());
+        return DeviceResource::collection(Device::simplePaginate());
     }
 
 
