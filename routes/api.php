@@ -19,6 +19,7 @@ Route::group(['prefix' => 'v1'], function() {
     Route::get('/devices/{device}', 'Api\DevicesController@show');
     Route::get('/devices/{device}/samples', 'Api\DeviceSamplesController@index');
 
+
     Route::put('/me/token', 'Api\UsersController@token');
 
 
