@@ -9,18 +9,9 @@
                     </button>
                 </div>
             </li>
-            <li class="list-group-item">
-                Today's
-                <stats-item :action="setInterval('today')"/>
-            </li>
-            <li class="list-group-item">
-                This week
-                <stats-item :action="setInterval('week')"/>
-            </li>
-            <li class="list-group-item">
-                This month
-                <stats-item :action="setInterval('month')"/>
-            </li>
+            <stats-item title="Today's" :action="setInterval('today')"></stats-item>
+            <stats-item title="This week" :action="setInterval('week')"></stats-item>
+            <stats-item title="This month" :action="setInterval('month')"></stats-item>
         </ul>
     </div>
 </template>

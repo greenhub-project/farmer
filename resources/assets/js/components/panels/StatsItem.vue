@@ -1,17 +1,20 @@
 <template>
-    <div class="stats__item">
-        <div v-if="isLoading">
-            <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
-            <span class="sr-only">Loading...</span>
+    <div class="list-group-item">
+        {{ title }}
+        <div class="stats__item">
+            <div v-if="isLoading">
+                <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div v-else>{{ count }}</div>
         </div>
-        <div v-else>{{ count }}</div>
     </div>
 </template>
 
 <script>
     import axios from 'axios';
     export default {
-        props: ['action'],
+        props: ['action', 'title'],
         data() {
             return {
                 count: 0,

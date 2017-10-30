@@ -61045,15 +61045,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -61181,10 +61172,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['action'],
+    props: ['action', 'title'],
     data: function data() {
         return {
             count: 0,
@@ -61223,14 +61217,17 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "stats__item" }, [
-    _vm.isLoading
-      ? _c("div", [
-          _c("i", { staticClass: "fa fa-circle-o-notch fa-spin fa-fw" }),
-          _vm._v(" "),
-          _c("span", { staticClass: "sr-only" }, [_vm._v("Loading...")])
-        ])
-      : _c("div", [_vm._v(_vm._s(_vm.count))])
+  return _c("div", { staticClass: "list-group-item" }, [
+    _vm._v("\n    " + _vm._s(_vm.title) + "\n    "),
+    _c("div", { staticClass: "stats__item" }, [
+      _vm.isLoading
+        ? _c("div", [
+            _c("i", { staticClass: "fa fa-circle-o-notch fa-spin fa-fw" }),
+            _vm._v(" "),
+            _c("span", { staticClass: "sr-only" }, [_vm._v("Loading...")])
+          ])
+        : _c("div", [_vm._v(_vm._s(_vm.count))])
+    ])
   ])
 }
 var staticRenderFns = []
@@ -61252,55 +61249,42 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "panel panel-default" }, [
-    _c("ul", { staticClass: "list-group list-group--spaced" }, [
-      _c("li", { staticClass: "list-group-item" }, [
-        _c("h3", { staticClass: "list-group-item-heading" }, [
-          _vm._v(_vm._s(_vm.title))
+    _c(
+      "ul",
+      { staticClass: "list-group list-group--spaced" },
+      [
+        _c("li", { staticClass: "list-group-item" }, [
+          _c("h3", { staticClass: "list-group-item-heading" }, [
+            _vm._v(_vm._s(_vm.title))
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "pull-right" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-xs btn-info",
+                attrs: { type: "button", title: "Refresh" },
+                on: { click: _vm.refreshData }
+              },
+              [_c("i", { staticClass: "fa fa-refresh" })]
+            )
+          ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "pull-right" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-xs btn-info",
-              attrs: { type: "button", title: "Refresh" },
-              on: { click: _vm.refreshData }
-            },
-            [_c("i", { staticClass: "fa fa-refresh" })]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "li",
-        { staticClass: "list-group-item" },
-        [
-          _vm._v("\n            Today's\n            "),
-          _c("stats-item", { attrs: { action: _vm.setInterval("today") } })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "li",
-        { staticClass: "list-group-item" },
-        [
-          _vm._v("\n            This week\n            "),
-          _c("stats-item", { attrs: { action: _vm.setInterval("week") } })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "li",
-        { staticClass: "list-group-item" },
-        [
-          _vm._v("\n            This month\n            "),
-          _c("stats-item", { attrs: { action: _vm.setInterval("month") } })
-        ],
-        1
-      )
-    ])
+        _c("stats-item", {
+          attrs: { title: "Today's", action: _vm.setInterval("today") }
+        }),
+        _vm._v(" "),
+        _c("stats-item", {
+          attrs: { title: "This week", action: _vm.setInterval("week") }
+        }),
+        _vm._v(" "),
+        _c("stats-item", {
+          attrs: { title: "This month", action: _vm.setInterval("month") }
+        })
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = []
