@@ -10,7 +10,7 @@
 
                     <div class="modal-body">
                         <p>Build version <span class="underline">v{{ version }}</span></p>
-                        <p class="text-muted">Last updated: 2017-10-24</p>
+                        <p class="text-muted">Last updated: 2017-10-30</p>
                     </div>
 
                     <div class="modal-footer">
