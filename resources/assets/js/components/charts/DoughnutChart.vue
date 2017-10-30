@@ -16,10 +16,7 @@
         props: ['action', 'labels'],
         data() {
             return {
-                count: {
-                    active: 0,
-                    inactive: 0,
-                },
+                count: [],
                 isLoading: false,
                 color: ''
             }
@@ -32,8 +29,7 @@
                 this.isLoading = true;
                 axios.get(this.action)
                     .then(response => {
-                        this.count.active = response.data.active;
-                        this.count.inactive = response.data.total - response.data.active;
+                        this.count = response.data;
                         this.isLoading = false;
                         this.initChart();
                     });
@@ -43,10 +39,7 @@
                     type: 'doughnut',
                     data: {
                         datasets: [{
-                            data: [
-                                this.count.active,
-                                this.count.inactive
-                            ],
+                            data: this.count,
                             backgroundColor: [
                                 'rgb(255, 99, 132)',
                                 'rgb(54, 162, 235)'

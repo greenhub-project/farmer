@@ -56,14 +56,15 @@ class StatsCounterController extends Controller
     public function weekly($model, Request $request)
     {
         $today = Carbon::today();
+        $begin = $today->subDays(7);
 
-        $params = $request->validate([
+        $request->validate([
             'device' => 'nullable',
         ]);
 
         $data = \DB::table($model)
             ->selectRaw('count(*) as total, DATE(created_at) as day')
-            ->where('created_at', '>=', $today->subDays(7))
+            ->where('created_at', '>=', $begin)
             ->groupBy('day')
             ->get();
 
@@ -89,9 +90,12 @@ class StatsCounterController extends Controller
 
     public function active()
     {
+        $active = Device::active()->count();
+        $inactive = Device::count() - $active;
+
         return json_encode([
-            'active' => Device::active()->count(),
-            'total' => Device::count(),
+            $active,
+            $inactive,
         ]);
     }
 }

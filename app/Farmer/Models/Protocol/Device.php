@@ -50,8 +50,10 @@ class Device extends Model
 
     public function scopeActive($query)
     {
-        return $query->whereHas('samples', function ($query) {
-            $query->where('created_at', '>=', Carbon::now()->subHours(24));
+        $yesterday = Carbon::now()->subHours(24);
+
+        return $query->whereHas('samples', function ($query) use ($yesterday) {
+            $query->where('created_at', '>=', $yesterday);
         });
     }
 }

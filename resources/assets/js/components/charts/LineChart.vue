@@ -55,6 +55,8 @@
                 axios.get(this.action)
                     .then(response => {
                         this.feed = response.data;
+                        console.log(this.feed);
+                        console.log(this.totals);
                         this.isLoading = false;
                         this.initChart();
                     })
