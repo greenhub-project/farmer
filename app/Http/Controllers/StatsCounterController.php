@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Farmer\Models\Protocol\Device;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -84,5 +85,13 @@ class StatsCounterController extends Controller
     public function total($model)
     {
         return \DB::table($model)->count();
+    }
+
+    public function active()
+    {
+        return json_encode([
+            'active' => Device::active()->count(),
+            'total' => Device::count(),
+        ]);
     }
 }

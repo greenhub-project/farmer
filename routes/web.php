@@ -40,3 +40,4 @@ Route::post('/settings/api', 'Settings\UpdateController@api');
 Route::get('/stats/count/{model}', 'StatsCounterController@count');
 Route::get('/stats/total/{model}', 'StatsCounterController@total');
 Route::get('/stats/weekly/{model}', 'StatsCounterController@weekly');
+Route::get('/stats/devices/active', 'StatsCounterController@active');

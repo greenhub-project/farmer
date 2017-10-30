@@ -55,8 +55,8 @@
                 axios.get(this.action)
                     .then(response => {
                         this.feed = response.data;
-                        this.initChart();
                         this.isLoading = false;
+                        this.initChart();
                     })
                     .catch(error => console.error(error));
             },
@@ -64,7 +64,6 @@
                 new Chart(this.$el.querySelector('canvas').getContext('2d'), {
                     type: 'line',
                     data: {
-                        labels: this.labels,
                         datasets: [{
                             label: this.label,
                             backgroundColor: toRgba(this.color),

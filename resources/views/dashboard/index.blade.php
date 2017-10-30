@@ -32,14 +32,22 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <chart-panel
+            <line-chart-panel
                     label="Samples received last 7 days"
-                    action="{{ url('/stats/weekly/samples') }}"></chart-panel>
+                    action="{{ url('/stats/weekly/samples') }}"></line-chart-panel>
         </div>
         <div class="col-md-6">
-            <chart-panel
+            <line-chart-panel
                     label="Devices installs last 7 days"
-                    action="{{ url('/stats/weekly/devices') }}"></chart-panel>
+                    action="{{ url('/stats/weekly/devices') }}"></line-chart-panel>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <doughnut-chart-panel
+                    action="{{ url('/stats/devices/active') }}"
+                    label="Devices activity distribution"
+                    :labels="{{ json_encode(['Active', 'Total']) }}"></doughnut-chart-panel>
         </div>
     </div>
 </div>

@@ -4,7 +4,7 @@
         <div class="panel-body">
             <line-chart
                 :label="label"
-                :action="action"/>
+                :action="action"></line-chart>
         </div>
     </div>
 </template>
