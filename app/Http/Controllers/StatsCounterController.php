@@ -63,7 +63,7 @@ class StatsCounterController extends Controller
 
         $data = \DB::table($model)
             ->selectRaw('count(*) as total, DATE(created_at) as day')
-            ->where('created_at', '>=', $today->subWeek())
+            ->where('created_at', '>=', $today->subDays(7))
             ->groupBy('day')
             ->get();
 

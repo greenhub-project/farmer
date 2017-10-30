@@ -18,7 +18,7 @@
             return {
                 count: {
                     active: 0,
-                    total: 0,
+                    inactive: 0,
                 },
                 isLoading: false,
                 color: ''
@@ -33,7 +33,7 @@
                 axios.get(this.action)
                     .then(response => {
                         this.count.active = response.data.active;
-                        this.count.total = response.data.total;
+                        this.count.inactive = response.data.total - response.data.active;
                         this.isLoading = false;
                         this.initChart();
                     });
@@ -45,7 +45,7 @@
                         datasets: [{
                             data: [
                                 this.count.active,
-                                this.count.total
+                                this.count.inactive
                             ],
                             backgroundColor: [
                                 'rgb(255, 99, 132)',

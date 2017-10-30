@@ -47,7 +47,7 @@
             <doughnut-chart-panel
                     action="{{ url('/stats/devices/active') }}"
                     label="Devices activity distribution"
-                    :labels="{{ json_encode(['Active', 'Total']) }}"></doughnut-chart-panel>
+                    :labels="{{ json_encode(['Active', 'Inactive']) }}"></doughnut-chart-panel>
         </div>
     </div>
 </div>
