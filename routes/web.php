@@ -15,7 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Auth::routes();
 
 Route::get('/register/verify/{token}', 'Auth\RegisterController@verify')->name('register.verify');

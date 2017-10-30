@@ -32,6 +32,10 @@ class Device extends Model
         'uuid',
     ];
 
+    protected $casts = [
+        'is_root' => 'boolean',
+    ];
+
     public function samples()
     {
         return $this->hasMany(Sample::class);
@@ -39,7 +43,7 @@ class Device extends Model
 
     public function isActive()
     {
-        return !! $this->samples()
+        return (bool) $this->samples()
             ->where('created_at', '>=', Carbon::now()->subHours(24))
             ->count();
     }

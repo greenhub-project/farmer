@@ -27,7 +27,16 @@ class Sample extends Model
         'screen_brightness',
         'screen_on',
         'timezone',
-        'country_code'
+        'country_code',
+    ];
+
+    protected $hidden = [
+        'memory_wired', 'device_id',
+    ];
+
+    protected $casts = [
+        'battery_level' => 'float',
+        'screen_on' => 'boolean',
     ];
 
     // Helpers
@@ -42,9 +51,9 @@ class Sample extends Model
         $memory = $this->memory_active / 1024;
 
         if ($memory < 1024) {
-            return round($memory, 2) . ' MB';
+            return round($memory, 2).' MB';
         } else {
-            return round($memory / 1024, 2) . ' GB';
+            return round($memory / 1024, 2).' GB';
         }
     }
 

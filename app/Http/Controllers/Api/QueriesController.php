@@ -14,7 +14,7 @@ class QueriesController extends Controller
 {
     private $availableModels = [
         'devices',
-        'samples'
+        'samples',
     ];
 
     /**
@@ -31,7 +31,7 @@ class QueriesController extends Controller
     {
         if (! in_array($model, $this->availableModels)) {
             return json_encode([
-                'message' => 'Unknown model'
+                'message' => 'Unknown model',
             ]);
         }
 
@@ -45,7 +45,9 @@ class QueriesController extends Controller
                 case 'devices':
                     foreach ($filters as $key => $val) {
                         $key = str_replace('os', 'os_version', $key);
-                        if (! in_array($key, $columns)) continue;
+                        if (! in_array($key, $columns)) {
+                            continue;
+                        }
                         $query->where($key, $val);
                     }
                     break;
@@ -56,7 +58,9 @@ class QueriesController extends Controller
 
                     foreach ($filters as $key => $val) {
                         $key = str_replace('os', 'os_version', $key);
-                        if (! in_array($key, $columns)) continue;
+                        if (! in_array($key, $columns)) {
+                            continue;
+                        }
                         $query = $query->where($key, $val);
                     }
                     break;
@@ -66,7 +70,7 @@ class QueriesController extends Controller
         // Has date parameters
         if ($request->has('date')) {
             $date = Carbon::parse($request->date);
-            $query->whereDate($model . '.created_at', $date);
+            $query->whereDate($model.'.created_at', $date);
         }
 
         // Has last parameters
@@ -90,11 +94,11 @@ class QueriesController extends Controller
                     break;
                 default:
                     return json_encode([
-                        'errors' => ['Invalid time interval']
+                        'errors' => ['Invalid time interval'],
                     ]);
             }
 
-            $query->where($model . '.created_at', '>=', $date);
+            $query->where($model.'.created_at', '>=', $date);
         }
 
         // Has range parameters
@@ -103,30 +107,30 @@ class QueriesController extends Controller
             $begin = Carbon::parse($request->date_begin);
             $end = Carbon::parse($request->date_end);
 
-            $query->whereBetween($model . '.created_at', [$begin, $end]);
+            $query->whereBetween($model.'.created_at', [$begin, $end]);
         }
 
         if ($request->has('date_begin')) {
             // Contains only begin date
             $begin = Carbon::parse($request->date_begin);
-            $query->where($model . '.created_at', '>=', $begin);
+            $query->where($model.'.created_at', '>=', $begin);
         }
 
         if ($request->has('date_end')) {
             // Contains only end date
             $end = Carbon::parse($request->date_end);
-            $query->where($model . '.created_at', '<=', $end);
+            $query->where($model.'.created_at', '<=', $end);
         }
 
         return json_encode([
-            'total' => $query->count()
+            'total' => $query->count(),
         ]);
     }
 
     public function models()
     {
         return json_encode([
-            'data' => $this->availableModels
+            'data' => $this->availableModels,
         ]);
     }
 
@@ -145,7 +149,9 @@ class QueriesController extends Controller
                 $key = str_replace('os', 'os_version', $key);
                 $key = str_replace('kernel', 'kernel_version', $key);
 
-                if (! in_array($key, $columns)) continue;
+                if (! in_array($key, $columns)) {
+                    continue;
+                }
 
                 $builder = is_null($builder) ? Device::where($key, $val) : $builder->where($key, $val);
             }
@@ -180,7 +186,7 @@ class QueriesController extends Controller
                     break;
                 default:
                     return json_encode([
-                        'errors' => ['Invalid time interval']
+                        'errors' => ['Invalid time interval'],
                     ]);
             }
 
@@ -219,8 +225,8 @@ class QueriesController extends Controller
             $builder = is_null($builder) ? Device::all() : $builder->get();
             $data = $builder->toArray();
 
-            $filename = 'csv/query_' . Carbon::now()->toDateTimeString() . '.csv';
-            $path = storage_path('app/public/' . $filename);
+            $filename = 'csv/query_'.Carbon::now()->toDateTimeString().'.csv';
+            $path = storage_path('app/public/'.$filename);
             \Storage::disk('public')->put($filename, '');
 
             $fp = fopen($path, 'w');
@@ -249,11 +255,13 @@ class QueriesController extends Controller
 
     public function samples(Request $request)
     {
-        if (! $request->has('cli')) return [];
+        if (! $request->has('cli')) {
+            return [];
+        }
 
         $debug = $request->has('debug');
 
-            // Get the filters and per page args
+        // Get the filters and per page args
         $builder = null;
         $filters = $request->has('filters') ? json_decode($request->filters) : [];
         $perPage = $request->has('per_page') ? $request->per_page : 10;
@@ -270,14 +278,16 @@ class QueriesController extends Controller
                 $key = str_replace('os', 'os_version', $key);
                 $key = str_replace('kernel', 'kernel_version', $key);
 
-                if (! in_array($key, $columns)) continue;
+                if (! in_array($key, $columns)) {
+                    continue;
+                }
 
                 if (is_null($builder)) {
-                    $builder = Sample::whereHas('device', function($query) use ($key, $val) {
+                    $builder = Sample::whereHas('device', function ($query) use ($key, $val) {
                         $query->where($key, $val);
                     });
                 } else {
-                    $builder = $builder->whereHas('device', function($query) use ($key, $val) {
+                    $builder = $builder->whereHas('device', function ($query) use ($key, $val) {
                         $query->where($key, $val);
                     });
                 }
@@ -313,7 +323,7 @@ class QueriesController extends Controller
                     break;
                 default:
                     return json_encode([
-                        'errors' => ['Invalid time interval']
+                        'errors' => ['Invalid time interval'],
                     ]);
             }
 
@@ -349,19 +359,12 @@ class QueriesController extends Controller
 
         // If command export has called return a download response instead
         if ($request->has('export')) {
-
-            if ($debug) \Log::info('Got to export samples part...');
-
             $builder = is_null($builder) ? Sample::all() : $builder->get();
-
-            if ($debug) \Log::info('Done query!');
 
             $data = $builder->toArray();
 
-            if ($debug) \Log::info('Converted to Array!');
-
-            $filename = 'csv/query_' . Carbon::now()->toDateTimeString() . '.csv';
-            $path = storage_path('app/public/' . $filename);
+            $filename = 'csv/query_'.Carbon::now()->toDateTimeString().'.csv';
+            $path = storage_path('app/public/'.$filename);
             \Storage::disk('public')->put($filename, '');
 
             $fp = fopen($path, 'w');

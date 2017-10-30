@@ -13,12 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['prefix' => 'v1'], function() {
+Route::group(['prefix' => 'v1'], function () {
     Route::get('/me', 'Api\UsersController@index');
     Route::get('/devices', 'Api\DevicesController@index');
     Route::get('/devices/{device}', 'Api\DevicesController@show');
     Route::get('/devices/{device}/samples', 'Api\DeviceSamplesController@index');
-
+    Route::get('/samples', 'Api\SamplesController@index');
 
     Route::put('/me/token', 'Api\UsersController@token');
 
@@ -26,18 +26,17 @@ Route::group(['prefix' => 'v1'], function() {
     // Old ----------------------------------------------------------------
     Route::get('/count/{model}', 'Api\QueriesController@count');
     Route::get('/devices', 'Api\QueriesController@devices');
-    Route::get('/samples', 'Api\QueriesController@samples');
     Route::get('/models', 'Api\QueriesController@models');
 
     // Guest
     Route::get('/public/count/{model}', 'Api\PublicController@count');
-    Route::get('/status', function() {
+    Route::get('/status', function () {
         return ['status' => 'Online'];
     });
 });
 
 // Mobile dedicated endpoints
-Route::group(['prefix' => 'mobile'], function() {
+Route::group(['prefix' => 'mobile'], function () {
     Route::get('/messages', 'Mobile\ApiController@messages');
 
     // Duplicate endpoints for legacy support (Android app version <= 10)

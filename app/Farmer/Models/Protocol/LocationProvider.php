@@ -12,7 +12,7 @@ class LocationProvider extends Model
      * @var array
      */
     protected $fillable = [
-        'provider'
+        'provider',
     ];
 
     public function sample()

@@ -85,12 +85,14 @@ class MembersController extends Controller
     public function update(Request $request, User $member)
     {
         $params = $request->validate([
-            'role' => 'required'
+            'role' => 'required',
         ]);
 
         $member->toggleRole($params['role']);
 
-        return json_encode(['changed' => $member->hasRole($params['role'])]);
+        return json_encode([
+            'changed' => $member->hasRole($params['role']),
+        ]);
     }
 
     /**

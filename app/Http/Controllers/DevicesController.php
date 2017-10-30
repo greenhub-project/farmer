@@ -18,7 +18,7 @@ class DevicesController extends Controller
         $devices = null;
 
         $params = $request->validate([
-            'q' => 'nullable'
+            'q' => 'nullable',
         ]);
 
         $noParams = ! $request->has('q') or is_null($params['q']);
@@ -26,7 +26,7 @@ class DevicesController extends Controller
         if ($noParams) {
             $devices = Device::simplePaginate();
         } else {
-            $params['q'] = '%' . $params['q'] . '%';
+            $params['q'] = '%'.$params['q'].'%';
             $devices = Device::where('model', 'like', $params['q'])
                 ->orWhere('brand', 'like', $params['q'])
                 ->orWhere('os_version', 'like', $params['q'])

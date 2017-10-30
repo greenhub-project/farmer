@@ -5,7 +5,7 @@ namespace App\Http;
 class Flash
 {
     /**
-     * Create flash  session
+     * Create flash  session.
      * @param  string       $title
      * @param  string       $text
      * @param  string       $type
@@ -21,7 +21,7 @@ class Flash
         ]);
     }
     /**
-     * Create a warning flash message
+     * Create a warning flash message.
      * @param  string   $title
      * @param  string   $text
      * @return mixed
@@ -31,7 +31,7 @@ class Flash
         return $this->create($title, $text, 'warning');
     }
     /**
-     * Create an error flash message
+     * Create an error flash message.
      * @param  string   $title
      * @param  string   $text
      * @return mixed
@@ -41,7 +41,7 @@ class Flash
         return $this->create($title, $text, 'error');
     }
     /**
-     * Create a warning flash message
+     * Create a warning flash message.
      * @param  string   $title
      * @param  string   $text
      * @return mixed
@@ -51,7 +51,7 @@ class Flash
         return $this->create($title, $text, 'success');
     }
     /**
-     * Create an info flash message
+     * Create an info flash message.
      * @param  string   $title
      * @param  string   $text
      * @return mixed
@@ -61,7 +61,7 @@ class Flash
         return $this->create($title, $text, 'info');
     }
     /**
-     * Create an overlay flash message
+     * Create an overlay flash message.
      * @param  string   $title
      * @param  string   $text
      * @param  string   $type

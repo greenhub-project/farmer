@@ -4,9 +4,8 @@ namespace App\Notifications;
 
 use App\Farmer\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
 class NewUserRegistered extends Notification
 {
@@ -46,7 +45,7 @@ class NewUserRegistered extends Notification
     {
         return (new MailMessage)
             ->subject('Confirmation instructions')
-            ->greeting('Welcome, ' . $this->user->name)
+            ->greeting('Welcome, '.$this->user->name)
             ->line('Thank you for signing up for GreenHub!')
             ->line('Please verify Your Email Address by clicking the button below.')
             ->action('Confirm my email', route('register.verify', $this->user->email_token))

@@ -20,7 +20,7 @@ class BatteryDetails extends Model
         'charge_counter',
         'current_average',
         'current_now',
-        'energy_counter'
+        'energy_counter',
     ];
 
     public function sample()

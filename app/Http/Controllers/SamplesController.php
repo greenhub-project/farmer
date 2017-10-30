@@ -28,7 +28,7 @@ class SamplesController extends Controller
         $samples = null;
 
         $params = $request->validate([
-            'q' => 'nullable'
+            'q' => 'nullable',
         ]);
 
         $noParams = ! $request->has('q') or is_null($params['q']);
@@ -36,7 +36,7 @@ class SamplesController extends Controller
         if ($noParams) {
             $samples = Sample::simplePaginate();
         } else {
-            $params['q'] = '%' . $params['q'] . '%';
+            $params['q'] = '%'.$params['q'].'%';
             $samples = Sample::where('battery_state', 'like', $params['q'])
                 ->orWhere('battery_level', 'like', $params['q'])
                 ->orWhere('network_status', 'like', $params['q'])

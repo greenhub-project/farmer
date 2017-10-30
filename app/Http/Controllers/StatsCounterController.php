@@ -18,7 +18,7 @@ class StatsCounterController extends Controller
     }
 
     /**
-     * Count records from given model per interval of time
+     * Count records from given model per interval of time.
      *
      * @param string $model model name
      * @param Request $request interval parameter
@@ -29,7 +29,7 @@ class StatsCounterController extends Controller
         $today = Carbon::today();
 
         $data = $request->validate([
-            'interval' => 'required'
+            'interval' => 'required',
         ]);
 
         switch ($data['interval']) {
@@ -46,7 +46,7 @@ class StatsCounterController extends Controller
 
     /**
      * Count number of records of last 7 days
-     * from given model and group them by date
+     * from given model and group them by date.
      *
      * @param string $model model name
      * @param Request $request
@@ -57,7 +57,7 @@ class StatsCounterController extends Controller
         $today = Carbon::today();
 
         $params = $request->validate([
-            'device' => 'nullable'
+            'device' => 'nullable',
         ]);
 
         $data = \DB::table($model)
@@ -66,16 +66,16 @@ class StatsCounterController extends Controller
             ->groupBy('day')
             ->get();
 
-        $data->map(function($elem) {
+        $data->map(function ($elem) {
             $elem->day = Carbon::parse($elem->day)->format('d M');
             return $elem;
         });
 
-        return json_encode($data);;
+        return json_encode($data);
     }
 
     /**
-     * Count total number of records from given model
+     * Count total number of records from given model.
      *
      * @param string $model model name
      * @return int total number

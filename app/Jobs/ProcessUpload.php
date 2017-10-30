@@ -5,11 +5,11 @@ namespace App\Jobs;
 use App\Farmer\Models\Protocol\Device;
 use App\Farmer\Models\Upload;
 use Illuminate\Bus\Queueable;
-use Illuminate\Database\QueryException;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class ProcessUpload implements ShouldQueue
 {
@@ -37,7 +37,9 @@ class ProcessUpload implements ShouldQueue
      */
     public function handle()
     {
-        if ($this->device == null) return;
+        if ($this->device == null) {
+            return;
+        }
 
         $raw = null;
 
@@ -62,7 +64,7 @@ class ProcessUpload implements ShouldQueue
             $database = array_key_exists('database', $this->data) ? $this->data['database'] : 0;
 
             $sample = $this->device->samples()->create([
-                'timestamp' => date("Y-m-d H:i:s", $this->data['timestamp'] / 1000),
+                'timestamp' => date('Y-m-d H:i:s', $this->data['timestamp'] / 1000),
                 'app_version' => $app,
                 'database_version' => $database,
                 'battery_state' => $this->data['batteryState'],
@@ -77,7 +79,7 @@ class ProcessUpload implements ShouldQueue
                 'screen_brightness' => $this->data['screenBrightness'],
                 'screen_on' => $this->data['screenOn'],
                 'timezone' => $this->data['timeZone'],
-                'country_code' => $this->data['countryCode']
+                'country_code' => $this->data['countryCode'],
             ]);
 
             $child = $this->data['networkDetails'];
@@ -95,7 +97,7 @@ class ProcessUpload implements ShouldQueue
                 'network_operator' => $child['networkOperator'],
                 'sim_operator' => $child['simOperator'],
                 'mcc' => $child['mcc'],
-                'mnc' => $child['mnc']
+                'mnc' => $child['mnc'],
             ]);
 
             $child = $this->data['batteryDetails'];
@@ -109,7 +111,7 @@ class ProcessUpload implements ShouldQueue
                 'charge_counter' => $child['chargeCounter'],
                 'current_average' => $child['currentAverage'],
                 'current_now' => $child['currentNow'],
-                'energy_counter' => $child['energyCounter']
+                'energy_counter' => $child['energyCounter'],
             ]);
 
             $child = $this->data['cpuStatus'];
@@ -118,7 +120,7 @@ class ProcessUpload implements ShouldQueue
                 // Create a function to convert 0.xxx to xxx
                 'usage' => $child['cpuUsage'],
                 'up_time' => ($child['upTime'] < 1) ? 0 : $child['upTime'],
-                'sleep_time' => ($child['sleepTime'] < 1) ? 0 : $child['sleepTime']
+                'sleep_time' => ($child['sleepTime'] < 1) ? 0 : $child['sleepTime'],
             ]);
 
             $child = $this->data['settings'];
@@ -130,7 +132,7 @@ class ProcessUpload implements ShouldQueue
                 'flashlight_enabled' => $child['flashlightEnabled'],
                 'nfc_enabled' => $child['nfcEnabled'],
                 'unknown_sources' => $child['unknownSources'],
-                'developer_mode' => $child['developerMode']
+                'developer_mode' => $child['developerMode'],
             ]);
 
             $child = $this->data['storageDetails'];
@@ -143,7 +145,7 @@ class ProcessUpload implements ShouldQueue
                 'free_system' => $child['freeSystem'],
                 'total_system' => $child['totalSystem'],
                 'free_secondary' => $child['freeSecondary'],
-                'total_secondary' => $child['totalSecondary']
+                'total_secondary' => $child['totalSecondary'],
             ]);
 
             if (array_key_exists('locationProviders', $this->data)) {
@@ -151,7 +153,7 @@ class ProcessUpload implements ShouldQueue
 
                 foreach ($child as $el) {
                     $sample->locationProviders()->create([
-                        'provider' => $el['provider']
+                        'provider' => $el['provider'],
                     ]);
                 }
             }
@@ -162,7 +164,7 @@ class ProcessUpload implements ShouldQueue
                 foreach ($child as $el) {
                     $sample->features()->create([
                         'key' => $el['key'],
-                        'value' => $el['value']
+                        'value' => $el['value'],
                     ]);
                 }
             }
@@ -179,14 +181,14 @@ class ProcessUpload implements ShouldQueue
                         'importance' => $el['importance'],
                         'version_name' => $el['versionName'],
                         'version_code' => $el['versionCode'],
-                        'installation_package' => $el['installationPkg']
+                        'installation_package' => $el['installationPkg'],
                     ]);
 
                     // permissions
                     if (array_key_exists('appPermissions', $el)) {
                         foreach ($el['appPermissions'] as $perm) {
                             $process->permissions()->create([
-                                'permission' =>  $perm['permission']
+                                'permission' =>  $perm['permission'],
                             ]);
                         }
                     }
@@ -198,7 +200,7 @@ class ProcessUpload implements ShouldQueue
                 $raw->save();
             }
         } catch (QueryException $e) {
-            \Log::error('Failed for device => ' . $this->device->id);
+            \Log::error('Failed for device => '.$this->device->id);
             \Log::error($e->getMessage());
             \DB::rollBack();
         }

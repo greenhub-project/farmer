@@ -13,7 +13,7 @@ class Feature extends Model
      */
     protected $fillable = [
         'key',
-        'value'
+        'value',
     ];
 
     public function sample()

@@ -20,7 +20,7 @@ class ApiController extends Controller
     }
 
     /**
-     * Retrieve new messages for a given device
+     * Retrieve new messages for a given device.
      *
      * @param Request $request Containing device uuid
      * @return mixed Collection of new messages
@@ -30,7 +30,7 @@ class ApiController extends Controller
         // here uuid is lowercase on upload is still capitalized in future versions change it to lowercase too
         $data = $request->validate([
             'uuid' => 'required',
-            'message' => 'required'
+            'message' => 'required',
         ]);
 
         $device = Device::where('uuid', $data['uuid'])->firstOrFail();
@@ -56,7 +56,9 @@ class ApiController extends Controller
         ]);
 
         $exists = Device::where('uuid', $data['uuId'])->first();
-        if ($exists != null) return 0;
+        if ($exists != null) {
+            return 0;
+        }
 
         $device = Device::create([
             'uuid' => $data['uuId'],
@@ -66,7 +68,7 @@ class ApiController extends Controller
             'product' => $request->product,
             'os_version' => $request->osVersion,
             'kernel_version' => $request->kernelVersion,
-            'is_root' => $request->isRoot
+            'is_root' => $request->isRoot,
         ]);
 
         return $device->id;
@@ -75,7 +77,7 @@ class ApiController extends Controller
     public function upload(Request $request)
     {
         $data = $request->validate([
-            'sample' => 'required'
+            'sample' => 'required',
         ]);
 
         // Find device

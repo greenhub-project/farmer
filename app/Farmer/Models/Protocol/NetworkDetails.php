@@ -24,7 +24,7 @@ class NetworkDetails extends Model
         'network_operator',
         'sim_operator',
         'mcc',
-        'mnc'
+        'mnc',
     ];
 
     public function sample()

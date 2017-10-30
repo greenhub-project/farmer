@@ -14,7 +14,7 @@ class CpuStatus extends Model
     protected $fillable = [
         'usage',
         'up_time',
-        'sleep_time'
+        'sleep_time',
     ];
 
     public function sample()

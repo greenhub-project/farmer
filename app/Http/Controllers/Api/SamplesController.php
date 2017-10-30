@@ -26,7 +26,6 @@ class SamplesController extends Controller
         return SampleResource::collection(Sample::simplePaginate());
     }
 
-
     /**
      * Display the specified resource.
      *

@@ -19,7 +19,7 @@ class StorageDetails extends Model
         'free_system',
         'total_system',
         'free_secondary',
-        'total_secondary'
+        'total_secondary',
     ];
 
     public function sample()

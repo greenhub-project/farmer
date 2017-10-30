@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Farmer\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
@@ -41,13 +40,13 @@ class UsersController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'cli' => 'required'
+            'cli' => 'required',
         ]);
 
         $user = $request->user();
 
         $user->update([
-            'api_token' => str_random(60)
+            'api_token' => str_random(60),
         ]);
 
         return UserResource::make($user);
@@ -58,12 +57,12 @@ class UsersController extends Controller
         $user = $request->user();
 
         $user->update([
-            'api_token' => str_random(60)
+            'api_token' => str_random(60),
         ]);
 
         return json_encode([
             'data' => [
-                'api_token' => $user->api_token
+                'api_token' => $user->api_token,
             ]
         ]);
     }

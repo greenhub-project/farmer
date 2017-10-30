@@ -39,7 +39,7 @@ class UpdateController extends Controller
         ]);
 
         auth()->user()->update([
-            'password' => bcrypt($data['new_password'])
+            'password' => bcrypt($data['new_password']),
         ]);
 
         flash()->success('Password changed!', 'The changes were saved successfully');

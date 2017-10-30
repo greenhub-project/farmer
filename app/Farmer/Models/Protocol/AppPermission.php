@@ -12,7 +12,7 @@ class AppPermission extends Model
      * @var array
      */
     protected $fillable = [
-        'permission'
+        'permission',
     ];
 
     public function process()

@@ -18,7 +18,7 @@ class Settings extends Model
         'flashlight_enabled',
         'nfc_enabled',
         'unknown_sources',
-        'developer_mode'
+        'developer_mode',
     ];
 
     public function sample()

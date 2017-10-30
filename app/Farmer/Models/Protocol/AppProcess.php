@@ -19,7 +19,7 @@ class AppProcess extends Model
         'importance',
         'version_name',
         'version_code',
-        'installation_package'
+        'installation_package',
     ];
 
     public function sample()
