@@ -16,6 +16,7 @@ trait HasRoles
     {
         return $this->belongsToMany(Role::class);
     }
+
     /**
      * Assign the given role to the user.
      *
@@ -39,6 +40,7 @@ trait HasRoles
         if (is_string($role)) {
             $result = Role::whereName($role)->firstOrFail();
             $this->roles()->toggle([$result->id]);
+
             return;
         }
         $this->roles()->toggle([$role->id]);
@@ -55,8 +57,10 @@ trait HasRoles
         if (is_string($role)) {
             return $this->roles->contains('name', $role);
         }
+
         return (bool) $role->intersect($this->roles)->count();
     }
+
     /**
      * Determine if the user may perform the given permission.
      *

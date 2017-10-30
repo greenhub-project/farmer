@@ -47,7 +47,6 @@ class SamplesController extends Controller
         return view('samples.index', compact('samples'));
     }
 
-
     /**
      * Display the specified resource.
      *

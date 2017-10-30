@@ -26,7 +26,6 @@ class DevicesController extends Controller
         return DeviceResource::collection(Device::simplePaginate());
     }
 
-
     /**
      * Display the specified resource.
      *

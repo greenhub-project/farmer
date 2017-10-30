@@ -36,7 +36,6 @@ class DevicesController extends Controller
         return view('devices.index', compact('devices'));
     }
 
-
     /**
      * Display the specified resource.
      *
