@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Farmer\Models\MobileMessage;
 use Illuminate\Http\Request;
+use App\Farmer\Models\MobileMessage;
 
 class MobileMessagesController extends Controller
 {

@@ -20,6 +20,7 @@ class Flash
             'type'   => $type,
         ]);
     }
+
     /**
      * Create a warning flash message.
      * @param  string   $title
@@ -30,6 +31,7 @@ class Flash
     {
         return $this->create($title, $text, 'warning');
     }
+
     /**
      * Create an error flash message.
      * @param  string   $title
@@ -40,6 +42,7 @@ class Flash
     {
         return $this->create($title, $text, 'error');
     }
+
     /**
      * Create a warning flash message.
      * @param  string   $title
@@ -50,6 +53,7 @@ class Flash
     {
         return $this->create($title, $text, 'success');
     }
+
     /**
      * Create an info flash message.
      * @param  string   $title
@@ -60,6 +64,7 @@ class Flash
     {
         return $this->create($title, $text, 'info');
     }
+
     /**
      * Create an overlay flash message.
      * @param  string   $title

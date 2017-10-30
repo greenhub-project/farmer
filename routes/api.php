@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,7 +19,6 @@ Route::group(['prefix' => 'v1'], function () {
     Route::get('/samples', 'Api\SamplesController@index');
 
     Route::put('/me/token', 'Api\UsersController@token');
-
 
     // Old ----------------------------------------------------------------
     Route::get('/count/{model}', 'Api\QueriesController@count');

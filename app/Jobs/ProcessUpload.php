@@ -2,14 +2,14 @@
 
 namespace App\Jobs;
 
-use App\Farmer\Models\Protocol\Device;
 use App\Farmer\Models\Upload;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Database\QueryException;
-use Illuminate\Foundation\Bus\Dispatchable;
+use App\Farmer\Models\Protocol\Device;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Database\QueryException;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
 
 class ProcessUpload implements ShouldQueue
 {

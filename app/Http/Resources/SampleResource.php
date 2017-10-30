@@ -29,7 +29,7 @@ class SampleResource extends Resource
             'screen_brightness' => $this->data['screenBrightness'],
             'screen_on' => $this->data['screenOn'],
             'timezone' => $this->data['timeZone'],
-            'country_code' => $this->data['countryCode']
+            'country_code' => $this->data['countryCode'],
         ];
     }
 }

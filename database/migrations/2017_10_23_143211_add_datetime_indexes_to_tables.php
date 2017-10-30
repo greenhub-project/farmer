@@ -14,7 +14,7 @@ class AddDatetimeIndexesToTables extends Migration
     public function up()
     {
         Schema::table('devices', function (Blueprint $table) {
-           $table->index('created_at');
+            $table->index('created_at');
         });
         Schema::table('samples', function (Blueprint $table) {
             $table->index('created_at');

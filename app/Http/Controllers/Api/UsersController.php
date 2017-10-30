@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
-use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
@@ -63,7 +63,7 @@ class UsersController extends Controller
         return json_encode([
             'data' => [
                 'api_token' => $user->api_token,
-            ]
+            ],
         ]);
     }
 }

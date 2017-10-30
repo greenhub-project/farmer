@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Farmer\Models\Role;
 use App\Farmer\Models\User;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class MembersController extends Controller
 {

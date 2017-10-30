@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Farmer\Models\Protocol\Sample;
 use App\Http\Controllers\Controller;
+use App\Farmer\Models\Protocol\Sample;
 use App\Http\Resources\SampleResource;
 
 class SamplesController extends Controller

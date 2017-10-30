@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Farmer\Models\Protocol\Device;
-use App\Farmer\Models\Protocol\Sample;
-use App\Http\Controllers\Controller;
-use App\Http\Resources\DeviceResource;
-use App\Http\Resources\SampleResource;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Farmer\Models\Protocol\Device;
+use App\Farmer\Models\Protocol\Sample;
+use App\Http\Resources\DeviceResource;
+use App\Http\Resources\SampleResource;
 
 class QueriesController extends Controller
 {
@@ -38,7 +38,7 @@ class QueriesController extends Controller
         $query = \DB::table($model);
         $filters = json_decode($request->filters);
 
-        if (sizeof($filters) > 0) {
+        if (count($filters) > 0) {
             $columns = \Schema::getColumnListing($model);
             // No parameters, check for any filters now
             switch ($model) {
@@ -142,7 +142,7 @@ class QueriesController extends Controller
         $perPage = $request->has('per_page') ? $request->per_page : 10;
 
         // Query through any existing filters
-        if (sizeof($filters) > 0) {
+        if (count($filters) > 0) {
             $columns = \Schema::getColumnListing('devices');
             // No parameters, check for any filters now
             foreach ($filters as $key => $val) {
@@ -267,7 +267,7 @@ class QueriesController extends Controller
         $perPage = $request->has('per_page') ? $request->per_page : 10;
 
         // Query through any existing filters
-        if (sizeof($filters) > 0) {
+        if (count($filters) > 0) {
             $columns = array_merge(
                 \Schema::getColumnListing('samples'),
                 \Schema::getColumnListing('devices')

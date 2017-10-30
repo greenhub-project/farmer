@@ -24,18 +24,21 @@ class PagesController extends Controller
     public function account()
     {
         $user = auth()->user();
+
         return view('settings.account', compact('user'));
     }
 
     public function password()
     {
         $user = auth()->user();
+
         return view('settings.password', compact('user'));
     }
 
     public function api()
     {
         $user = auth()->user();
+
         return view('settings.api', compact('user'));
     }
 }

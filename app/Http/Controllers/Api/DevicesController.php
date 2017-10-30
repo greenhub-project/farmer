@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Farmer\Models\Protocol\Device;
 use App\Http\Controllers\Controller;
+use App\Farmer\Models\Protocol\Device;
 use App\Http\Resources\DeviceResource;
 
 class DevicesController extends Controller

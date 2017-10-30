@@ -68,6 +68,7 @@ class StatsCounterController extends Controller
 
         $data->map(function ($elem) {
             $elem->day = Carbon::parse($elem->day)->format('d M');
+
             return $elem;
         });
 

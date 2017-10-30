@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Farmer\Models\Protocol\Device;
 use Illuminate\Http\Request;
+use App\Farmer\Models\Protocol\Device;
 
 class DevicesController extends Controller
 {

@@ -2,10 +2,11 @@
 
 namespace App\Farmer\Traits;
 
-use App\Farmer\Models\Permission;
 use App\Farmer\Models\Role;
+use App\Farmer\Models\Permission;
 
-trait HasRoles {
+trait HasRoles
+{
     /**
      * A user may have multiple roles.
      *

@@ -3,8 +3,8 @@
 namespace App\Farmer\Models;
 
 use App\Farmer\Traits\HasRoles;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
