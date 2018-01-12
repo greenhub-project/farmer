@@ -5,15 +5,16 @@ use Illuminate\Support\Facades\Request;
 /**
  * Flash Helper.
  *
- * @param  string|null  $title
- * @param  string|null  $text
+ * @param string|null $title
+ * @param string|null $text
+ *
  * @return mixed
  */
 function flash($title = null, $text = null)
 {
     $flash = app('App\Http\Flash');
 
-    if (func_num_args() == 0) {
+    if (0 == func_num_args()) {
         return $flash;
     }
 

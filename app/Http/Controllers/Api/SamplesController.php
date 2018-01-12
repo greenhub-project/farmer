@@ -29,7 +29,8 @@ class SamplesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Farmer\Models\Protocol\Sample  $sample
+     * @param \App\Farmer\Models\Protocol\Sample $sample
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Sample $sample)

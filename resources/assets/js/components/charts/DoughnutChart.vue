@@ -58,10 +58,6 @@
     .fa {
         color: $brand-primary;
     }
-    canvas {
-        width: auto;
-        height: 400px;
-    }
     .flex-center {
         display: flex;
         align-items: center;

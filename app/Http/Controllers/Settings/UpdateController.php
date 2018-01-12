@@ -9,8 +9,6 @@ class UpdateController extends Controller
 {
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -21,7 +19,7 @@ class UpdateController extends Controller
     {
         $data = $request->validate([
             'name' => 'required',
-            'email'=> 'required|email',
+            'email' => 'required|email',
         ]);
 
         auth()->user()->update($data);
@@ -35,7 +33,7 @@ class UpdateController extends Controller
     {
         $data = $request->validate([
             'new_password' => 'required|min:6',
-            'repeat_password'=> 'required|min:6|same:new_password',
+            'repeat_password' => 'required|min:6|same:new_password',
         ]);
 
         auth()->user()->update([

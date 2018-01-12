@@ -20,7 +20,8 @@ trait HasRoles
     /**
      * Assign the given role to the user.
      *
-     * @param  string $role
+     * @param string $role
+     *
      * @return mixed
      */
     public function assignRole($role)
@@ -49,7 +50,8 @@ trait HasRoles
     /**
      * Determine if the user has the given role.
      *
-     * @param  mixed $role
+     * @param mixed $role
+     *
      * @return bool
      */
     public function hasRole($role)
@@ -64,7 +66,8 @@ trait HasRoles
     /**
      * Determine if the user may perform the given permission.
      *
-     * @param  Permission $permission
+     * @param Permission $permission
+     *
      * @return bool
      */
     public function hasPermission(Permission $permission)

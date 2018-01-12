@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Farmer\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Notifications\NewUserRegistered;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -34,8 +35,6 @@ class RegisterController extends Controller
 
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -45,7 +44,8 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -60,7 +60,8 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return User
      */
     protected function create(array $data)
@@ -79,8 +80,9 @@ class RegisterController extends Controller
     /**
      * The user has been registered.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  mixed  $user
+     * @param \Illuminate\Http\Request $request
+     * @param mixed                    $user
+     *
      * @return mixed
      */
     protected function registered(Request $request, $user)
@@ -93,7 +95,8 @@ class RegisterController extends Controller
     /**
      * Confirm a user's email address.
      *
-     * @param  string $token
+     * @param string $token
+     *
      * @return mixed
      */
     public function verify($token)
@@ -102,6 +105,10 @@ class RegisterController extends Controller
         $user->verify();
 
         flash()->success('You are now verified.', 'Please login or continue navigation');
+
+        if (Auth::check()) {
+            return redirect('dashboard');
+        }
 
         return redirect('login');
     }

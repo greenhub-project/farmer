@@ -6,25 +6,27 @@ class Flash
 {
     /**
      * Create flash  session.
-     * @param  string       $title
-     * @param  string       $text
-     * @param  string       $type
-     * @param  string|null  $key
-     * @return void
+     *
+     * @param string      $title
+     * @param string      $text
+     * @param string      $type
+     * @param string|null $key
      */
     public function create($title, $text, $type, $key = 'flash_message')
     {
         session()->flash($key, [
-            'title'  => $title,
-            'text'   => $text,
-            'type'   => $type,
+            'title' => $title,
+            'text' => $text,
+            'type' => $type,
         ]);
     }
 
     /**
      * Create a warning flash message.
-     * @param  string   $title
-     * @param  string   $text
+     *
+     * @param string $title
+     * @param string $text
+     *
      * @return mixed
      */
     public function warning($title, $text)
@@ -34,8 +36,10 @@ class Flash
 
     /**
      * Create an error flash message.
-     * @param  string   $title
-     * @param  string   $text
+     *
+     * @param string $title
+     * @param string $text
+     *
      * @return mixed
      */
     public function error($title, $text)
@@ -45,8 +49,10 @@ class Flash
 
     /**
      * Create a warning flash message.
-     * @param  string   $title
-     * @param  string   $text
+     *
+     * @param string $title
+     * @param string $text
+     *
      * @return mixed
      */
     public function success($title, $text)
@@ -56,8 +62,10 @@ class Flash
 
     /**
      * Create an info flash message.
-     * @param  string   $title
-     * @param  string   $text
+     *
+     * @param string $title
+     * @param string $text
+     *
      * @return mixed
      */
     public function info($title, $text)
@@ -67,9 +75,11 @@ class Flash
 
     /**
      * Create an overlay flash message.
-     * @param  string   $title
-     * @param  string   $text
-     * @param  string   $type
+     *
+     * @param string $title
+     * @param string $text
+     * @param string $type
+     *
      * @return mixed
      */
     public function overlay($title, $text, $type = 'info')

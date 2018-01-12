@@ -10,8 +10,6 @@ class UsersController extends Controller
 {
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -21,7 +19,8 @@ class UsersController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  Request  $request
+     * @param Request $request
+     *
      * @return UserResource
      */
     public function index(Request $request)
@@ -34,7 +33,8 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
+     * @param Request $request
+     *
      * @return UserResource
      */
     public function update(Request $request)

@@ -43,7 +43,7 @@ class Sample extends Model
 
     public function isScreenOn()
     {
-        return $this->screen_on == 1;
+        return 1 == $this->screen_on;
     }
 
     public function memoryActive()

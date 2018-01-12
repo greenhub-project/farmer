@@ -1,27 +1,27 @@
 <?php
 
+use App\Farmer\Models\Role;
 use Illuminate\Database\Seeder;
+use App\Farmer\Models\Permission;
 
 class RolesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run()
     {
-        $admin = \App\Role::create([
+        $admin = Role::create([
             'name' => 'admin',
             'label' => 'Administrator',
         ]);
 
-        $member = \App\Role::create([
+        $member = Role::create([
             'name' => 'member',
             'label' => 'Member',
         ]);
 
-        $viewToken = \App\Permission::create([
+        $viewToken = Permission::create([
             'name' => 'view-api-token',
             'label' => 'View API token',
         ]);

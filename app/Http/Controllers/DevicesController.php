@@ -10,7 +10,8 @@ class DevicesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -39,34 +40,34 @@ class DevicesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Farmer\Models\Protocol\Device  $device
+     * @param \App\Farmer\Models\Protocol\Device $device
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Device $device)
     {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Farmer\Models\Protocol\Device  $device
+     * @param \Illuminate\Http\Request           $request
+     * @param \App\Farmer\Models\Protocol\Device $device
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Device $device)
     {
-        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Farmer\Models\Protocol\Device  $device
+     * @param \App\Farmer\Models\Protocol\Device $device
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Device $device)
     {
-        //
     }
 }

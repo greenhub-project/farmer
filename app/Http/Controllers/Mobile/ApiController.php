@@ -23,6 +23,7 @@ class ApiController extends Controller
      * Retrieve new messages for a given device.
      *
      * @param Request $request Containing device uuid
+     *
      * @return mixed Collection of new messages
      */
     public function messages(Request $request)
@@ -56,7 +57,7 @@ class ApiController extends Controller
         ]);
 
         $exists = Device::where('uuid', $data['uuId'])->first();
-        if ($exists != null) {
+        if (null != $exists) {
             return 0;
         }
 
@@ -87,6 +88,6 @@ class ApiController extends Controller
         $job = (new ProcessUpload($device, $data['sample']))->delay(Carbon::now()->addSeconds(5));
         dispatch($job);
 
-        return ($device == null) ? 0 : 1;
+        return (null == $device) ? 0 : 1;
     }
 }

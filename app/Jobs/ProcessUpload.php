@@ -21,8 +21,8 @@ class ProcessUpload implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @param $device Device to add the sample.
-     * @param $data array to extract data to add to the sample.
+     * @param $device device to add the sample
+     * @param $data array to extract data to add to the sample
      */
     public function __construct(Device $device, $data)
     {
@@ -32,12 +32,10 @@ class ProcessUpload implements ShouldQueue
 
     /**
      * Execute the job.
-     *
-     * @return void
      */
     public function handle()
     {
-        if ($this->device == null) {
+        if (null == $this->device) {
             return;
         }
 
@@ -188,14 +186,14 @@ class ProcessUpload implements ShouldQueue
                     if (array_key_exists('appPermissions', $el)) {
                         foreach ($el['appPermissions'] as $perm) {
                             $process->permissions()->create([
-                                'permission' =>  $perm['permission'],
+                                'permission' => $perm['permission'],
                             ]);
                         }
                     }
                 }
             }
 
-            if ($raw != null) {
+            if (null != $raw) {
                 $raw->stored = true;
                 $raw->save();
             }

@@ -29,7 +29,8 @@ class DevicesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Farmer\Models\Protocol\Device  $device
+     * @param \App\Farmer\Models\Protocol\Device $device
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Device $device)

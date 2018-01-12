@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Farmer\Models\Protocol\Device;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Farmer\Models\Protocol\Device;
 
 class StatsCounterController extends Controller
 {
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -21,8 +19,9 @@ class StatsCounterController extends Controller
     /**
      * Count records from given model per interval of time.
      *
-     * @param string $model model name
+     * @param string  $model   model name
      * @param Request $request interval parameter
+     *
      * @return int count number
      */
     public function count($model, Request $request)
@@ -49,8 +48,9 @@ class StatsCounterController extends Controller
      * Count number of records of last 7 days
      * from given model and group them by date.
      *
-     * @param string $model model name
+     * @param string  $model   model name
      * @param Request $request
+     *
      * @return array
      */
     public function weekly($model, Request $request)
@@ -74,13 +74,14 @@ class StatsCounterController extends Controller
             return $elem;
         });
 
-        return json_encode($data);
+        return $data->toJson();
     }
 
     /**
      * Count total number of records from given model.
      *
      * @param string $model model name
+     *
      * @return int total number
      */
     public function total($model)
@@ -97,5 +98,15 @@ class StatsCounterController extends Controller
             $active,
             $inactive,
         ]);
+    }
+
+    public function countGroup($field)
+    {
+        $data = \DB::table('devices')
+            ->selectRaw($field.', count(*) as total')
+            ->groupBy($field)
+            ->get();
+
+        return $data->toJson();
     }
 }

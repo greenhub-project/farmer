@@ -8,26 +8,23 @@ class AddVersioningStateToMobileMessages extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
         Schema::table('mobile_messages', function (Blueprint $table) {
-            $table->integer('version')->unsigned()->default(0);
             $table->boolean('permanent')->default(false);
+            $table->boolean('published')->default(false);
+            $table->integer('version')->unsigned()->default(0);
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {
         Schema::table('mobile_messages', function (Blueprint $table) {
-            $table->dropColumn(['version', 'permanent']);
+            $table->dropColumn(['permanent', 'published', 'version']);
         });
     }
 }

@@ -14,3 +14,4 @@ yarn-error.log
 _ide_helper.php
 request.sh
 request.sh.save
+.php_cs.cache

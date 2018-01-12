@@ -20,6 +20,7 @@ class DeviceSamplesController extends Controller
      * Display a listing of the resource.
      *
      * @param \App\Farmer\Models\Protocol\Device $device
+     *
      * @return \Illuminate\Http\Response
      */
     public function index(Device $device)

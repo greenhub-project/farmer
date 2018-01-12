@@ -46,7 +46,7 @@
         <div class="col-md-4">
             <doughnut-chart-panel
                     action="{{ url('/stats/devices/active') }}"
-                    label="Devices activity distribution"
+                    label="Devices activity"
                     :labels="{{ json_encode(['Active', 'Inactive']) }}"></doughnut-chart-panel>
         </div>
     </div>

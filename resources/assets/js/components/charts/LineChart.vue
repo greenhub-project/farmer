@@ -55,8 +55,6 @@
                 axios.get(this.action)
                     .then(response => {
                         this.feed = response.data;
-                        console.log(this.feed);
-                        console.log(this.totals);
                         this.isLoading = false;
                         this.initChart();
                     })
@@ -66,16 +64,22 @@
                 new Chart(this.$el.querySelector('canvas').getContext('2d'), {
                     type: 'line',
                     data: {
+                        labels: this.labels,
                         datasets: [{
                             label: this.label,
+                            data: this.totals,
                             backgroundColor: toRgba(this.color),
                             borderColor: this.color,
-                            data: this.totals
                         }]
                     },
                     options: {
                         legend: {
                             display: false
+                        },
+                        elements: {
+                            line: {
+                                tension: 0, // disables bezier curves
+                            }
                         }
                     }
                 });

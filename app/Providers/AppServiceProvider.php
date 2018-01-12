@@ -8,8 +8,6 @@ class AppServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
     public function boot()
     {
@@ -22,18 +20,16 @@ class AppServiceProvider extends ServiceProvider
         });
 
         \Blade::if('query', function ($param) {
-            return ! is_null($param) and $param != '';
+            return ! is_null($param) and '' != $param;
         });
     }
 
     /**
      * Register any application services.
-     *
-     * @return void
      */
     public function register()
     {
-        if ($this->app->environment() !== 'production') {
+        if ('production' !== $this->app->environment()) {
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
         }
     }

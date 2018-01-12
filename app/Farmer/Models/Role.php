@@ -29,6 +29,7 @@ class Role extends Model
      * Give the role the permission to.
      *
      * @param Permission $permission
+     *
      * @return Model
      */
     public function givePermissionTo(Permission $permission)
