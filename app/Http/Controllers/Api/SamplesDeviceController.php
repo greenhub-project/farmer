@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Farmer\Models\Protocol\Sample;
 use App\Http\Controllers\Controller;
+use App\Farmer\Models\Protocol\Sample;
 use App\Http\Resources\DeviceResource;
 
 class SamplesDeviceController extends Controller
@@ -24,6 +24,6 @@ class SamplesDeviceController extends Controller
      */
     public function index(Sample $sample)
     {
-        return DeviceResource::make($sample->device);
+        return new DeviceResource($sample->device);
     }
 }

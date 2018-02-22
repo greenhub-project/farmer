@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Farmer\Models\Protocol\Device;
 use App\Http\Resources\DeviceResource;
+use Illuminate\Http\Request;
 
 class DevicesController extends Controller
 {
+    protected $perPage = 10;
+
     /**
      * Create a new controller instance.
      */
@@ -19,11 +22,16 @@ class DevicesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index()
+    public function index(Request $request)
     {
-        return DeviceResource::collection(Device::simplePaginate());
+        if ($request->has('per_page')) {
+            $this->perPage = $request->per_page;
+        }
+
+        return DeviceResource::collection(Device::simplePaginate($this->perPage));
     }
 
     /**
@@ -31,10 +39,10 @@ class DevicesController extends Controller
      *
      * @param \App\Farmer\Models\Protocol\Device $device
      *
-     * @return \Illuminate\Http\Response
+     * @return DeviceResource
      */
     public function show(Device $device)
     {
-        return DeviceResource::make($device);
+        return new DeviceResource($device);
     }
 }

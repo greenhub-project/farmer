@@ -27,7 +27,7 @@ class UsersController extends Controller
     {
         $user = $request->user();
 
-        return UserResource::make($user);
+        return new UserResource($user);
     }
 
     /**
@@ -49,7 +49,7 @@ class UsersController extends Controller
             'api_token' => str_random(60),
         ]);
 
-        return UserResource::make($user);
+        return new UserResource($user);
     }
 
     public function token(Request $request)

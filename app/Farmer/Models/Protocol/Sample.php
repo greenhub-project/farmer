@@ -31,7 +31,7 @@ class Sample extends Model
     ];
 
     protected $hidden = [
-        'memory_wired', 'device_id',
+        'device_id',
     ];
 
     protected $casts = [
@@ -46,7 +46,7 @@ class Sample extends Model
         return 1 == $this->screen_on;
     }
 
-    public function memoryActive()
+    public function formattedMemoryActive()
     {
         $memory = $this->memory_active / 1024;
 

@@ -128,7 +128,7 @@
                                     <td>{{ $sample->id }}</td>
                                     <td>{{ $sample->battery_state }}</td>
                                     <td>{{ $sample->battery_level }}</td>
-                                    <td>{{ $sample->memoryActive() }}</td>
+                                    <td>{{ $sample->formattedMemoryActive() }}</td>
                                     <td>{{ $sample->network_status }}</td>
                                     <td>
                                         @if($sample->screen_on)

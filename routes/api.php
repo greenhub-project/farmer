@@ -18,6 +18,14 @@ Route::group(['prefix' => 'v1'], function () {
     Route::get('/devices/{device}/samples', 'Api\DeviceSamplesController@index');
     Route::get('/samples', 'Api\SamplesController@index');
     Route::get('/samples/{sample}', 'Api\SamplesController@show');
+    Route::get('/samples/{sample}/device', 'Api\SamplesDeviceController@index');
+
+    Route::get('/battery-details', 'Api\BatteryDetailsController@index');
+    Route::get('/battery-details/{batteryDetails}', 'Api\BatteryDetailsController@show');
+    Route::get('/battery-details/{batteryDetails}/sample', 'Api\BatteryDetailsSampleController@index');
+
+    Route::get('/network-details', 'Api\NetworkDetails@index');
+    Route::get('/network-details/{networkDetails}', 'Api\NetworkDetails@show');
 
     Route::put('/me/token', 'Api\UsersController@token');
 
