@@ -19,7 +19,7 @@ class SamplesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
@@ -31,7 +31,7 @@ class SamplesController extends Controller
      *
      * @param \App\Farmer\Models\Protocol\Sample $sample
      *
-     * @return \Illuminate\Http\Response
+     * @return SampleResource
      */
     public function show(Sample $sample)
     {
