@@ -16,6 +16,8 @@ class SampleResource extends Resource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
+            'device_id' => $this->device_id,
             'timestamp' => $this->timestamp,
             'app_version' => $this->app_version,
             'database_version' => $this->database_version,
@@ -31,6 +33,8 @@ class SampleResource extends Resource
             'screen_on' => $this->isScreenOn(),
             'timezone' => $this->timezone,
             'country_code' => $this->country_code,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

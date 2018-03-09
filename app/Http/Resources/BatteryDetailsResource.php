@@ -15,6 +15,8 @@ class BatteryDetailsResource extends Resource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
+            'sample_id' => $this->sample_id,
             'charger' => $this->charger,
             'health' => $this->health,
             'voltage' => $this->voltage,
@@ -23,6 +25,8 @@ class BatteryDetailsResource extends Resource
             'current_average' => $this->current_average,
             'current_now' => $this->current_now,
             'energy_counter' => $this->energy_counter,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

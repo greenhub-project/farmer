@@ -84,6 +84,10 @@ class ApiController extends Controller
         // Find device
         $device = Device::where('uuid', $data['sample']['uuId'])->first();
 
+        if (is_null($device)) {
+            \Log::error('Device with uuId:' . $data['sample']['uuId'] . 'not found');
+        }
+
         // dispatch job with device
         $job = (new ProcessUpload($device, $data['sample']))->delay(Carbon::now()->addSeconds(5));
         dispatch($job);

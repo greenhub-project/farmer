@@ -30,10 +30,6 @@ class Sample extends Model
         'country_code',
     ];
 
-    protected $hidden = [
-        'device_id',
-    ];
-
     protected $casts = [
         'battery_level' => 'float',
         'screen_on' => 'boolean',

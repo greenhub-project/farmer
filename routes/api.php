@@ -24,8 +24,8 @@ Route::group(['prefix' => 'v1'], function () {
     Route::get('/battery-details/{batteryDetails}', 'Api\BatteryDetailsController@show');
     Route::get('/battery-details/{batteryDetails}/sample', 'Api\BatteryDetailsSampleController@index');
 
-    Route::get('/network-details', 'Api\NetworkDetails@index');
-    Route::get('/network-details/{networkDetails}', 'Api\NetworkDetails@show');
+    Route::get('/network-details', 'Api\NetworkDetailsController@index');
+    Route::get('/network-details/{networkDetails}', 'Api\NetworkDetailsController@show');
 
     Route::put('/me/token', 'Api\UsersController@token');
 
