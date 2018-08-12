@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SampleResource;
-use App\Farmer\Models\Protocol\BatteryDetails;
+use App\Farmer\Models\Protocol\NetworkDetails;
 
-class BatteryDetailsSampleController extends Controller
+class NetworkDetailsSampleController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -19,11 +19,11 @@ class BatteryDetailsSampleController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param BatteryDetails $batteryDetails
+     * @param NetworkDetails $networkDetails
      * @return SampleResource
      */
-    public function index(BatteryDetails $batteryDetails)
+    public function index(NetworkDetails $networkDetails)
     {
-        return new SampleResource($batteryDetails->sample);
+        return new SampleResource($networkDetails->sample);
     }
 }

@@ -22,4 +22,9 @@ class PublicController extends Controller
             return -1;
         }
     }
+
+    public function status()
+    {
+        return ['status' => 'online'];
+    }
 }

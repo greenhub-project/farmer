@@ -13,9 +13,11 @@
 
 Route::group(['prefix' => 'v1'], function () {
     Route::get('/me', 'Api\UsersController@index');
+
     Route::get('/devices', 'Api\DevicesController@index');
     Route::get('/devices/{device}', 'Api\DevicesController@show');
     Route::get('/devices/{device}/samples', 'Api\DeviceSamplesController@index');
+
     Route::get('/samples', 'Api\SamplesController@index');
     Route::get('/samples/{sample}', 'Api\SamplesController@show');
     Route::get('/samples/{sample}/device', 'Api\SamplesDeviceController@index');
@@ -26,6 +28,11 @@ Route::group(['prefix' => 'v1'], function () {
 
     Route::get('/network-details', 'Api\NetworkDetailsController@index');
     Route::get('/network-details/{networkDetails}', 'Api\NetworkDetailsController@show');
+    Route::get('/network-details/{networkDetails}/sample', 'Api\NetworkDetailsSampleController@index');
+
+    Route::get('/settings', 'Api\SettingsController@index');
+    Route::get('/settings/{settings}', 'Api\SettingsController@show');
+    Route::get('/settings/{settings}/sample', 'Api\SettingsSampleController@index');
 
     Route::put('/me/token', 'Api\UsersController@token');
 
@@ -34,11 +41,9 @@ Route::group(['prefix' => 'v1'], function () {
     Route::get('/devices', 'Api\QueriesController@devices');
     Route::get('/models', 'Api\QueriesController@models');
 
-    // Guest
+    // Public
     Route::get('/public/count/{model}', 'Api\PublicController@count');
-    Route::get('/status', function () {
-        return ['status' => 'Online'];
-    });
+    Route::get('/public/status', 'Api\PublicController@status');
 });
 
 // Mobile dedicated endpoints

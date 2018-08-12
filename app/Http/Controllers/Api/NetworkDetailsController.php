@@ -12,6 +12,14 @@ class NetworkDetailsController extends Controller
     protected $perPage = 10;
 
     /**
+     * Create a new controller instance.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection

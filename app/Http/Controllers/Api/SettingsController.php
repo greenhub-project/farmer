@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Farmer\Models\Protocol\Sample;
-use App\Http\Resources\SampleResource;
-use Illuminate\Http\Request;
+use App\Http\Resources\SettingsResource;
+use App\Farmer\Models\Protocol\Settings;
 
-class SamplesController extends Controller
+class SettingsController extends Controller
 {
     protected $perPage = 10;
 
@@ -22,8 +21,7 @@ class SamplesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param Request $request
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @return SettingsResource
      */
     public function index(Request $request)
     {
@@ -31,18 +29,17 @@ class SamplesController extends Controller
             $this->perPage = $request->per_page;
         }
 
-        return SampleResource::collection(Sample::simplePaginate($this->perPage));
+        return SettingsResource::collection(Settings::simplePaginate($this->perPage));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param \App\Farmer\Models\Protocol\Sample $sample
-     *
-     * @return SampleResource
+     * @param Settings $settings
+     * @return SettingsResource
      */
-    public function show(Sample $sample)
+    public function show(Settings $settings)
     {
-        return new SampleResource($sample);
+        return new SettingsResource($settings);
     }
 }
