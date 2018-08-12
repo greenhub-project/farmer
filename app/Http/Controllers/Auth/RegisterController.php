@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Carbon\Carbon;
 use App\Farmer\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use App\Notifications\NewUserRegistered;
-use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {

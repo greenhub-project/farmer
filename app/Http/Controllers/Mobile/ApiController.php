@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Mobile;
 
-use Carbon\Carbon;
-use App\Jobs\ProcessUpload;
-use Illuminate\Http\Request;
 use App\Farmer\Models\MobileMessage;
-use App\Http\Controllers\Controller;
 use App\Farmer\Models\Protocol\Device;
+use App\Http\Controllers\Controller;
+use App\Jobs\ProcessUpload;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class ApiController extends Controller
 {

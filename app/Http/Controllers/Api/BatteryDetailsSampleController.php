@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Farmer\Models\Protocol\BatteryDetails;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SampleResource;
-use App\Farmer\Models\Protocol\BatteryDetails;
 
 class BatteryDetailsSampleController extends Controller
 {

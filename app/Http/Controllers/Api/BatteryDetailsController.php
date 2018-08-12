@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Farmer\Models\Protocol\BatteryDetails;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\BatteryDetailsResource;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class BatteryDetailsController extends Controller
 {

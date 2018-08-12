@@ -1,7 +1,7 @@
 <?php
 
-use Faker\Generator as Faker;
 use App\Farmer\Models\User;
+use Faker\Generator as Faker;
 
 /*
 |--------------------------------------------------------------------------

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Farmer\Models\Protocol\Device;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Farmer\Models\Protocol\Device;
 
 class StatsCounterController extends Controller
 {

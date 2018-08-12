@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Farmer\Models\Protocol\Device;
 use App\Farmer\Models\Protocol\Sample;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\DeviceResource;
 use App\Http\Resources\SampleResource;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class QueriesController extends Controller
 {

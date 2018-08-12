@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Farmer\Models\Protocol\NetworkDetails;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\NetworkDetailsResource;
+use Illuminate\Http\Request;
 
 class NetworkDetailsController extends Controller
 {

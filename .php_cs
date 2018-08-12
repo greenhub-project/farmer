@@ -1,25 +1,20 @@
 <?php
 
-$finder = PhpCsFixer\Finder::create()
+$finder = Symfony\Component\Finder\Finder::create()
     ->notPath('bootstrap/cache')
-    ->notPath('storage')
+    ->notPath('storage/*')
     ->notPath('vendor')
     ->in(__DIR__)
     ->name('*.php')
+    ->name('_ide_helper')
     ->notName('*.blade.php')
     ->ignoreDotFiles(true)
-    ->ignoreVCS(true)
-;
-
+    ->ignoreVCS(true);
 return PhpCsFixer\Config::create()
-    ->setRules(array(
-        '@Symfony' => true,
-        'binary_operator_spaces' => ['align_double_arrow' => false],
+    ->setRules([
+        '@PSR2' => true,
         'array_syntax' => ['syntax' => 'short'],
-        'linebreak_after_opening_tag' => true,
-        'not_operator_with_successor_space' => true,
-        'ordered_imports' => ['sortAlgorithm' => 'length'],
-        'phpdoc_order' => true,
-    ))
-    ->setFinder($finder)
-;
+        'ordered_imports' => ['sortAlgorithm' => 'alpha'],
+        'no_unused_imports' => true,
+    ])
+    ->setFinder($finder);

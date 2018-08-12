@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Farmer\Models\Protocol\Sample;
+use Illuminate\Http\Request;
 
 class SamplesController extends Controller
 {
