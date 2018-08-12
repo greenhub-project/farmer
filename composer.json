@@ -44,9 +44,6 @@
     }
   },
   "scripts": {
-    "format": [
-      "vendor/bin/php-cs-fixer fix"
-    ],
     "post-root-package-install": [
       "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
     ],
@@ -56,6 +53,18 @@
     "post-autoload-dump": [
       "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
       "@php artisan package:discover"
+    ],
+    "format": [
+      "vendor/bin/php-cs-fixer fix"
+    ],
+    "test": [
+      "rm storage/logs/laravel.log 2>/dev/null; vendor/bin/phpunit --coverage-text; error=$?; if [ $error -ne 0 ]; then grep -B 2 -A 1 '#0' storage/logs/laravel.log 2>/dev/null; fi; exit $error"
+    ],
+    "ci-format": [
+      "vendor/bin/php-cs-fixer fix --dry-run"
+    ],
+    "ci-test": [
+      "rm storage/logs/laravel.log 2>/dev/null; vendor/bin/phpunit --coverage-text --colors=never; error=$?; if [ $error -ne 0 ]; then grep -B 2 -A 1 '#0' storage/logs/laravel.log 2>/dev/null; fi; exit $error"
     ]
   },
   "config": {
