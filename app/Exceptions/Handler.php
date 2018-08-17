@@ -69,8 +69,15 @@ class Handler extends ExceptionHandler
                         'message' => "Internal server error",
                     ], 500);
                 }
-            } 
-            else{
+            } elseif ($exception instanceof ModelNotFoundException) {
+                //This should be revised if routes are changed
+                $pathArray = explode("/", $request->getUri());
+                $objectId = explode("?", $pathArray[6])[0];
+ 
+                return response()->json([
+                    'message' => 'There is no object with ' . $objectId . ' in ' . $pathArray[5],
+                ], 404);
+            } else{
                 return response()->json([
                     'message' => 'Interval server error',
                 ], 500);
