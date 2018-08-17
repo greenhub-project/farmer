@@ -80,7 +80,6 @@ class Handler extends ExceptionHandler
                     'message' => 'There is no object with ' . $objectId . ' in ' . $pathArray[5],
                 ], 404);
             } else{
-                \Log::info($exception);
                 return response()->json([
                     'message' => 'Interval server error',
                 ], 500);
