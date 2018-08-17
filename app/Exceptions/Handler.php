@@ -54,6 +54,10 @@ class Handler extends ExceptionHandler
                 return response()->json([
                     'message' => 'Requested route is invalid.',
                 ], 400);
+            } elseif ($exception instanceof AuthenticationException) {
+                return response()->json([
+                    'message' => 'Unable to authenticate request, check if your access token is correct.',
+                ], 401);
             } 
             else{
                 return response()->json([
