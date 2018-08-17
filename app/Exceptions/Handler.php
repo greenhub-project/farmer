@@ -58,6 +58,17 @@ class Handler extends ExceptionHandler
                 return response()->json([
                     'message' => 'Unable to authenticate request, check if your access token is correct.',
                 ], 401);
+            } elseif ($exception instanceof HttpException) {
+                if ($exception->getMessage() == 'Too Many Attempts.') {
+                    return response()->json([
+                        'message' => "The rate limit has been exceeded, please wait before sending more requests",
+                    ], 429);
+                } else {
+                    //Maybe this should be logged?
+                    return response()->json([
+                        'message' => "Internal server error",
+                    ], 500);
+                }
             } 
             else{
                 return response()->json([
