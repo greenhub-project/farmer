@@ -49,18 +49,21 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if (! $request->expectsJson()) {
+        if (strpos($request->getUri(), '/api/v') !== false) {
+            if ($exception instanceof NotFoundHttpException) {
+                return response()->json([
+                    'message' => 'Requested route is invalid.',
+                ], 400);
+            } 
+            else{
+                return response()->json([
+                    'message' => 'Interval server error',
+                ], 500);
+            }
+        }
+        else{
             return parent::render($request, $exception);
         }
-
-        if ($exception instanceof ModelNotFoundException) {
-            return response()->json([
-                'message' => 'Record not found.',
-            ], 404);
-        } elseif ($exception instanceof NotFoundHttpException) {
-            return response()->json([
-                'message' => 'Resource not found.',
-            ], 404);
-        }
+        
     }
 }
