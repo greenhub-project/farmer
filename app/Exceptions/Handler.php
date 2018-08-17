@@ -5,6 +5,8 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Auth\AuthenticationException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
@@ -78,6 +80,7 @@ class Handler extends ExceptionHandler
                     'message' => 'There is no object with ' . $objectId . ' in ' . $pathArray[5],
                 ], 404);
             } else{
+                \Log::info($exception);
                 return response()->json([
                     'message' => 'Interval server error',
                 ], 500);
