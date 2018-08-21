@@ -45,49 +45,48 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Exception               $exception
+     * @param \Exception $exception
      *
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
     {
-        if (strpos($request->getUri(), '/api/v') !== false) {
-            if ($exception instanceof NotFoundHttpException) {
-                return response()->json([
-                    'message' => 'Requested route is invalid.',
-                ], 400);
-            } elseif ($exception instanceof AuthenticationException) {
-                return response()->json([
-                    'message' => 'Unable to authenticate request, check if your access token is correct.',
-                ], 401);
-            } elseif ($exception instanceof HttpException) {
-                if ($exception->getMessage() == 'Too Many Attempts.') {
-                    return response()->json([
-                        'message' => "The rate limit has been exceeded, please wait before sending more requests",
-                    ], 429);
-                } else {
-                    //Maybe this should be logged?
-                    return response()->json([
-                        'message' => "Internal server error",
-                    ], 500);
-                }
-            } elseif ($exception instanceof ModelNotFoundException) {
-                //This should be revised if routes are changed
-                $pathArray = explode("/", $request->getUri());
-                $objectId = explode("?", $pathArray[6])[0];
- 
-                return response()->json([
-                    'message' => 'There is no object with ' . $objectId . ' in ' . $pathArray[5],
-                ], 404);
-            } else{
-                return response()->json([
-                    'message' => 'Interval server error',
-                ], 500);
-            }
-        }
-        else{
+        if (!$request->is("api/*")) {
             return parent::render($request, $exception);
         }
         
+        if ($exception instanceof NotFoundHttpException) {
+            return response()->json([
+                'message' => 'Requested route is invalid.',
+            ], 400);
+        } elseif ($exception instanceof AuthenticationException) {
+            return response()->json([
+                'message' => 'Unable to authenticate request, check if your access token is correct.',
+            ], 401);
+        } elseif ($exception instanceof HttpException) {
+            if ($exception->getMessage() == 'Too Many Attempts.') {
+                return response()->json([
+                    'message' => "The rate limit has been exceeded, please wait before sending more requests",
+                ], 429);
+            } else {
+                //Maybe this should be logged?
+                return response()->json([
+                    'message' => "Internal server error",
+                ], 500);
+            }
+        } elseif ($exception instanceof ModelNotFoundException) {
+            //This should be revised if routes are changed
+            $pathArray = explode("/", $request->getUri());
+            $objectId = explode("?", $pathArray[6])[0];
+
+            return response()->json([
+                'message' => 'There is no object with ' . $objectId . ' in ' . $pathArray[5],
+            ], 404);
+        } else {
+            return response()->json([
+                'message' => 'Interval server error',
+            ], 500);
+        }
+
     }
 }
