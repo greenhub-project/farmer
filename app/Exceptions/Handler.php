@@ -54,39 +54,39 @@ class Handler extends ExceptionHandler
         if (!$request->is("api/*")) {
             return parent::render($request, $exception);
         }
-        
-        if ($exception instanceof NotFoundHttpException) {
-            return response()->json([
-                'message' => 'Requested route is invalid.',
-            ], 400);
-        } elseif ($exception instanceof AuthenticationException) {
-            return response()->json([
-                'message' => 'Unable to authenticate request, check if your access token is correct.',
-            ], 401);
-        } elseif ($exception instanceof HttpException) {
-            if ($exception->getMessage() == 'Too Many Attempts.') {
+        $exceptionClass = get_class($exception);
+        switch ($exceptionClass) {
+            case NotFoundHttpException::class:
+                return response()->json(['message' => 'Requested route is invalid.',], 400);
+            case AuthenticationException::class:
                 return response()->json([
-                    'message' => "The rate limit has been exceeded, please wait before sending more requests",
-                ], 429);
-            } else {
-                //Maybe this should be logged?
+                    'message' => 'Unable to authenticate request, check if your access token is correct.',
+                ], 401);
+            case HttpException::class:
+                if ($exception->getMessage() == 'Too Many Attempts.') {
+                    return response()->json([
+                        'message' => "The rate limit has been exceeded, please wait before sending more requests",
+                    ], 429);
+                } else {
+                    //Maybe this should be logged?
+                    return response()->json([
+                        'message' => "Internal server error",
+                    ], 500);
+                }
+            case ModelNotFoundException::class:
+                //This should be revised if routes are changed
+
+                \Log::info($exception->getModel());
+
                 return response()->json([
-                    'message' => "Internal server error",
+                    'message' => 'Requested object not found in ' . $exception->getModel(),
+                ], 404);
+            default:
+                return response()->json([
+                    'message' => 'Interval server error',
                 ], 500);
-            }
-        } elseif ($exception instanceof ModelNotFoundException) {
-            //This should be revised if routes are changed
-            $pathArray = explode("/", $request->getUri());
-            $objectId = explode("?", $pathArray[6])[0];
-
-            return response()->json([
-                'message' => 'There is no object with ' . $objectId . ' in ' . $pathArray[5],
-            ], 404);
-        } else {
-            return response()->json([
-                'message' => 'Interval server error',
-            ], 500);
         }
-
     }
+
+
 }
