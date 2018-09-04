@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -74,10 +75,20 @@ class Handler extends ExceptionHandler
                 }
                 // no break
             case ModelNotFoundException::class:
-
                 return response()->json([
                     'message' => 'Requested object not found in ' . $exception->getModel(),
                 ], 404);
+            case HttpResponseException::class:
+                if ($exception->getStatusCode() == 422) {
+                    return response()->json([
+                        'message' => 'Error validating requested object ',
+                    ], 422);
+                } else {
+                    return response()->json([
+                        'message' => "Internal server error",
+                    ], 500);
+                }
+                // no break
             default:
                 return response()->json([
                     'message' => 'Interval server error',
