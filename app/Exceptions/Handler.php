@@ -63,20 +63,16 @@ class Handler extends ExceptionHandler
                     'message' => 'Unable to authenticate request, check if your access token is correct.',
                 ], 401);
             case HttpException::class:
-                if ($exception->getMessage() == 'Too Many Attempts.') {
+                if ($exception->getStatusCode() == 429) {
                     return response()->json([
                         'message' => "The rate limit has been exceeded, please wait before sending more requests",
                     ], 429);
                 } else {
-                    //Maybe this should be logged?
                     return response()->json([
                         'message' => "Internal server error",
                     ], 500);
                 }
             case ModelNotFoundException::class:
-                //This should be revised if routes are changed
-
-                \Log::info($exception->getModel());
 
                 return response()->json([
                     'message' => 'Requested object not found in ' . $exception->getModel(),
