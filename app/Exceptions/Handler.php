@@ -58,7 +58,7 @@ class Handler extends ExceptionHandler
         $exceptionClass = get_class($exception);
         switch ($exceptionClass) {
             case NotFoundHttpException::class:
-                return response()->json(['message' => 'Requested route is invalid.',], 400);
+                return response()->json(['message' => 'Requested route was not found.',], 404);
             case AuthenticationException::class:
                 return response()->json([
                     'message' => 'Unable to authenticate request, check if your access token is correct.',
@@ -66,32 +66,32 @@ class Handler extends ExceptionHandler
             case HttpException::class:
                 if ($exception->getStatusCode() == 429) {
                     return response()->json([
-                        'message' => "The rate limit has been exceeded, please wait before sending more requests",
+                        'message' => "The rate limit has been exceeded, please wait before sending more requests.",
                     ], 429);
                 } else {
                     return response()->json([
-                        'message' => "Internal server error",
+                        'message' => "Internal server error.",
                     ], 500);
                 }
                 // no break
             case ModelNotFoundException::class:
                 return response()->json([
-                    'message' => 'Requested object not found in ' . $exception->getModel(),
+                    'message' => 'Requested object not found in ' . $exception->getModel() . '.',
                 ], 404);
             case HttpResponseException::class:
                 if ($exception->getStatusCode() == 422) {
                     return response()->json([
-                        'message' => 'Error validating requested object ',
+                        'message' => 'Error validating requested object.',
                     ], 422);
                 } else {
                     return response()->json([
-                        'message' => "Internal server error",
+                        'message' => "Internal server error.",
                     ], 500);
                 }
                 // no break
             default:
                 return response()->json([
-                    'message' => 'Interval server error',
+                    'message' => 'Interval server error.',
                 ], 500);
         }
     }
