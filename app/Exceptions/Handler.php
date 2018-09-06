@@ -39,6 +39,10 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        if (app()->bound('sentry') ) {
+            app('sentry')->captureException($exception);
+        }
+
         parent::report($exception);
     }
 
@@ -56,6 +60,8 @@ class Handler extends ExceptionHandler
             return parent::render($request, $exception);
         }
         $exceptionClass = get_class($exception);
+
+
         switch ($exceptionClass) {
             case NotFoundHttpException::class:
                 return response()->json(['message' => 'Requested route was not found.',], 404);
@@ -68,12 +74,8 @@ class Handler extends ExceptionHandler
                     return response()->json([
                         'message' => "The rate limit has been exceeded, please wait before sending more requests.",
                     ], 429);
-                } else {
-                    return response()->json([
-                        'message' => "Internal server error.",
-                    ], 500);
                 }
-                // no break
+                break;
             case ModelNotFoundException::class:
                 return response()->json([
                     'message' => 'Requested object not found in ' . $exception->getModel() . '.',
@@ -83,16 +85,13 @@ class Handler extends ExceptionHandler
                     return response()->json([
                         'message' => 'Error validating requested object.',
                     ], 422);
-                } else {
-                    return response()->json([
-                        'message' => "Internal server error.",
-                    ], 500);
                 }
-                // no break
-            default:
-                return response()->json([
-                    'message' => 'Interval server error.',
-                ], 500);
+                break;
         }
+        $exception = new HttpException(500, 'Whoops!');
+        parent::render($request, $exception);
+        return response()->json([
+            'message' => 'Interval server error.',
+        ], 500);
     }
 }
