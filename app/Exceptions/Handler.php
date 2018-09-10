@@ -39,7 +39,7 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        if (app()->bound('sentry') ) {
+        if (app()->bound('sentry') && $this->shouldReport($exception)) {
             app('sentry')->captureException($exception);
         }
 
@@ -57,7 +57,7 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         if (!$request->is("api/*")) {
-            return parent::render($request, $exception);
+            return parent::report($request, $exception);
         }
         $exceptionClass = get_class($exception);
 
@@ -88,8 +88,7 @@ class Handler extends ExceptionHandler
                 }
                 break;
         }
-        $exception = new HttpException(500, 'Whoops!');
-        parent::render($request, $exception);
+        parent::report($exception);
         return response()->json([
             'message' => 'Interval server error.',
         ], 500);
