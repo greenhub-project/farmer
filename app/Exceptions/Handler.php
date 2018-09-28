@@ -57,7 +57,7 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         if (!$request->is("api/*")) {
-            return parent::report($request, $exception);
+            return parent::render($request, $exception);
         }
         $exceptionClass = get_class($exception);
 
@@ -88,7 +88,7 @@ class Handler extends ExceptionHandler
                 }
                 break;
         }
-        parent::report($exception);
+        parent::render($exception);
         return response()->json([
             'message' => 'Interval server error.',
         ], 500);
