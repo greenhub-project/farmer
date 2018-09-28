@@ -56,15 +56,14 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if (!$request->is("api/*")) {
+        if (!$request->is('api/*')) {
             return parent::render($request, $exception);
         }
         $exceptionClass = get_class($exception);
 
-
         switch ($exceptionClass) {
             case NotFoundHttpException::class:
-                return response()->json(['message' => 'Requested route was not found.',], 404);
+                return response()->json(['message' => 'Requested route was not found.', ], 404);
             case AuthenticationException::class:
                 return response()->json([
                     'message' => 'Unable to authenticate request, check if your access token is correct.',
@@ -72,7 +71,7 @@ class Handler extends ExceptionHandler
             case HttpException::class:
                 if ($exception->getStatusCode() == 429) {
                     return response()->json([
-                        'message' => "The rate limit has been exceeded, please wait before sending more requests.",
+                        'message' => 'The rate limit has been exceeded, please wait before sending more requests.',
                     ], 429);
                 }
                 break;
@@ -88,9 +87,6 @@ class Handler extends ExceptionHandler
                 }
                 break;
         }
-        parent::render($exception);
-        return response()->json([
-            'message' => 'Interval server error.',
-        ], 500);
+        return parent::render($exception);
     }
 }
