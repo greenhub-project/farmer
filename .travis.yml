@@ -23,5 +23,5 @@ before_script:
 
 script:
   - composer ci-test
-  - composer ci-lint
+  - composer ci-format
   - yarn run production
