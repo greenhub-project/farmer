@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Farmer\Models\Protocol\Sample;
-use App\Http\Controllers\Controller;
-use App\Http\Resources\SampleResource;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Farmer\Models\Protocol\Sample;
+use App\Http\Resources\SampleResource;
 
 class SamplesController extends Controller
 {
@@ -23,6 +23,7 @@ class SamplesController extends Controller
      * Display a listing of the resource.
      *
      * @param Request $request
+     *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index(Request $request)

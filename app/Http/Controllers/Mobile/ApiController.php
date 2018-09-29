@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Mobile;
 
-use App\Farmer\Models\MobileMessage;
-use App\Farmer\Models\Protocol\Device;
-use App\Http\Controllers\Controller;
-use App\Jobs\ProcessUpload;
 use Carbon\Carbon;
+use App\Jobs\ProcessUpload;
 use Illuminate\Http\Request;
+use App\Farmer\Models\MobileMessage;
+use App\Http\Controllers\Controller;
+use App\Farmer\Models\Protocol\Device;
 
 class ApiController extends Controller
 {
@@ -85,7 +85,7 @@ class ApiController extends Controller
         $device = Device::where('uuid', $data['sample']['uuId'])->first();
 
         if (is_null($device)) {
-            \Log::error('Device with uuId:' . $data['sample']['uuId'] . 'not found');
+            \Log::error('Device with uuId:'.$data['sample']['uuId'].'not found');
         }
 
         // dispatch job with device

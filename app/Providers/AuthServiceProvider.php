@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Farmer\Models\Permission;
 use App\Farmer\Models\User;
+use App\Farmer\Models\Permission;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Farmer\Models\Protocol\Settings;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SampleResource;
+use App\Farmer\Models\Protocol\Settings;
 
 class SettingsSampleController extends Controller
 {
@@ -20,6 +20,7 @@ class SettingsSampleController extends Controller
      * Display a listing of the resource.
      *
      * @param Settings $settings
+     *
      * @return SampleResource
      */
     public function index(Settings $settings)

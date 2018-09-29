@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Farmer\Models\Protocol\NetworkDetails;
-use App\Http\Controllers\Controller;
-use App\Http\Resources\NetworkDetailsResource;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Farmer\Models\Protocol\NetworkDetails;
+use App\Http\Resources\NetworkDetailsResource;
 
 class NetworkDetailsController extends Controller
 {
@@ -37,6 +37,7 @@ class NetworkDetailsController extends Controller
      * Display the specified resource.
      *
      * @param NetworkDetails $networkDetails
+     *
      * @return NetworkDetailsResource
      */
     public function show(NetworkDetails $networkDetails)

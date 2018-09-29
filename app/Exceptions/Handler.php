@@ -4,10 +4,10 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Auth\AuthenticationException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
@@ -50,20 +50,20 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Exception $exception
+     * @param \Exception               $exception
      *
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
     {
-        if (!$request->is('api/*')) {
+        if (! $request->is('api/*')) {
             return parent::render($request, $exception);
         }
         $exceptionClass = get_class($exception);
 
         switch ($exceptionClass) {
             case NotFoundHttpException::class:
-                return response()->json(['message' => 'Requested route was not found.', ], 404);
+                return response()->json(['message' => 'Requested route was not found.'], 404);
             case AuthenticationException::class:
                 return response()->json([
                     'message' => 'Unable to authenticate request, check if your access token is correct.',
@@ -77,7 +77,7 @@ class Handler extends ExceptionHandler
                 break;
             case ModelNotFoundException::class:
                 return response()->json([
-                    'message' => 'Requested object not found in ' . $exception->getModel() . '.',
+                    'message' => 'Requested object not found in '.$exception->getModel().'.',
                 ], 404);
             case HttpResponseException::class:
                 if ($exception->getStatusCode() == 422) {
@@ -87,6 +87,7 @@ class Handler extends ExceptionHandler
                 }
                 break;
         }
+
         return parent::render($exception);
     }
 }

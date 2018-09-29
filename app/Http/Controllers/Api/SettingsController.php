@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Farmer\Models\Protocol\Settings;
 use App\Http\Controllers\Controller;
+use App\Farmer\Models\Protocol\Settings;
 use App\Http\Resources\SettingsResource;
 
 class SettingsController extends Controller
@@ -36,6 +36,7 @@ class SettingsController extends Controller
      * Display the specified resource.
      *
      * @param Settings $settings
+     *
      * @return SettingsResource
      */
     public function show(Settings $settings)
