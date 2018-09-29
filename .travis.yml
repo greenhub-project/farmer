@@ -1,0 +1,27 @@
+language: php
+
+services:
+  - postgresql
+
+php:
+  - 7.2
+
+sudo: false
+
+cache:
+  directories:
+    - vendor
+    - $HOME/.composer/cache
+
+install:
+  - COMPOSER_DISCARD_CHANGES=1 composer install --dev --prefer-source --no-interaction
+
+before_script:
+  - psql -c 'create database farmer_testing;' -U postgres
+  - php artisan migrate
+  - yarn install
+
+script:
+  - composer ci-test
+  - composer ci-format
+  - yarn run production

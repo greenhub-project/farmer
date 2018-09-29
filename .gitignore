@@ -15,3 +15,4 @@ _ide_helper.php
 request.sh
 request.sh.save
 .php_cs.cache
+.vscode/

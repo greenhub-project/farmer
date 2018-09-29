@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Farmer\Models\Protocol\Device;
-use App\Http\Controllers\Controller;
-use App\Http\Resources\SampleResource;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Farmer\Models\Protocol\Device;
+use App\Http\Resources\SampleResource;
 
 class DeviceSamplesController extends Controller
 {
@@ -23,7 +23,8 @@ class DeviceSamplesController extends Controller
      * Display a listing of the resource.
      *
      * @param \App\Farmer\Models\Protocol\Device $device
-     * @param Request $request
+     * @param Request                            $request
+     *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index(Device $device, Request $request)

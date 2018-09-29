@@ -1,5 +1,5 @@
 # GreenHub Farmer
 
-[![StyleCI](https://styleci.io/repos/106722869/shield?branch=master)](https://styleci.io/repos/106722869)
+[![Build Status](https://travis-ci.org/greenhub-project/farmer.svg?branch=develop)](https://travis-ci.org/greenhub-project/farmer)
 
-> Backend application providing the REST API 
+> Backend application providing the REST API

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Farmer\Models\Protocol\BatteryDetails;
-use App\Http\Controllers\Controller;
-use App\Http\Resources\BatteryDetailsResource;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Farmer\Models\Protocol\BatteryDetails;
+use App\Http\Resources\BatteryDetailsResource;
 
 class BatteryDetailsController extends Controller
 {
@@ -23,6 +23,7 @@ class BatteryDetailsController extends Controller
      * Display a listing of the resource.
      *
      * @param Request $request
+     *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index(Request $request)
@@ -37,7 +38,8 @@ class BatteryDetailsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  BatteryDetails $batteryDetails
+     * @param BatteryDetails $batteryDetails
+     *
      * @return BatteryDetailsResource
      */
     public function show(BatteryDetails $batteryDetails)

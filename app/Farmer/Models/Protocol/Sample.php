@@ -47,9 +47,9 @@ class Sample extends Model
         $memory = $this->memory_active / 1024;
 
         if ($memory < 1024) {
-            return round($memory, 2) . ' MB';
+            return round($memory, 2).' MB';
         } else {
-            return round($memory / 1024, 2) . ' GB';
+            return round($memory / 1024, 2).' GB';
         }
     }
 

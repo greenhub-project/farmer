@@ -3,7 +3,10 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -36,6 +39,10 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        if (app()->bound('sentry') && $this->shouldReport($exception)) {
+            app('sentry')->captureException($exception);
+        }
+
         parent::report($exception);
     }
 
@@ -49,18 +56,38 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if (! $request->expectsJson()) {
+        if (! $request->is('api/*')) {
             return parent::render($request, $exception);
         }
+        $exceptionClass = get_class($exception);
 
-        if ($exception instanceof ModelNotFoundException) {
-            return response()->json([
-                'message' => 'Record not found.',
-            ], 404);
-        } elseif ($exception instanceof NotFoundHttpException) {
-            return response()->json([
-                'message' => 'Resource not found.',
-            ], 404);
+        switch ($exceptionClass) {
+            case NotFoundHttpException::class:
+                return response()->json(['message' => 'Requested route was not found.'], 404);
+            case AuthenticationException::class:
+                return response()->json([
+                    'message' => 'Unable to authenticate request, check if your access token is correct.',
+                ], 401);
+            case HttpException::class:
+                if ($exception->getStatusCode() == 429) {
+                    return response()->json([
+                        'message' => 'The rate limit has been exceeded, please wait before sending more requests.',
+                    ], 429);
+                }
+                break;
+            case ModelNotFoundException::class:
+                return response()->json([
+                    'message' => 'Requested object not found in '.$exception->getModel().'.',
+                ], 404);
+            case HttpResponseException::class:
+                if ($exception->getStatusCode() == 422) {
+                    return response()->json([
+                        'message' => 'Error validating requested object.',
+                    ], 422);
+                }
+                break;
         }
+
+        return parent::render($exception);
     }
 }

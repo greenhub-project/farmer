@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Farmer\Models\Protocol\NetworkDetails;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SampleResource;
+use App\Farmer\Models\Protocol\NetworkDetails;
 
 class NetworkDetailsSampleController extends Controller
 {
@@ -20,6 +20,7 @@ class NetworkDetailsSampleController extends Controller
      * Display a listing of the resource.
      *
      * @param NetworkDetails $networkDetails
+     *
      * @return SampleResource
      */
     public function index(NetworkDetails $networkDetails)

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Farmer\Models\Protocol\Sample;
 use App\Http\Controllers\Controller;
+use App\Farmer\Models\Protocol\Sample;
 use App\Http\Resources\DeviceResource;
 
 class SamplesDeviceController extends Controller
@@ -20,6 +20,7 @@ class SamplesDeviceController extends Controller
      * Display a listing of the resource.
      *
      * @param Sample $sample
+     *
      * @return DeviceResource
      */
     public function index(Sample $sample)

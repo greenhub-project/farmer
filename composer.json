@@ -11,7 +11,8 @@
     "php": ">=7.0.0",
     "fideloper/proxy": "~3.3",
     "laravel/framework": "5.5.*",
-    "laravel/tinker": "~1.0"
+    "laravel/tinker": "~1.0",
+    "sentry/sentry-laravel": "^0.10.0"
   },
   "require-dev": {
     "barryvdh/laravel-ide-helper": "^2.4",
@@ -44,9 +45,6 @@
     }
   },
   "scripts": {
-    "format": [
-      "vendor/bin/php-cs-fixer fix"
-    ],
     "post-root-package-install": [
       "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
     ],
@@ -56,6 +54,18 @@
     "post-autoload-dump": [
       "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
       "@php artisan package:discover"
+    ],
+    "format": [
+      "vendor/bin/php-cs-fixer fix"
+    ],
+    "test": [
+      "rm storage/logs/laravel.log 2>/dev/null; vendor/bin/phpunit;"
+    ],
+    "ci-format": [
+      "vendor/bin/php-cs-fixer fix --dry-run"
+    ],
+    "ci-test": [
+      "rm storage/logs/laravel.log 2>/dev/null; vendor/bin/phpunit --colors=never;"
     ]
   },
   "config": {

@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Farmer\Models\User;
-use App\Http\Controllers\Controller;
-use App\Notifications\NewUserRegistered;
 use Carbon\Carbon;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Farmer\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\NewUserRegistered;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -39,6 +39,27 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('verify');
+    }
+
+    /**
+     * Confirm a user's email address.
+     *
+     * @param string $token
+     *
+     * @return mixed
+     */
+    public function verify($token)
+    {
+        $user = User::where('email_token', $token)->firstOrFail();
+        $user->verify();
+
+        flash()->success('You are now verified.', 'Please login or continue navigation');
+
+        if (Auth::check()) {
+            return redirect('dashboard');
+        }
+
+        return redirect('login');
     }
 
     /**
@@ -90,26 +111,5 @@ class RegisterController extends Controller
         $user->notify((new NewUserRegistered($user))->delay(Carbon::now()->addSeconds(10)));
 
         flash()->overlay('A confirmation email was sent!', 'Please check your inbox.');
-    }
-
-    /**
-     * Confirm a user's email address.
-     *
-     * @param string $token
-     *
-     * @return mixed
-     */
-    public function verify($token)
-    {
-        $user = User::where('email_token', $token)->firstOrFail();
-        $user->verify();
-
-        flash()->success('You are now verified.', 'Please login or continue navigation');
-
-        if (Auth::check()) {
-            return redirect('dashboard');
-        }
-
-        return redirect('login');
     }
 }
