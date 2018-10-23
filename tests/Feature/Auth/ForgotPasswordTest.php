@@ -14,7 +14,8 @@ class ForgotPasswordTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_user_receives_an_email_with_a_password_reset_link()
+    /** @test */
+    public function an_user_receives_an_email_with_a_password_reset_link()
     {
         Notification::fake();
 
