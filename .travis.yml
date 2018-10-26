@@ -18,7 +18,7 @@ install:
 
 before_script:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS greenhubfarmer_testing;'
-  - php artisan migrate
+  - php artisan migrate --seed --env=testing
   - yarn install
 
 script:
