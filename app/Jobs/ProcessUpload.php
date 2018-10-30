@@ -39,7 +39,7 @@ class ProcessUpload implements ShouldQueue
             return;
         }
 
-        $rawUpload = null;
+        $rawUpload = commitRawUpload(null, $this->data);
 
         \DB::beginTransaction();
 
@@ -183,8 +183,7 @@ class ProcessUpload implements ShouldQueue
             }
 
             if (null != $rawUpload) {
-                $rawUpload->stored = true;
-                $rawUpload->save();
+                $rawUpload->delete();
             }
         } catch (QueryException $e) {
             \Log::error('Failed for device => ' . $this->device->id);
@@ -195,7 +194,7 @@ class ProcessUpload implements ShouldQueue
         \DB::commit();
     }
 
-    private function commitRawUpload($upload, $data = [])
+    private function commitRawUpload($upload, $data)
     {
         \DB::beginTransaction();
 
