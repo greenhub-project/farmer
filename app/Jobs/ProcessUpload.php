@@ -39,18 +39,7 @@ class ProcessUpload implements ShouldQueue
             return;
         }
 
-        $raw = null;
-
-        \DB::beginTransaction();
-
-        try {
-            $raw = Upload::create(['data' => json_encode($this->data)]);
-        } catch (QueryException $e) {
-            \Log::error($e->getMessage());
-            \DB::rollBack();
-        }
-
-        \DB::commit();
+        $rawUpload = null;
 
         \DB::beginTransaction();
 
@@ -193,16 +182,32 @@ class ProcessUpload implements ShouldQueue
                 }
             }
 
-            if (null != $raw) {
-                $raw->stored = true;
-                $raw->save();
+            if (null != $rawUpload) {
+                $rawUpload->stored = true;
+                $rawUpload->save();
             }
         } catch (QueryException $e) {
-            \Log::error('Failed for device => '.$this->device->id);
+            \Log::error('Failed for device => ' . $this->device->id);
             \Log::error($e->getMessage());
             \DB::rollBack();
         }
 
         \DB::commit();
+    }
+
+    private function commitRawUpload($upload, $data = [])
+    {
+        \DB::beginTransaction();
+
+        try {
+            $upload = Upload::create(['data' => json_encode($data)]);
+        } catch (QueryException $e) {
+            \Log::error($e->getMessage());
+            \DB::rollBack();
+        }
+
+        \DB::commit();
+
+        return $upload;
     }
 }
