@@ -186,7 +186,7 @@ class ProcessUpload implements ShouldQueue
                 $rawUpload->delete();
             }
         } catch (QueryException $e) {
-            \Log::error('Failed for device => ' . $this->device->id);
+            \Log::error('Failed for device => '.$this->device->id);
             \Log::error($e->getMessage());
             \DB::rollBack();
         }
