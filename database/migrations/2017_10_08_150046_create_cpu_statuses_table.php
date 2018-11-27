@@ -13,12 +13,13 @@ class CreateCpuStatusesTable extends Migration
     {
         Schema::create('cpu_statuses', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('sample_id')->unsigned();
-            $table->foreign('sample_id')->references('id')->on('samples')->onDelete('cascade');
+            $table->unsignedInteger('sample_id');
             $table->decimal('usage');
-            $table->bigInteger('up_time')->unsigned()->default(0);
-            $table->bigInteger('sleep_time')->unsigned()->default(0);
+            $table->unsignedBigInteger('up_time')->default(0);
+            $table->unsignedBigInteger('sleep_time')->default(0);
             $table->timestamps();
+
+            $table->foreign('sample_id')->references('id')->on('samples')->onDelete('cascade');
         });
     }
 

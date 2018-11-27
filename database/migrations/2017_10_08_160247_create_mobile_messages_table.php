@@ -13,10 +13,13 @@ class CreateMobileMessagesTable extends Migration
     {
         Schema::create('mobile_messages', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('recipient')->unsigned()->default(0);
+            $table->unsignedInteger('recipient')->default(0);
             $table->string('type')->default('info');
             $table->string('title');
             $table->text('body');
+            $table->boolean('permanent')->default(false);
+            $table->boolean('published')->default(false);
+            $table->unsignedInteger('version')->default(0);
             $table->timestamps();
 
             $table->index('recipient');

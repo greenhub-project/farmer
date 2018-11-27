@@ -15,12 +15,10 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->boolean('verified')->default(false);
-            $table->string('email_token', 30)->nullable();
-            $table->string('api_token', 60)->unique();
-            $table->rememberToken();
             $table->boolean('active')->default(true);
+            $table->rememberToken();
             $table->timestamps();
         });
     }

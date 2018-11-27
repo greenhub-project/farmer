@@ -13,25 +13,25 @@ class CreateSamplesTable extends Migration
     {
         Schema::create('samples', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('device_id')->unsigned();
-            $table->foreign('device_id')->references('id')->on('devices')->onDelete('cascade');
+            $table->unsignedInteger('device_id');
             $table->timestamp('timestamp');
-            $table->integer('app_version')->unsigned()->default(0);
-            $table->integer('database_version')->unsigned()->default(0);
+            $table->unsignedInteger('app_version')->default(0);
+            $table->unsignedInteger('database_version')->default(0);
             $table->string('battery_state', 20);
             $table->decimal('battery_level');
-            $table->integer('memory_wired');
-            $table->integer('memory_active');
-            $table->integer('memory_inactive');
-            $table->integer('memory_free');
-            $table->integer('memory_user');
-            $table->string('triggered_by', 80);
+            $table->unsignedInteger('memory_active');
+            $table->unsignedInteger('memory_inactive');
+            $table->unsignedInteger('memory_free');
+            $table->unsignedInteger('memory_user');
+            $table->string('triggered_by', 100);
             $table->string('network_status', 50);
             $table->integer('screen_brightness');
             $table->boolean('screen_on');
             $table->string('timezone', 50);
             $table->string('country_code', 10);
             $table->timestamps();
+
+            $table->foreign('device_id')->references('id')->on('devices')->onDelete('cascade');
 
             $table->index('battery_state');
             $table->index('network_status');

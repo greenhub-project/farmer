@@ -13,17 +13,18 @@ class CreateStorageDetailsTable extends Migration
     {
         Schema::create('storage_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('sample_id')->unsigned();
-            $table->foreign('sample_id')->references('id')->on('samples')->onDelete('cascade');
-            $table->integer('free')->unsigned();
-            $table->integer('total')->unsigned();
-            $table->integer('free_external')->unsigned();
-            $table->integer('total_external')->unsigned();
-            $table->integer('free_system')->unsigned();
-            $table->integer('total_system')->unsigned();
-            $table->integer('free_secondary')->unsigned();
-            $table->integer('total_secondary')->unsigned();
+            $table->unsignedInteger('sample_id');
+            $table->unsignedInteger('free');
+            $table->unsignedInteger('total');
+            $table->unsignedInteger('free_external');
+            $table->unsignedInteger('total_external');
+            $table->unsignedInteger('free_system');
+            $table->unsignedInteger('total_system');
+            $table->unsignedInteger('free_secondary');
+            $table->unsignedInteger('total_secondary');
             $table->timestamps();
+
+            $table->foreign('sample_id')->references('id')->on('samples')->onDelete('cascade');
         });
     }
 

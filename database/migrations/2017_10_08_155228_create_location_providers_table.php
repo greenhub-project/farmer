@@ -13,10 +13,11 @@ class CreateLocationProvidersTable extends Migration
     {
         Schema::create('location_providers', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('sample_id')->unsigned();
-            $table->foreign('sample_id')->references('id')->on('samples')->onDelete('cascade');
+            $table->unsignedInteger('sample_id');
             $table->string('provider', 20);
             $table->timestamps();
+
+            $table->foreign('sample_id')->references('id')->on('samples')->onDelete('cascade');
         });
     }
 

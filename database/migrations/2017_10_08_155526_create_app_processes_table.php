@@ -13,11 +13,10 @@ class CreateAppProcessesTable extends Migration
     {
         Schema::create('app_processes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('sample_id')->unsigned();
-            $table->foreign('sample_id')->references('id')->on('samples')->onDelete('cascade');
-            $table->integer('process_id')->unsigned();
-            $table->string('name', 150);
-            $table->string('application_label', 100)->nullable();
+            $table->unsignedInteger('sample_id');
+            $table->unsignedInteger('process_id');
+            $table->string('name');
+            $table->string('application_label')->nullable();
             $table->boolean('is_system_app');
             $table->string('importance', 20)->nullable();
             $table->string('version_name', 100)->nullable();
@@ -25,7 +24,10 @@ class CreateAppProcessesTable extends Migration
             $table->string('installation_package')->nullable();
             $table->timestamps();
 
-            $table->index(['name', 'application_label']);
+            $table->foreign('sample_id')->references('id')->on('samples')->onDelete('cascade');
+
+            $table->index('name');
+            $table->index('application_label');
         });
     }
 

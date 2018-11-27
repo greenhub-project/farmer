@@ -13,8 +13,7 @@ class CreateSettingsTable extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('sample_id')->unsigned();
-            $table->foreign('sample_id')->references('id')->on('samples')->onDelete('cascade');
+            $table->unsignedInteger('sample_id');
             $table->boolean('bluetooth_enabled');
             $table->boolean('location_enabled');
             $table->boolean('power_saver_enabled');
@@ -23,6 +22,8 @@ class CreateSettingsTable extends Migration
             $table->boolean('unknown_sources');
             $table->boolean('developer_mode');
             $table->timestamps();
+
+            $table->foreign('sample_id')->references('id')->on('samples')->onDelete('cascade');
         });
     }
 

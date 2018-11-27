@@ -13,8 +13,7 @@ class CreateBatteryDetailsTable extends Migration
     {
         Schema::create('battery_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('sample_id')->unsigned();
-            $table->foreign('sample_id')->references('id')->on('samples')->onDelete('cascade');
+            $table->unsignedInteger('sample_id');
             $table->string('charger', 20);
             $table->string('health', 30);
             $table->decimal('voltage');
@@ -25,6 +24,8 @@ class CreateBatteryDetailsTable extends Migration
             $table->integer('current_now');
             $table->bigInteger('energy_counter');
             $table->timestamps();
+
+            $table->foreign('sample_id')->references('id')->on('samples')->onDelete('cascade');
         });
     }
 
