@@ -22,7 +22,7 @@ class CreateAppPermissionsTable extends Migration
             $table->unsignedInteger('app_process_id');
             $table->timestamps();
 
-            $table->foreign('android_permission_id')->references('id')->on('android_processes')->onDelete('cascade');
+            $table->foreign('android_permission_id')->references('id')->on('android_permissions')->onDelete('cascade');
             $table->foreign('app_process_id')->references('id')->on('app_processes')->onDelete('cascade');
             $table->primary(['android_permission_id', 'app_process_id']);
         });
