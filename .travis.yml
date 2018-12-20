@@ -14,11 +14,11 @@ cache:
     - $HOME/.composer/cache
 
 install:
-  - COMPOSER_DISCARD_CHANGES=1 composer install --dev --prefer-source --no-interaction
+  - COMPOSER_DISCARD_CHANGES=1 composer install --prefer-source --no-interaction
 
 before_script:
   - psql -c 'create database greenhubfarmer_testing;' -U postgres
-  - php artisan migrate
+  - php artisan migrate --env=testing
   - yarn install
 
 script:
