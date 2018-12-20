@@ -2,13 +2,16 @@
 
 namespace App\Farmer\Models;
 
-use App\Farmer\Traits\HasRoles;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable, HasRoles;
+
+    protected $guard_name = 'web';
 
     /**
      * The attributes that are mass assignable.
@@ -25,11 +28,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'email_token', 'api_token', 'active',
-    ];
-
-    protected $casts = [
-        'verified' => 'boolean',
+        'password', 'remember_token', 'api_token', 'active',
     ];
 
     /**
@@ -39,20 +38,10 @@ class User extends Authenticatable
     {
         parent::boot();
 
-        static::creating(function (User $user) {
-            $user->email_token = str_random(30);
-            $user->api_token = str_random(60);
+        static::creating(function (self $user) {
+            $user->api_token = str_random(30);
+            $user->assignRole('member');
         });
-    }
-
-    /**
-     * Confirm the user.
-     */
-    public function verify()
-    {
-        $this->verified = true;
-        $this->email_token = null;
-        $this->save();
     }
 
     public function datasets()

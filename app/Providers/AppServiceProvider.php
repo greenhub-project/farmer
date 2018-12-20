@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,16 +13,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \Blade::if('verified', function () {
-            return auth()->user()->verified;
-        });
-
-        \Blade::if('admin', function () {
-            return auth()->user()->hasRole('admin');
-        });
-
-        \Blade::if('query', function ($param) {
-            return ! is_null($param) and '' != $param;
+        Blade::if('admin', function () {
+            return Auth::user()->hasRole('admin');
         });
     }
 
@@ -29,8 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if ('production' !== $this->app->environment()) {
-            $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
-        }
+        //
     }
 }

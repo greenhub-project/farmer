@@ -25,9 +25,7 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        $user = $request->user();
-
-        return new UserResource($user);
+        return new UserResource($request->user());
     }
 
     /**
@@ -44,8 +42,7 @@ class UsersController extends Controller
         ]);
 
         $user = $request->user();
-
-        $user->update([
+        $user = tap($user)->update([
             'api_token' => str_random(60),
         ]);
 

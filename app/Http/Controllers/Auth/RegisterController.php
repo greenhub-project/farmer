@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Carbon\Carbon;
 use App\Farmer\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use App\Notifications\NewUserRegistered;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -38,28 +35,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('verify');
-    }
-
-    /**
-     * Confirm a user's email address.
-     *
-     * @param string $token
-     *
-     * @return mixed
-     */
-    public function verify($token)
-    {
-        $user = User::where('email_token', $token)->firstOrFail();
-        $user->verify();
-
-        flash()->success('You are now verified.', 'Please login or continue navigation');
-
-        if (Auth::check()) {
-            return redirect('dashboard');
-        }
-
-        return redirect('login');
+        $this->middleware('guest');
     }
 
     /**
@@ -72,9 +48,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
     }
 
@@ -83,33 +59,14 @@ class RegisterController extends Controller
      *
      * @param array $data
      *
-     * @return User
+     * @return \App\Farmer\Models\User
      */
     protected function create(array $data)
     {
-        $user = User::create([
+        return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'password' => Hash::make($data['password']),
         ]);
-
-        $user->assignRole('member');
-
-        return $user;
-    }
-
-    /**
-     * The user has been registered.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param mixed                    $user
-     *
-     * @return mixed
-     */
-    protected function registered(Request $request, $user)
-    {
-        $user->notify((new NewUserRegistered($user))->delay(Carbon::now()->addSeconds(10)));
-
-        flash()->overlay('A confirmation email was sent!', 'Please check your inbox.');
     }
 }

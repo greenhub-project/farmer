@@ -1,8 +1,8 @@
 <?php
 
-use App\Farmer\Models\Role;
 use Illuminate\Database\Seeder;
-use App\Farmer\Models\Permission;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RolesTableSeeder extends Seeder
 {
@@ -11,22 +11,19 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        $admin = Role::create([
+        $admin = Role::updateOrCreate([
             'name' => 'admin',
-            'label' => 'Administrator',
         ]);
 
-        $member = Role::create([
+        $member = Role::updateOrCreate([
             'name' => 'member',
-            'label' => 'Member',
         ]);
 
-        $viewToken = Permission::create([
+        $viewApiToken = Permission::updateOrCreate([
             'name' => 'view-api-token',
-            'label' => 'View API token',
         ]);
 
-        $admin->givePermissionTo($viewToken);
-        $member->givePermissionTo($viewToken);
+        $admin->givePermissionTo($viewApiToken);
+        $member->givePermissionTo($viewApiToken);
     }
 }

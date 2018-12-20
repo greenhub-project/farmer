@@ -14,20 +14,16 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Auth::routes();
-
-Route::get('/register/verify/{token}', 'Auth\RegisterController@verify')->name('register.verify');
+Auth::routes(['verify' => true]);
 
 Route::get('/dashboard', 'Dashboard\PagesController@dashboard')->name('dashboard');
 
 Route::resource('devices', 'DevicesController')->only(['index', 'show', 'update', 'destroy']);
-Route::get('devices/fetch', 'DevicesController@fetch');
-
 Route::resource('samples', 'SamplesController')->only(['index', 'show', 'update', 'destroy']);
 Route::resource('messages', 'MobileMessagesController');
 Route::resource('members', 'Dashboard\MembersController')->only(['index', 'update']);
 
+Route::get('devices/fetch', 'DevicesController@fetch');
 Route::get('/settings', 'Settings\PagesController@redirect')->name('settings');
 Route::get('/settings/account', 'Settings\PagesController@account')->name('settings.account');
 Route::get('/settings/password', 'Settings\PagesController@password')->name('settings.password');
