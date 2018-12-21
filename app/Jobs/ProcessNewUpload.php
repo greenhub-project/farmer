@@ -2,16 +2,17 @@
 
 namespace App\Jobs;
 
+use App\Farmer\Models\Upload;
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use App\Farmer\Models\Protocol\Device;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Database\QueryException;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\Farmer\Models\Protocol\Device;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\Log;
-use App\Farmer\Models\Upload;
+use App\Farmer\Models\Protocol\AndroidPermission;
 
 class ProcessNewUpload implements ShouldQueue
 {
@@ -22,8 +23,6 @@ class ProcessNewUpload implements ShouldQueue
 
     /**
      * Create a new job instance.
-     *
-     * @return void
      */
     public function __construct(Device $device, $data)
     {
@@ -33,44 +32,21 @@ class ProcessNewUpload implements ShouldQueue
 
     /**
      * Execute the job.
-     *
-     * @return void
      */
     public function handle()
     {
-        if (null == $this->device) {
+        if (is_null($this->device)) {
             return;
         }
 
-        $upload = commitRawUpload($this->data);
+        $upload = commitRawUpload();
 
         DB::beginTransaction();
 
         try {
             $child = null;
 
-            // Legacy support, these fields don't exist in previous versions of the Android app protocol
-            $app = setOptionalValue($this->data, 'version');
-            $database = setOptionalValue($this->data, 'database');
-
-            $sample = $this->device->samples()->create([
-                'timestamp' => date('Y-m-d H:i:s', $this->data['timestamp'] / 1000),
-                'app_version' => $app,
-                'database_version' => $database,
-                'battery_state' => $this->data['batteryState'],
-                'battery_level' => $this->data['batteryLevel'],
-                'memory_wired' => $this->data['memoryWired'],
-                'memory_active' => $this->data['memoryActive'],
-                'memory_inactive' => $this->data['memoryInactive'],
-                'memory_free' => $this->data['memoryFree'],
-                'memory_user' => $this->data['memoryUser'],
-                'triggered_by' => $this->data['triggeredBy'],
-                'network_status' => $this->data['networkStatus'],
-                'screen_brightness' => $this->data['screenBrightness'],
-                'screen_on' => $this->data['screenOn'],
-                'timezone' => $this->data['timeZone'],
-                'country_code' => $this->data['countryCode'],
-            ]);
+            $sample = createSample();
 
             $child = $this->data['networkDetails'];
             $sample->networkDetails()->create([
@@ -165,18 +141,14 @@ class ProcessNewUpload implements ShouldQueue
                         'version_code' => $el['versionCode'],
                         'installation_package' => $el['installationPkg'],
                     ]);
-                    // permissions
+
                     if (array_key_exists('appPermissions', $el)) {
-                        foreach ($el['appPermissions'] as $perm) {
-                            $process->permissions()->create([
-                                'permission' => $perm['permission'],
-                            ]);
-                        }
+                        addAndroidPermissions($process, $el['appPermissions']);
                     }
                 }
             }
 
-            if (null != $upload) {
+            if (! is_null($upload)) {
                 $upload->delete();
             }
         } catch (QueryException $e) {
@@ -188,19 +160,19 @@ class ProcessNewUpload implements ShouldQueue
         DB::commit();
     }
 
-    private function setOptionalValue($data, $key, $default = 0)
+    private function setOptionalValue($key, $default = 0)
     {
-        return array_key_exists($key, $data) ? $data[$key] : $default;
+        return array_key_exists($key, $this->data) ? $this->data[$key] : $default;
     }
 
-    private function commitRawUpload($data)
+    private function commitRawUpload()
     {
         $upload = null;
 
         DB::beginTransaction();
 
         try {
-            $upload = Upload::create(['data' => json_encode($data)]);
+            $upload = Upload::create(['data' => json_encode($this->data)]);
         } catch (QueryException $e) {
             Log::error($e->getMessage());
             DB::rollBack();
@@ -209,5 +181,35 @@ class ProcessNewUpload implements ShouldQueue
         DB::commit();
 
         return $upload;
+    }
+
+    private function createSample()
+    {
+        return $this->device->samples()->create([
+            'timestamp' => date('Y-m-d H:i:s', $this->data['timestamp'] / 1000),
+            'app_version' => setOptionalValue('version'),
+            'database_version' => setOptionalValue('database'),
+            'battery_state' => $this->data['batteryState'],
+            'battery_level' => $this->data['batteryLevel'],
+            'memory_active' => $this->data['memoryActive'],
+            'memory_inactive' => $this->data['memoryInactive'],
+            'memory_free' => $this->data['memoryFree'],
+            'memory_user' => $this->data['memoryUser'],
+            'triggered_by' => $this->data['triggeredBy'],
+            'network_status' => $this->data['networkStatus'],
+            'screen_brightness' => $this->data['screenBrightness'],
+            'screen_on' => $this->data['screenOn'],
+            'timezone' => $this->data['timeZone'],
+            'country_code' => $this->data['countryCode'],
+        ]);
+    }
+
+    private function addAndroidPermissions($process, $permissions)
+    {
+        foreach ($permissions as $item) {
+            $process->permissions()->attach(
+                AndroidPermission::firstOrCreate(['permission' => $item['permission']])
+            );
+        }
     }
 }
