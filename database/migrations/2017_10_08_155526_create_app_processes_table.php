@@ -14,7 +14,6 @@ class CreateAppProcessesTable extends Migration
         Schema::create('app_processes', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('sample_id');
-            $table->unsignedInteger('process_id');
             $table->string('name');
             $table->string('application_label')->nullable();
             $table->boolean('is_system_app');

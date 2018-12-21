@@ -4,7 +4,7 @@ namespace App\Farmer\Models\Protocol;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AppPermission extends Model
+class AndroidPermission extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -14,9 +14,4 @@ class AppPermission extends Model
     protected $fillable = [
         'permission',
     ];
-
-    public function process()
-    {
-        return $this->belongsTo(AppProcess::class);
-    }
 }

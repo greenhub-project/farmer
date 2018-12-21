@@ -17,7 +17,6 @@ class Sample extends Model
         'database_version',
         'battery_state',
         'battery_level',
-        'memory_wired',
         'memory_active',
         'memory_inactive',
         'memory_free',
@@ -39,7 +38,7 @@ class Sample extends Model
 
     public function isScreenOn()
     {
-        return 1 == $this->screen_on;
+        return $this->screen_on;
     }
 
     public function formattedMemoryActive()
@@ -47,9 +46,9 @@ class Sample extends Model
         $memory = $this->memory_active / 1024;
 
         if ($memory < 1024) {
-            return round($memory, 2).' MB';
+            return round($memory, 2) . ' MB';
         } else {
-            return round($memory / 1024, 2).' GB';
+            return round($memory / 1024, 2) . ' GB';
         }
     }
 

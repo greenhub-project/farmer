@@ -14,7 +14,6 @@ class CreateUploadsTable extends Migration
         Schema::create('uploads', function (Blueprint $table) {
             $table->increments('id');
             $table->mediumText('data');
-            $table->boolean('is_stored')->default(false);
             $table->timestamps();
         });
     }

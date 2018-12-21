@@ -12,7 +12,6 @@ class AppProcess extends Model
      * @var array
      */
     protected $fillable = [
-        'process_id',
         'name',
         'application_label',
         'is_system_app',
@@ -29,6 +28,6 @@ class AppProcess extends Model
 
     public function permissions()
     {
-        return $this->hasMany(AppPermission::class);
+        return $this->belongsToMany(AndroidPermission::class, 'app_permissions');
     }
 }
