@@ -53,4 +53,4 @@ php artisan serve
 
 ## License
 
-The Swap project is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+GreenHub Farmer module is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
