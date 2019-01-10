@@ -29,14 +29,14 @@ class ApiController extends Controller
     public function messages(Request $request)
     {
         // here uuid is lowercase on upload is still capitalized in future versions change it to lowercase too
-        $data = $request->validate([
+        $attributes = $request->validate([
             'uuid' => 'required',
             'message' => 'required',
         ]);
 
-        $device = Device::where('uuid', $data['uuid'])->firstOrFail();
+        $device = Device::where('uuid', $attributes['uuid'])->firstOrFail();
 
-        return MobileMessage::where('id', '>', $data['message'])
+        return MobileMessage::where('id', '>', $attributes['message'])
             ->where(function ($query) use ($device) {
                 $query->where('recipient', 0)->orWhere('recipient', $device->id);
             })

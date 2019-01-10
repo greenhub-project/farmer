@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class PublicController extends Controller
@@ -17,7 +18,7 @@ class PublicController extends Controller
     public function count($model)
     {
         try {
-            return \DB::table($model)->count();
+            return DB::table($model)->count();
         } catch (\Exception $e) {
             return -1;
         }
