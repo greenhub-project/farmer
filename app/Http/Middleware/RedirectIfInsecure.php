@@ -15,7 +15,7 @@ class RedirectIfInsecure
      */
     public function handle($request, Closure $next)
     {
-        $request->setTrustedProxies([$request->getClientIp()]);
+        $request->setTrustedProxies([$request->getClientIp()], config('trustedproxy.headers'));
         if (!$request->secure()) {
             return redirect()->secure($request->getRequestUri());
         }
