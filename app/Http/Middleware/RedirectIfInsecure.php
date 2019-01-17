@@ -15,6 +15,10 @@ class RedirectIfInsecure
      */
     public function handle($request, Closure $next)
     {
+        if (!app()->environment('production')) {
+            return $next($request);
+        }
+
         $request->setTrustedProxies([$request->getClientIp()], config('trustedproxy.headers'));
         if (!$request->secure()) {
             return redirect()->secure($request->getRequestUri());
