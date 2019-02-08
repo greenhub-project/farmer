@@ -23,6 +23,11 @@ class RolesTableSeeder extends Seeder
             'name' => 'view-api-token',
         ]);
 
+        $manageUsers = Permission::updateOrCreate([
+            'name' => 'manage-users',
+        ]);
+
+        $admin->givePermissionTo($manageUsers);
         $admin->givePermissionTo($viewApiToken);
         $member->givePermissionTo($viewApiToken);
     }

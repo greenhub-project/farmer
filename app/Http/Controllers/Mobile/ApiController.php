@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Mobile;
 
-use Carbon\Carbon;
-use App\Jobs\ProcessUpload;
 use Illuminate\Http\Request;
+use App\Jobs\ProcessNewUpload;
 use App\Farmer\Models\MobileMessage;
 use App\Http\Controllers\Controller;
 use App\Farmer\Models\Protocol\Device;
@@ -89,8 +88,7 @@ class ApiController extends Controller
         }
 
         // dispatch job with device
-        $job = (new ProcessUpload($device, $data['sample']))->delay(Carbon::now()->addSeconds(5));
-        dispatch($job);
+        dispatch(new ProcessNewUpload($device, $data['sample']));
 
         return (null == $device) ? 0 : 1;
     }

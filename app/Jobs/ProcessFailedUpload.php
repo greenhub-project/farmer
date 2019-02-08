@@ -2,19 +2,18 @@
 
 namespace App\Jobs;
 
-use App\Farmer\Models\Upload;
-use Illuminate\Bus\Queueable;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use App\Farmer\Models\Protocol\AndroidPermission;
 use App\Farmer\Models\Protocol\Device;
-use Illuminate\Queue\SerializesModels;
+use Illuminate\Bus\Queueable;
 use Illuminate\Database\QueryException;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\Farmer\Models\Protocol\AndroidPermission;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
-class ProcessNewUpload implements ShouldQueue
+class ProcessFailedUpload implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -26,23 +25,21 @@ class ProcessNewUpload implements ShouldQueue
      *
      * @param Device $device
      * @param mixed $data
+     * @return void
      */
     public function __construct(Device $device, $data)
     {
         $this->device = $device;
-        $this->data = $data;
+        $this->data = (array) $data;
     }
 
     /**
      * Execute the job.
+     *
+     * @return void
      */
     public function handle()
     {
-        if (is_null($this->device)) {
-            return;
-        }
-
-        $upload = $this->commitRawUpload();
 
         DB::beginTransaction();
 
@@ -51,7 +48,7 @@ class ProcessNewUpload implements ShouldQueue
 
             $sample = $this->createSample();
 
-            $child = $this->data['networkDetails'];
+            $child = (array) $this->data['networkDetails'];
             $sample->networkDetails()->create([
                 'network_type' => $child['networkType'],
                 'mobile_network_type' => $child['mobileNetworkType'],
@@ -68,7 +65,7 @@ class ProcessNewUpload implements ShouldQueue
                 'mnc' => $child['mnc'],
             ]);
 
-            $child = $this->data['batteryDetails'];
+            $child = (array) $this->data['batteryDetails'];
             $sample->batteryDetails()->create([
                 'charger' => $child['charger'],
                 'health' => $child['health'],
@@ -81,7 +78,7 @@ class ProcessNewUpload implements ShouldQueue
                 'energy_counter' => $child['energyCounter'],
             ]);
 
-            $child = $this->data['cpuStatus'];
+            $child = (array) $this->data['cpuStatus'];
             $sample->cpuStatus()->create([
                 // Create a function to convert 0.xxx to xxx
                 'usage' => $child['cpuUsage'],
@@ -89,7 +86,7 @@ class ProcessNewUpload implements ShouldQueue
                 'sleep_time' => ($child['sleepTime'] < 1) ? 0 : $child['sleepTime'],
             ]);
 
-            $child = $this->data['settings'];
+            $child = (array) $this->data['settings'];
             $sample->settings()->create([
                 'bluetooth_enabled' => $child['bluetoothEnabled'],
                 'location_enabled' => $child['locationEnabled'],
@@ -100,7 +97,7 @@ class ProcessNewUpload implements ShouldQueue
                 'developer_mode' => $child['developerMode'],
             ]);
 
-            $child = $this->data['storageDetails'];
+            $child = (array) $this->data['storageDetails'];
             $sample->storageDetails()->create([
                 'free' => $child['free'],
                 'total' => $child['total'],
@@ -113,8 +110,9 @@ class ProcessNewUpload implements ShouldQueue
             ]);
 
             if (array_key_exists('locationProviders', $this->data)) {
-                $child = $this->data['locationProviders'];
+                $child = (array) $this->data['locationProviders'];
                 foreach ($child as $el) {
+                    $el = (array) $el;
                     $sample->locationProviders()->create([
                         'provider' => $el['provider'],
                     ]);
@@ -122,8 +120,9 @@ class ProcessNewUpload implements ShouldQueue
             }
 
             if (array_key_exists('features', $this->data)) {
-                $child = $this->data['features'];
+                $child = (array) $this->data['features'];
                 foreach ($child as $el) {
+                    $el = (array) $el;
                     $sample->features()->create([
                         'key' => $el['key'],
                         'value' => $el['value'],
@@ -132,8 +131,9 @@ class ProcessNewUpload implements ShouldQueue
             }
 
             if (array_key_exists('processInfos', $this->data)) {
-                $child = $this->data['processInfos'];
+                $child = (array) $this->data['processInfos'];
                 foreach ($child as $el) {
+                    $el = (array) $el;
                     $process = $sample->processes()->create([
                         'process_id' => $el['processId'],
                         'name' => $el['name'],
@@ -150,10 +150,6 @@ class ProcessNewUpload implements ShouldQueue
                     }
                 }
             }
-
-            if (! is_null($upload)) {
-                $upload->delete();
-            }
         } catch (QueryException $e) {
             Log::error("Failed for device => $this->device->id");
             Log::error($e->getMessage());
@@ -161,29 +157,6 @@ class ProcessNewUpload implements ShouldQueue
         }
 
         DB::commit();
-    }
-
-    private function setOptionalValue($key, $default = 0)
-    {
-        return array_key_exists($key, $this->data) ? $this->data[$key] : $default;
-    }
-
-    private function commitRawUpload()
-    {
-        $upload = null;
-
-        DB::beginTransaction();
-
-        try {
-            $upload = Upload::create(['data' => json_encode($this->data)]);
-        } catch (QueryException $e) {
-            Log::error($e->getMessage());
-            DB::rollBack();
-        }
-
-        DB::commit();
-
-        return $upload;
     }
 
     private function createSample()
@@ -207,9 +180,15 @@ class ProcessNewUpload implements ShouldQueue
         ]);
     }
 
+    private function setOptionalValue($key, $default = 0)
+    {
+        return array_key_exists($key, $this->data) ? $this->data[$key] : $default;
+    }
+
     private function addAndroidPermissions($process, $permissions)
     {
         foreach ($permissions as $item) {
+            $item = (array) $item;
             $process->permissions()->attach(
                 AndroidPermission::firstOrCreate(['permission' => $item['permission']])
             );

@@ -11,10 +11,11 @@
 |
 */
 
+Auth::routes(['verify' => true]);
+
 Route::get('/', function () {
     return view('welcome');
 });
-Auth::routes(['verify' => true]);
 
 Route::get('/dashboard', 'Dashboard\PagesController@dashboard')->name('dashboard');
 

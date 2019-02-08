@@ -44,6 +44,11 @@ class User extends Authenticatable implements MustVerifyEmail
         });
     }
 
+    /**
+     * A user may have multiple datasets.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function datasets()
     {
         return $this->hasMany(Dataset::class);
