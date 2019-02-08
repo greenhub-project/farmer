@@ -25,7 +25,7 @@ class ProcessNewUpload implements ShouldQueue
      * Create a new job instance.
      *
      * @param Device $device
-     * @param mixed $data
+     * @param mixed  $data
      */
     public function __construct(Device $device, $data)
     {

@@ -39,7 +39,8 @@ class ProcessNewUploadTest extends TestCase
         $response->assertOk();
     }
 
-    private function createDevice() {
+    private function createDevice()
+    {
         return Device::create([
             'uuid' => '29d4f855-9190-490c-a4ad-7975104205c2',
             'model' => 'nexus',
@@ -51,5 +52,4 @@ class ProcessNewUploadTest extends TestCase
             'is_root' => false,
         ]);
     }
-
 }

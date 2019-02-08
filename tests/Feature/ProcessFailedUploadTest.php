@@ -2,12 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\Farmer\Models\Protocol\Device;
-use App\Farmer\Models\Protocol\Sample;
+use Tests\TestCase;
+use App\Farmer\Models\Upload;
 use App\Jobs\ProcessFailedUpload;
 use Illuminate\Support\Facades\Queue;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Farmer\Models\Protocol\Device;
+use App\Farmer\Models\Protocol\Sample;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProcessFailedUploadTest extends TestCase
@@ -26,11 +26,12 @@ class ProcessFailedUploadTest extends TestCase
     public function it_dispatches_a_process_failed_upload_job()
     {
         $device = $this->createDevice();
+        $upload = Upload::create(['data' => $this->rawJson]);
 
         Queue::fake();
         Queue::assertNothingPushed();
 
-        dispatch(new ProcessFailedUpload($device, json_decode($this->rawJson)));
+        dispatch(new ProcessFailedUpload($device, $upload));
 
         Queue::assertPushed(ProcessFailedUpload::class, function ($job) use ($device) {
             return $job->device->id === $device->id;
@@ -42,14 +43,20 @@ class ProcessFailedUploadTest extends TestCase
     {
         $device = $this->createDevice();
 
-        $job = new ProcessFailedUpload($device, json_decode($this->rawJson));
+        $upload = Upload::create(['data' => $this->rawJson]);
+
+        $this->assertEquals(1, Upload::count());
+
+        $job = new ProcessFailedUpload($device, $upload);
 
         $job->handle();
 
+        $this->assertEquals(0, Upload::count());
         $this->assertEquals(1, Sample::count());
     }
 
-    private function createDevice() {
+    private function createDevice()
+    {
         return Device::create([
             'uuid' => '29d4f855-9190-490c-a4ad-7975104205c2',
             'model' => 'nexus',

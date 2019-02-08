@@ -2,45 +2,45 @@
 
 namespace App\Jobs;
 
-use App\Farmer\Models\Protocol\AndroidPermission;
-use App\Farmer\Models\Protocol\Device;
+use App\Farmer\Models\Upload;
 use Illuminate\Bus\Queueable;
-use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use App\Farmer\Models\Protocol\Device;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Database\QueryException;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use App\Farmer\Models\Protocol\AndroidPermission;
 
 class ProcessFailedUpload implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public $device;
-    public $data;
+    public $upload;
+
+    private $data;
 
     /**
      * Create a new job instance.
      *
      * @param Device $device
-     * @param mixed $data
-     * @return void
+     * @param Upload $upload
      */
-    public function __construct(Device $device, $data)
+    public function __construct(Device $device, Upload $upload)
     {
         $this->device = $device;
-        $this->data = (array) $data;
+        $this->upload = $upload;
+        $this->data = (array) json_decode($upload->data);
     }
 
     /**
      * Execute the job.
-     *
-     * @return void
      */
     public function handle()
     {
-
         DB::beginTransaction();
 
         try {
@@ -151,7 +151,15 @@ class ProcessFailedUpload implements ShouldQueue
                 }
             }
         } catch (QueryException $e) {
-            Log::error("Failed for device => $this->device->id");
+            Log::error("Failed for upload => $this->upload->id");
+            Log::error($e->getMessage());
+            DB::rollBack();
+        }
+
+        try {
+            $this->upload->delete();
+        } catch (\Exception $e) {
+            Log::error("Failed for upload => $this->upload->id");
             Log::error($e->getMessage());
             DB::rollBack();
         }
