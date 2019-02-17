@@ -14,7 +14,7 @@
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="bg-grey-lightest h-screen font-sans antialiased">
+<body class="bg-grey-lightest h-screen antialiased">
     <div id="app">
         @include('partials.nav')
 

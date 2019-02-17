@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<header class="bg-blue-darker -mt-8 mb-8">
+<header class="bg-blue-darker -mt-8 mb-8 font-sans">
     <div class="container mx-auto px-4 md:px-0">
         <div class="flex justify-center py-8">
             <header-stats-item label="Samples" model="samples"></header-stats-item>
@@ -10,7 +10,7 @@
         </div>
     </div>
 </header>
-<div class="container mx-auto px-4 md:px-0">
+<div class="container mx-auto px-4 md:px-0 font-sans">
     <div class="mb-12">
         <div class="mb-6">
             <div class="text-xl tracking-wide mb-1">Datasets</div>
@@ -19,19 +19,19 @@
         <div class="flex flex-wrap md:-mx-2">
             <dataset-card 
                 title="Everything" 
-                link="{{ public_path('/storage/dataset.zip') }}"
+                link="{{ url('/storage/dataset.zip') }}"
                  body="Includes devices, samples and apps.">
             </dataset-card>
             
             <dataset-card 
                 title="Samples" 
-                link="{{ public_path('/storage/samples.zip') }}"
+                link="{{ url('/storage/samples.zip') }}"
                  body="Includes sample related files.">
             </dataset-card>
 
             <dataset-card 
                 title="Devices" 
-                link="{{ public_path('/storage/devices.zip') }}"
+                link="{{ url('/storage/devices.zip') }}"
                  body="Includes only devices file.">
             </dataset-card>
         </div>
