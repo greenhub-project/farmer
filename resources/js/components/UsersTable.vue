@@ -3,8 +3,8 @@
     <div class="bg-grey-lighter py-3 px-4 rounded-t-lg">
       <div class="flex text-blue-darker text-sm font-bold uppercase tracking-wide">
         <div class="w-12">&nbsp;</div>
-        <div class="flex-1">User</div>
-        <div class="flex-1">Email</div>
+        <div class="w-1/5">User</div>
+        <div class="w-1/4">Email</div>
         <div class="flex-1">Role</div>
         <div class="flex-1">Joined at</div>
         <div class="flex-1">Status</div>
@@ -24,11 +24,11 @@
             :alt="user.name"
           >
         </div>
-        <div class="flex-1 flex flex-col">
+        <div class="w-1/5 flex flex-col">
           <span class="mb-1">{{ user.name }}</span>
           <span class="text-grey-dark">#{{ user.id }}</span>
         </div>
-        <div class="flex-1">{{ user.email }}</div>
+        <div class="w-1/4">{{ user.email }}</div>
         <div class="flex-1 capitalize">{{ user.roles[0].name }}</div>
         <div class="flex-1">{{ user.created_at }}</div>
         <div class="flex-1" title="Verified" v-if="user.email_verified_at !== null">
