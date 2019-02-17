@@ -1,5 +1,6 @@
-const mix = require('laravel-mix');
-const tailwindcss = require('tailwindcss');
+const mix = require('laravel-mix')
+const tailwindcss = require('tailwindcss')
+require('laravel-mix-purgecss')
 
 /*
  |--------------------------------------------------------------------------
@@ -17,8 +18,9 @@ mix.js('resources/js/app.js', 'public/js')
     .options({
         processCssUrls: false,
         postCss: [tailwindcss('./tailwind.js')]
-    });
+    })
+    .purgeCss()
 
 if (mix.inProduction()) {
-    mix.version();
+    mix.version()
 }

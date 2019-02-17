@@ -1,7 +1,7 @@
 <template>
   <div class="flex-1">
     <div class="text-blue-lighter font-semibold uppercase tracking-ultrawide mb-2">{{ label }}</div>
-    <div class="text-white text-4xl font-light">{{ animatedNumber }}</div>
+    <div class="text-blue-lightest text-4xl font-light">{{ animatedNumber }}</div>
   </div>
 </template>
 
@@ -22,7 +22,7 @@ export default {
     },
     interval: {
       type: Number,
-      default: 5000
+      default: 10000
     }
   },
   data() {
@@ -38,7 +38,7 @@ export default {
   },
   watch: {
     number(newValue) {
-      TweenLite.to(this.$data, 1.0, { tweenedNumber: newValue });
+      TweenLite.to(this.$data, 2.0, { tweenedNumber: newValue });
     }
   },
   methods: {

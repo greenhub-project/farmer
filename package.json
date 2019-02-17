@@ -15,6 +15,7 @@
         "cross-env": "^5.1",
         "gsap": "^2.0.2",
         "laravel-mix": "^2.1",
+        "laravel-mix-purgecss": "^4.1.0",
         "tailwindcss": "^0.7.2",
         "vue": "^2.5.17"
     }

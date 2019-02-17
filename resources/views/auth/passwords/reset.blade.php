@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="flex items-center">
-    <div class="md:w-1/2 md:mx-auto">
+    <div class="w-full max-w-md md:mx-auto">
         <div class="rounded shadow">
             <div class="font-medium text-lg text-blue-lightest bg-blue-darker p-3 rounded-t">
                 {{ __('Reset Password') }}

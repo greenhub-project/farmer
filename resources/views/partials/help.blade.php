@@ -1,0 +1,1 @@
+<div class="text-grey text-xs -mt-6">For suggestions, questions or any other enquiries please open an issue <a class="text-grey hover:underline no-underline" href="https://github.com/greenhub-project/farmer/issues/new">[here]</a>.</div>
