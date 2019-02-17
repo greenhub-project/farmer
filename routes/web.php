@@ -13,29 +13,30 @@
 
 Auth::routes(['verify' => true]);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Auth::loginUsingId(1);
 
-Route::get('/dashboard', 'Dashboard\PagesController@dashboard')->name('dashboard');
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/stats', 'StatsController@index');
+Route::put('/token', 'TokenController@update');
+Route::patch('/token', 'TokenController@update');
 
-Route::resource('devices', 'DevicesController')->only(['index', 'show', 'update', 'destroy']);
-Route::resource('samples', 'SamplesController')->only(['index', 'show', 'update', 'destroy']);
-Route::resource('messages', 'MobileMessagesController');
-Route::resource('members', 'Dashboard\MembersController')->only(['index', 'update']);
+// Route::resource('devices', 'DevicesController')->only(['index', 'show', 'update', 'destroy']);
+// Route::resource('samples', 'SamplesController')->only(['index', 'show', 'update', 'destroy']);
+// Route::resource('messages', 'MobileMessagesController');
+// Route::resource('members', 'Dashboard\MembersController')->only(['index', 'update']);
 
-Route::get('devices/fetch', 'DevicesController@fetch');
-Route::get('/settings', 'Settings\PagesController@redirect')->name('settings');
-Route::get('/settings/account', 'Settings\PagesController@account')->name('settings.account');
-Route::get('/settings/password', 'Settings\PagesController@password')->name('settings.password');
-Route::get('/settings/api', 'Settings\PagesController@api')->name('settings.api');
+// Route::get('devices/fetch', 'DevicesController@fetch');
+// Route::get('/settings', 'Settings\PagesController@redirect')->name('settings');
+// Route::get('/settings/account', 'Settings\PagesController@account')->name('settings.account');
+// Route::get('/settings/password', 'Settings\PagesController@password')->name('settings.password');
+// Route::get('/settings/api', 'Settings\PagesController@api')->name('settings.api');
 
-Route::post('/settings/account', 'Settings\UpdateController@account');
-Route::post('/settings/password', 'Settings\UpdateController@password');
-Route::post('/settings/api', 'Settings\UpdateController@api');
+// Route::post('/settings/account', 'Settings\UpdateController@account');
+// Route::post('/settings/password', 'Settings\UpdateController@password');
+// Route::post('/settings/api', 'Settings\UpdateController@api');
 
-Route::get('/stats/count/{model}', 'StatsCounterController@count');
-Route::get('/stats/total/{model}', 'StatsCounterController@total');
-Route::get('/stats/weekly/{model}', 'StatsCounterController@weekly');
-Route::get('/stats/devices/active', 'StatsCounterController@active');
-Route::get('/stats/devices/group', 'StatsCounterController@countGroup');
+// Route::get('/stats/count/{model}', 'StatsCounterController@count');
+// Route::get('/stats/total/{model}', 'StatsCounterController@total');
+// Route::get('/stats/weekly/{model}', 'StatsCounterController@weekly');
+// Route::get('/stats/devices/active', 'StatsCounterController@active');
+// Route::get('/stats/devices/group', 'StatsCounterController@countGroup');
