@@ -13,7 +13,7 @@
 
 Auth::routes(['verify' => true]);
 
-Auth::loginUsingId(1);
+// Auth::loginUsingId(1);
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/stats', 'StatsController@index');
