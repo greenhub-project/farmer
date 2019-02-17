@@ -32,6 +32,22 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
+     * The relationships to always eager-load.
+     *
+     * @var array
+     */
+    protected $with = ['roles'];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'created_at' => 'datetime:M. d, Y',
+    ];
+
+    /**
      * Boot the model.
      */
     public static function boot()

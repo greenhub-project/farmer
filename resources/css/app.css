@@ -32,6 +32,10 @@
  * @import "components/forms";
  */
 
+.table-item:nth-child(even) {
+    @apply bg-grey-lighter;
+}
+
 /**
  * This injects all of Tailwind's utility classes, generated based on your
  * config file.

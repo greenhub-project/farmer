@@ -20,6 +20,8 @@ Route::get('/stats', 'StatsController@index');
 Route::put('/token', 'TokenController@update');
 Route::patch('/token', 'TokenController@update');
 
+Route::resource('users', 'UserController');
+
 // Route::resource('devices', 'DevicesController')->only(['index', 'show', 'update', 'destroy']);
 // Route::resource('samples', 'SamplesController')->only(['index', 'show', 'update', 'destroy']);
 // Route::resource('messages', 'MobileMessagesController');

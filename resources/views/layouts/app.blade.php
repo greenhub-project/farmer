@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'GreenHub Farmer') }}</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:600,400,300" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700,600,400,300" rel="stylesheet"> 
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
