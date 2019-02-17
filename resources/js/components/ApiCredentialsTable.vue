@@ -2,20 +2,20 @@
   <div class="rounded-lg shadow">
     <div class="bg-grey-lighter py-3 px-4 rounded-t-lg">
       <div class="flex text-blue-darker text-sm font-bold uppercase tracking-wide">
-        <div class="flex-1">Email</div>
+        <div class="flex-1 hidden md:block">Email</div>
         <div class="flex-1">Key</div>
-        <div class="flex-1 text-right">Last updated</div>
+        <div class="flex-1 text-right hidden lg:block">Last updated</div>
         <div class="flex-1">&nbsp;</div>
       </div>
     </div>
     <div class="bg-white py-3 px-4 rounded-b-lg">
       <div class="flex items-center text-blue-darker text-sm">
-        <div class="flex-1">{{ user.email }}</div>
+        <div class="flex-1 hidden md:block">{{ user.email }}</div>
         <div
           :class="['flex-1 hover:cursor-pointer hover:text-blue-darkest', busy ? 'text-blue-dark' : '']"
           @click="copyToClipboard"
         >{{ apiKey }}</div>
-        <div class="flex-1 text-right">{{ lastUpdate }}</div>
+        <div class="flex-1 text-right hidden lg:block">{{ lastUpdate }}</div>
         <div class="flex-1 text-right">
           <button
             class="bg-blue-darker hover:bg-blue-darkest text-blue-lightest font-semibold py-2 px-4 rounded-full inline-flex items-center"

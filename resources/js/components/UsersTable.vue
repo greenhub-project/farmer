@@ -2,12 +2,12 @@
   <div class="rounded-lg shadow">
     <div class="bg-grey-lighter py-3 px-4 rounded-t-lg">
       <div class="flex text-blue-darker text-sm font-bold uppercase tracking-wide">
-        <div class="w-12">&nbsp;</div>
-        <div class="w-1/5">User</div>
-        <div class="w-1/4">Email</div>
+        <div class="w-12 hidden lg:block">&nbsp;</div>
+        <div class="w-2/5 lg:w-1/5">User</div>
+        <div class="w-1/4 hidden lg:block">Email</div>
         <div class="flex-1">Role</div>
-        <div class="flex-1">Joined at</div>
-        <div class="flex-1">Status</div>
+        <div class="flex-1 hidden lg:block">Joined at</div>
+        <div class="flex-1">Verified</div>
         <div class="w-24">&nbsp;</div>
       </div>
     </div>
@@ -19,20 +19,20 @@
           v-for="user of users"
           :key="user.name"
         >
-          <div class="w-12">
+          <div class="w-12 hidden lg:block">
             <img
               class="inline-block h-8 w-8 rounded-full"
               src="https://randomuser.me/portraits/lego/1.jpg"
               :alt="user.name"
             >
           </div>
-          <div class="w-1/5 flex flex-col">
+          <div class="w-2/5 lg:w-1/5 flex flex-col">
             <span class="mb-1">{{ user.name }}</span>
             <span class="text-grey-dark">#{{ user.id }}</span>
           </div>
-          <div class="w-1/4">{{ user.email }}</div>
+          <div class="w-1/4 hidden lg:block">{{ user.email }}</div>
           <div class="flex-1 capitalize">{{ user.roles[0].name }}</div>
-          <div class="flex-1">{{ user.created_at }}</div>
+          <div class="flex-1 hidden lg:block">{{ user.created_at }}</div>
           <div class="flex-1" title="Verified" v-if="user.email_verified_at !== null">
             <svg
               class="h-8 h-8 text-green"
