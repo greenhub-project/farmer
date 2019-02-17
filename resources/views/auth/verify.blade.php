@@ -4,7 +4,7 @@
 <div class="flex items-center">
     <div class="md:w-1/2 md:mx-auto">
         <div class="rounded shadow">
-            <div class="font-medium text-lg text-teal-darker bg-teal p-3 rounded-t">
+            <div class="font-medium text-lg text-blue-lightest bg-blue-darker p-3 rounded-t">
                 {{ __('Verify your Email Address') }}
             </div>
             <div class="bg-white p-3 rounded-b">
@@ -16,7 +16,7 @@
 
                 <p class="text-grey-dark">
                     {{ __('Before proceeding, please check your email for a verification link.') }}
-                    {{ __('If you did not receive the email') }}, <a href="{{ route('verification.resend') }}" class="no-underline hover:underline text-teal-darker">{{ __('click here to request another') }}</a>.
+                    {{ __('If you did not receive the email') }}, <a href="{{ route('verification.resend') }}" class="no-underline hover:underline text-blue-darker">{{ __('click here to request another') }}</a>.
                 </p>
             </div>
         </div>
