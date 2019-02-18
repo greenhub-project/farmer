@@ -28,7 +28,8 @@ export default {
   data() {
     return {
       number: 0,
-      tweenedNumber: 0
+      tweenedNumber: 0,
+      busy: false
     };
   },
   computed: {
@@ -43,14 +44,20 @@ export default {
   },
   methods: {
     fetchData() {
-      StatsService.index(this.model).then(
-        ({ data }) => (this.number = data.total)
-      );
+      this.busy = true;
+      StatsService.index(this.model).then(({ data }) => {
+        this.number = data.total;
+        this.busy.false;
+      });
     }
   },
   created() {
     this.fetchData();
-    setInterval(() => this.fetchData(), this.interval);
+    setInterval(() => {
+      if (!this.busy) {
+        this.fetchData();
+      }
+    }, this.interval);
   }
 };
 </script>
