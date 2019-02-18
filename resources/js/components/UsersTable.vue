@@ -3,7 +3,7 @@
     <div class="bg-grey-lighter py-3 px-4 rounded-t-lg">
       <div class="flex text-blue-darker text-sm font-bold uppercase tracking-wide">
         <div class="w-12 hidden lg:block">&nbsp;</div>
-        <div class="w-2/5 lg:w-1/5">User</div>
+        <div class="w-2/5 xs:flex-1 lg:w-1/5">User</div>
         <div class="w-1/4 hidden lg:block">Email</div>
         <div class="flex-1">Role</div>
         <div class="flex-1 hidden lg:block">Joined at</div>
@@ -27,7 +27,7 @@
               :alt="user.name"
             >
           </div>
-          <div class="w-2/5 lg:w-1/5 flex flex-col">
+          <div class="w-2/5 xs:flex-1 lg:w-1/5 flex flex-col">
             <span class="mb-1">{{ user.name }}</span>
             <span class="text-grey-dark">#{{ user.id }}</span>
           </div>
@@ -69,7 +69,10 @@
             </svg>
           </div>
           <div class="w-24 text-right block xs:hidden">
-            <span class="hover:underline hover:cursor-pointer mr-8">Toggle Role</span>
+            <span
+              class="hover:underline hover:cursor-pointer mr-4 sm:mr-8"
+              @click="toggleRole(user.id, user.roles[0].name)"
+            >Toggle Role</span>
           </div>
           <div class="w-16 text-right block xs:hidden">
             <span
@@ -97,6 +100,18 @@ export default {
     };
   },
   methods: {
+    toggleRole(id, role) {
+      UserService.update(id, role).then(({ data }) => {
+        if (data.user !== null) {
+          const idx = this.users.findIndex(u => u.id === id);
+          this.users = [
+            ...this.users.slice(0, idx),
+            { ...data.user },
+            ...this.users.slice(idx + 1)
+          ];
+        }
+      });
+    },
     deleteUser(id) {
       if (confirm("Are you sure you want to delete this user?")) {
         UserService.destroy(id).then(({ data }) => {

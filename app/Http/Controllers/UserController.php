@@ -72,7 +72,20 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        if ($request->wantsJson()) {
+            $attributes = $request->validate([
+                'role' => 'required|string',
+            ]);
+
+            $newRole = $attributes['role'] === 'member' ? 'admin' : 'member';
+
+            $user->assignRole($newRole);
+            $user->removeRole($attributes['role']);
+
+            return response()->json(['user' => $user]);
+        }
+
+        return response();
     }
 
     /**
