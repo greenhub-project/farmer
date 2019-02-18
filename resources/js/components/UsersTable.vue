@@ -12,9 +12,8 @@
         <div class="w-16 block xs:hidden">&nbsp;</div>
       </div>
     </div>
-    <div class="bg-white rounded-b-lg" :class="busy ? 'py-4' : ''">
-      <Spinner v-if="busy"/>
-      <div class="table-body" v-else>
+    <div class="bg-white rounded-b-lg">
+      <div class="table-body" v-if="!busy">
         <div
           class="flex items-center text-blue-darker text-sm p-4 table-item"
           v-for="user of users"
@@ -82,6 +81,30 @@
           </div>
         </div>
       </div>
+      <div class="py-4" v-else>
+        <Spinner/>
+      </div>
+      <div class="table-item text-center py-2 rounded-b-lg" v-if="hasMorePages">
+        <div class="flex items-center justify-center">
+          <span
+            class="text-blue-darker hover:text-blue-darkest hover:cursor-pointer text-sm leading-normal"
+            @click="fetchData"
+          >Load more</span>
+          <svg
+            class="w-6 h-6 text-blue-darker"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+          >
+            <path
+              class="heroicon-ui"
+              d="M15.3 9.3a1 1 0 0 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4l3.3 3.29 3.3-3.3z"
+            ></path>
+          </svg>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -96,7 +119,9 @@ export default {
   data() {
     return {
       users: [],
-      busy: false
+      busy: false,
+      page: 1,
+      hasMorePages: false
     };
   },
   methods: {
@@ -120,12 +145,21 @@ export default {
           }
         });
       }
+    },
+    fetchData() {
+      UserService.index(this.page).then(({ data }) => {
+        this.users = [...this.users, ...data.data];
+        this.hasMorePages = data.next_page_url !== null;
+        this.page = this.page + 1;
+      });
     }
   },
   created() {
     this.busy = true;
-    UserService.index().then(({ data }) => {
-      this.users = data;
+    UserService.index(this.page).then(({ data }) => {
+      this.users = data.data;
+      this.hasMorePages = data.next_page_url !== null;
+      this.page = this.page + 1;
       this.busy = false;
     });
   }

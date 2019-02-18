@@ -16,8 +16,10 @@ class UserController extends Controller
     public function index(Request $request)
     {
         if ($request->wantsJson()) {
-            return User::all();
+            return response()->json(User::simplePaginate(5));
         }
+
+        return response()->json(User::simplePaginate(5));
     }
 
     /**
