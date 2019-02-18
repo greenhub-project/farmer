@@ -1,7 +1,7 @@
 <template>
   <div class="w-full mb-8 sm:flex-1 sm:mb-0">
     <div class="text-blue-lighter font-semibold uppercase tracking-ultrawide mb-2">{{ label }}</div>
-    <div class="text-blue-lightest text-4xl font-light">{{ animatedNumber }}</div>
+    <div class="text-blue-lightest text-4xl sm:text-2xl font-light">{{ animatedNumber }}</div>
   </div>
 </template>
 

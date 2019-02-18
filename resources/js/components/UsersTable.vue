@@ -7,8 +7,9 @@
         <div class="w-1/4 hidden lg:block">Email</div>
         <div class="flex-1">Role</div>
         <div class="flex-1 hidden lg:block">Joined at</div>
-        <div class="flex-1">Verified</div>
-        <div class="w-24">&nbsp;</div>
+        <div class="flex-1 text-center sm:text-left">Status</div>
+        <div class="w-24 block xs:hidden">&nbsp;</div>
+        <div class="w-16 block xs:hidden">&nbsp;</div>
       </div>
     </div>
     <div class="bg-white rounded-b-lg" :class="busy ? 'py-4' : ''">
@@ -33,7 +34,11 @@
           <div class="w-1/4 hidden lg:block">{{ user.email }}</div>
           <div class="flex-1 capitalize">{{ user.roles[0].name }}</div>
           <div class="flex-1 hidden lg:block">{{ user.created_at }}</div>
-          <div class="flex-1" title="Verified" v-if="user.email_verified_at !== null">
+          <div
+            class="flex-1 text-center sm:text-left"
+            title="Verified"
+            v-if="user.email_verified_at !== null"
+          >
             <svg
               class="h-8 h-8 text-green"
               fill="currentColor"
@@ -48,7 +53,7 @@
               ></path>
             </svg>
           </div>
-          <div class="flex-1" title="Unverified" v-else>
+          <div class="flex-1 text-center sm:text-left" title="Unverified" v-else>
             <svg
               class="h-8 h-8 text-red"
               fill="currentColor"
@@ -63,8 +68,14 @@
               ></path>
             </svg>
           </div>
-          <div class="w-24 text-right">
+          <div class="w-24 text-right block xs:hidden">
             <span class="hover:underline hover:cursor-pointer mr-8">Toggle Role</span>
+          </div>
+          <div class="w-16 text-right block xs:hidden">
+            <span
+              class="text-red-dark hover:underline hover:cursor-pointer"
+              @click="deleteUser(user.id)"
+            >Delete</span>
           </div>
         </div>
       </div>
@@ -84,6 +95,17 @@ export default {
       users: [],
       busy: false
     };
+  },
+  methods: {
+    deleteUser(id) {
+      if (confirm("Are you sure you want to delete this user?")) {
+        UserService.destroy(id).then(({ data }) => {
+          if (data.result) {
+            this.users = this.users.filter(u => u.id !== id);
+          }
+        });
+      }
+    }
   },
   created() {
     this.busy = true;
