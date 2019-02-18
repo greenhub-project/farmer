@@ -47,7 +47,7 @@ export default {
       this.busy = true;
       StatsService.index(this.model).then(({ data }) => {
         this.number = data.total;
-        this.busy.false;
+        this.busy = false;
       });
     }
   },
