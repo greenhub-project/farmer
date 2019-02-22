@@ -60,6 +60,13 @@ class User extends Authenticatable implements MustVerifyEmail
         });
     }
 
+    public function setPasswordAttribute($password)
+    {
+        if ($password !== null & $password !== '') {
+            $this->attributes['password'] = bcrypt($password);
+        }
+    }
+
     /**
      * A user may have multiple datasets.
      *

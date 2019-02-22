@@ -13,12 +13,11 @@
 
 Auth::routes(['verify' => true]);
 
-// Auth::loginUsingId(1);
-
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/account', 'AccountController@index')->name('account');
+Route::match(['put', 'patch'], '/account', 'AccountController@update')->name('account.update');
 Route::get('/stats', 'StatsController@index');
-Route::put('/token', 'TokenController@update');
-Route::patch('/token', 'TokenController@update');
+Route::match(['put', 'patch'], '/token', 'TokenController@update');
 
 Route::resource('users', 'UserController');
 

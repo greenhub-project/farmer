@@ -26,7 +26,7 @@
                             </div>
                         </div>
                         <div slot="dropdown" class="bg-white shadow rounded border overflow-hidden text-right">
-                            <a href="#" class="no-underline block px-4 py-3 border-b text-sm text-blue-darker bg-white hover:text-white hover:bg-blue-dark whitespace-no-wrap">{{ __('Account') }}</a>
+                            <a href="{{ route('account') }}" class="no-underline block px-4 py-3 border-b text-sm text-blue-darker bg-white hover:text-white hover:bg-blue-dark whitespace-no-wrap">{{ __('Account') }}</a>
                             <a href="#" class="no-underline block px-4 py-3 border-b text-sm text-blue-darker bg-white hover:text-white hover:bg-blue-dark whitespace-no-wrap" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">

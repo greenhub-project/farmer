@@ -14,6 +14,8 @@
     @else
         @include('partials.help')
     @endadmin
+
+    @include('partials.alert')
 </div>
 
 @endsection

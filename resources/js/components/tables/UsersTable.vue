@@ -110,8 +110,8 @@
 </template>
 
 <script>
-import Spinner from "./Spinner";
-import UserService from "../services/UserService";
+import Spinner from "../Spinner";
+import UserService from "../../services/UserService";
 
 export default {
   name: "UsersTable",

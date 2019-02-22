@@ -43,7 +43,7 @@
 
 <script>
 import { toClipboard } from "copee";
-import TokenService from "../services/TokenService";
+import TokenService from "../../services/TokenService";
 
 export default {
   name: "ApiCredentialsTable",
