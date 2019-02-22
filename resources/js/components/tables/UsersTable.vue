@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="bg-white rounded-b-lg">
-      <div class="table-body" v-if="!busy">
+      <div class="table-body">
         <div
           class="flex items-center text-blue-darker text-sm p-4 table-item"
           v-for="user of users"
@@ -81,7 +81,7 @@
           </div>
         </div>
       </div>
-      <div class="py-4" v-else>
+      <div class="py-4" v-if="busy">
         <Spinner/>
       </div>
       <div class="table-item text-center py-2 rounded-b-lg" v-if="hasMorePages">
@@ -125,6 +125,15 @@ export default {
     };
   },
   methods: {
+    fetchData() {
+      this.busy = true;
+      UserService.index(this.page).then(({ data }) => {
+        this.users = [...this.users, ...data.data];
+        this.hasMorePages = data.next_page_url !== null;
+        this.page = this.page + 1;
+        this.busy = false;
+      });
+    },
     toggleRole(id, role) {
       UserService.update(id, role).then(({ data }) => {
         if (data.user !== null) {
@@ -145,23 +154,10 @@ export default {
           }
         });
       }
-    },
-    fetchData() {
-      UserService.index(this.page).then(({ data }) => {
-        this.users = [...this.users, ...data.data];
-        this.hasMorePages = data.next_page_url !== null;
-        this.page = this.page + 1;
-      });
     }
   },
   created() {
-    this.busy = true;
-    UserService.index(this.page).then(({ data }) => {
-      this.users = data.data;
-      this.hasMorePages = data.next_page_url !== null;
-      this.page = this.page + 1;
-      this.busy = false;
-    });
+    this.fetchData();
   }
 };
 </script>
