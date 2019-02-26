@@ -10,7 +10,6 @@
 -   MariaDB database
 -   [Composer](https://getcomposer.org/) - Installs package dependencies
 -   [NodeJS](https://nodejs.org/en/) - Provides NPM to install node packages
--   [Yarn](https://yarnpkg.com/lang/en/) - Provides a fast, reliable and secure node package manager.
 
 ## Installation
 
@@ -23,7 +22,7 @@
 
 ```
 composer install
-yarn install
+npm install
 ```
 
 -   Generate application key:
@@ -42,7 +41,7 @@ php artisan db:seed
 -   Build assets (e.g. in development environment)
 
 ```
-yarn dev
+npm run dev
 ```
 
 -   Start local server
