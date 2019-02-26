@@ -7,19 +7,16 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    protected $bag = 10;
+
     /**
      * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        if ($request->wantsJson()) {
-            return response()->json(User::simplePaginate(5));
-        }
-
-        return response()->json(User::simplePaginate(5));
+        return response()->json(User::simplePaginate($this->bag));
     }
 
     /**

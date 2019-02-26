@@ -41,130 +41,120 @@ class ProcessFailedUpload implements ShouldQueue
      */
     public function handle()
     {
-        DB::beginTransaction();
-
-        try {
-            $child = null;
-
-            $sample = $this->createSample();
-
-            $child = (array) $this->data['networkDetails'];
-            $sample->networkDetails()->create([
-                'network_type' => $child['networkType'],
-                'mobile_network_type' => $child['mobileNetworkType'],
-                'mobile_data_status' => $child['mobileDataStatus'],
-                'mobile_data_activity' => $child['mobileDataActivity'],
-                'roaming_enabled' => $child['roamingEnabled'],
-                'wifi_status' => $child['wifiStatus'],
-                'wifi_signal_strength' => $child['wifiSignalStrength'],
-                'wifi_link_speed' => $child['wifiLinkSpeed'],
-                'wifi_ap_status' => $child['wifiApStatus'],
-                'network_operator' => $child['networkOperator'],
-                'sim_operator' => $child['simOperator'],
-                'mcc' => $child['mcc'],
-                'mnc' => $child['mnc'],
-            ]);
-
-            $child = (array) $this->data['batteryDetails'];
-            $sample->batteryDetails()->create([
-                'charger' => $child['charger'],
-                'health' => $child['health'],
-                'voltage' => $child['voltage'],
-                'temperature' => $child['temperature'],
-                'capacity' => $child['capacity'],
-                'charge_counter' => $child['chargeCounter'],
-                'current_average' => $child['currentAverage'],
-                'current_now' => $child['currentNow'],
-                'energy_counter' => $child['energyCounter'],
-            ]);
-
-            $child = (array) $this->data['cpuStatus'];
-            $sample->cpuStatus()->create([
-                // Create a function to convert 0.xxx to xxx
-                'usage' => $child['cpuUsage'],
-                'up_time' => ($child['upTime'] < 1) ? 0 : $child['upTime'],
-                'sleep_time' => ($child['sleepTime'] < 1) ? 0 : $child['sleepTime'],
-            ]);
-
-            $child = (array) $this->data['settings'];
-            $sample->settings()->create([
-                'bluetooth_enabled' => $child['bluetoothEnabled'],
-                'location_enabled' => $child['locationEnabled'],
-                'power_saver_enabled' => $child['powersaverEnabled'],
-                'flashlight_enabled' => $child['flashlightEnabled'],
-                'nfc_enabled' => $child['nfcEnabled'],
-                'unknown_sources' => $child['unknownSources'],
-                'developer_mode' => $child['developerMode'],
-            ]);
-
-            $child = (array) $this->data['storageDetails'];
-            $sample->storageDetails()->create([
-                'free' => $child['free'],
-                'total' => $child['total'],
-                'free_external' => $child['freeExternal'],
-                'total_external' => $child['totalExternal'],
-                'free_system' => $child['freeSystem'],
-                'total_system' => $child['totalSystem'],
-                'free_secondary' => $child['freeSecondary'],
-                'total_secondary' => $child['totalSecondary'],
-            ]);
-
-            if (array_key_exists('locationProviders', $this->data)) {
-                $child = (array) $this->data['locationProviders'];
-                foreach ($child as $el) {
-                    $el = (array) $el;
-                    $sample->locationProviders()->create([
-                        'provider' => $el['provider'],
-                    ]);
-                }
-            }
-
-            if (array_key_exists('features', $this->data)) {
-                $child = (array) $this->data['features'];
-                foreach ($child as $el) {
-                    $el = (array) $el;
-                    $sample->features()->create([
-                        'key' => $el['key'],
-                        'value' => $el['value'],
-                    ]);
-                }
-            }
-
-            if (array_key_exists('processInfos', $this->data)) {
-                $child = (array) $this->data['processInfos'];
-                foreach ($child as $el) {
-                    $el = (array) $el;
-                    $process = $sample->processes()->create([
-                        'process_id' => $el['processId'],
-                        'name' => $el['name'],
-                        'application_label' => $el['applicationLabel'],
-                        'is_system_app' => $el['isSystemApp'],
-                        'importance' => $el['importance'],
-                        'version_name' => $el['versionName'],
-                        'version_code' => $el['versionCode'],
-                        'installation_package' => $el['installationPkg'],
-                    ]);
-
-                    if (array_key_exists('appPermissions', $el)) {
-                        $this->addAndroidPermissions($process, $el['appPermissions']);
+        DB::transaction(function () {
+            try {
+                $child = null;
+    
+                $sample = $this->createSample();
+    
+                $child = (array) $this->data['networkDetails'];
+                $sample->networkDetails()->create([
+                    'network_type' => $child['networkType'],
+                    'mobile_network_type' => $child['mobileNetworkType'],
+                    'mobile_data_status' => $child['mobileDataStatus'],
+                    'mobile_data_activity' => $child['mobileDataActivity'],
+                    'roaming_enabled' => $child['roamingEnabled'],
+                    'wifi_status' => $child['wifiStatus'],
+                    'wifi_signal_strength' => $child['wifiSignalStrength'],
+                    'wifi_link_speed' => $child['wifiLinkSpeed'],
+                    'wifi_ap_status' => $child['wifiApStatus'],
+                    'network_operator' => $child['networkOperator'],
+                    'sim_operator' => $child['simOperator'],
+                    'mcc' => $child['mcc'],
+                    'mnc' => $child['mnc'],
+                ]);
+    
+                $child = (array) $this->data['batteryDetails'];
+                $sample->batteryDetails()->create([
+                    'charger' => $child['charger'],
+                    'health' => $child['health'],
+                    'voltage' => $child['voltage'],
+                    'temperature' => $child['temperature'],
+                    'capacity' => $child['capacity'],
+                    'charge_counter' => $child['chargeCounter'],
+                    'current_average' => $child['currentAverage'],
+                    'current_now' => $child['currentNow'],
+                    'energy_counter' => $child['energyCounter'],
+                ]);
+    
+                $child = (array) $this->data['cpuStatus'];
+                $sample->cpuStatus()->create([
+                    // Create a function to convert 0.xxx to xxx
+                    'usage' => $child['cpuUsage'],
+                    'up_time' => ($child['upTime'] < 1) ? 0 : $child['upTime'],
+                    'sleep_time' => ($child['sleepTime'] < 1) ? 0 : $child['sleepTime'],
+                ]);
+    
+                $child = (array) $this->data['settings'];
+                $sample->settings()->create([
+                    'bluetooth_enabled' => $child['bluetoothEnabled'],
+                    'location_enabled' => $child['locationEnabled'],
+                    'power_saver_enabled' => $child['powersaverEnabled'],
+                    'flashlight_enabled' => $child['flashlightEnabled'],
+                    'nfc_enabled' => $child['nfcEnabled'],
+                    'unknown_sources' => $child['unknownSources'],
+                    'developer_mode' => $child['developerMode'],
+                ]);
+    
+                $child = (array) $this->data['storageDetails'];
+                $sample->storageDetails()->create([
+                    'free' => $child['free'],
+                    'total' => $child['total'],
+                    'free_external' => $child['freeExternal'],
+                    'total_external' => $child['totalExternal'],
+                    'free_system' => $child['freeSystem'],
+                    'total_system' => $child['totalSystem'],
+                    'free_secondary' => $child['freeSecondary'],
+                    'total_secondary' => $child['totalSecondary'],
+                ]);
+    
+                if (array_key_exists('locationProviders', $this->data)) {
+                    $child = (array) $this->data['locationProviders'];
+                    foreach ($child as $el) {
+                        $el = (array) $el;
+                        $sample->locationProviders()->create([
+                            'provider' => $el['provider'],
+                        ]);
                     }
                 }
+    
+                if (array_key_exists('features', $this->data)) {
+                    $child = (array) $this->data['features'];
+                    foreach ($child as $el) {
+                        $el = (array) $el;
+                        $sample->features()->create([
+                            'key' => $el['key'],
+                            'value' => $el['value'],
+                        ]);
+                    }
+                }
+    
+                if (array_key_exists('processInfos', $this->data)) {
+                    $child = (array) $this->data['processInfos'];
+                    foreach ($child as $el) {
+                        $el = (array) $el;
+                        $process = $sample->processes()->create([
+                            'process_id' => $el['processId'],
+                            'name' => $el['name'],
+                            'application_label' => $el['applicationLabel'],
+                            'is_system_app' => $el['isSystemApp'],
+                            'importance' => $el['importance'],
+                            'version_name' => $el['versionName'],
+                            'version_code' => $el['versionCode'],
+                            'installation_package' => $el['installationPkg'],
+                        ]);
+    
+                        if (array_key_exists('appPermissions', $el)) {
+                            $this->addAndroidPermissions($process, $el['appPermissions']);
+                        }
+                    }
+                }
+                $this->upload->delete();
+            } catch (QueryException $e) {
+                Log::error("Failed for upload => $this->upload->id");
+                Log::error($e->getMessage());
             }
-        } catch (QueryException $e) {
-            Log::error("Failed for upload => $this->upload->id");
-            Log::error($e->getMessage());
-            DB::rollBack();
-        }
-
-        try {
-            $this->upload->delete();
-        } catch (\Exception $e) {
-            Log::error("Failed for upload => $this->upload->id");
-            Log::error($e->getMessage());
-            DB::rollBack();
-        }
-
-        DB::commit();
+        });
     }
 
     private function createSample()

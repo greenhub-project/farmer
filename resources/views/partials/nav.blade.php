@@ -3,7 +3,7 @@
       <div class="flex items-center justify-center h-12">
           <div class="flex items-center mr-6">
             <img class="h-8 h-8 mr-2" src="/images/brand.png" alt="{{ config('app.name', 'GreenHub Farmer') }}">
-            <a href="{{ url('/') }}" class="text-lg font-hairline text-blue-darker no-underline hover:underline">
+            <a href="{{ url('/') }}" class="hidden md:inline-block text-lg font-hairline text-blue-darker no-underline hover:underline">
                 {{ config('app.name', 'GreenHub Farmer') }}
             </a>
           </div>
