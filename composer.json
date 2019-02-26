@@ -14,6 +14,7 @@
         "laravel-frontend-presets/tailwindcss": "^0.7.0",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
+        "predis/predis": "^1.1",
         "sentry/sentry-laravel": "^0.11.0",
         "spatie/laravel-backup": "^5.11",
         "spatie/laravel-cors": "^1.3",
