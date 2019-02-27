@@ -1,5 +1,7 @@
 <?php
 
+use App\Notifications\DailyStatsSummary;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +22,12 @@ Route::get('/stats', 'StatsController@index');
 Route::match(['put', 'patch'], '/token', 'TokenController@update');
 
 Route::resource('users', 'UserController');
+
+Route::get('/slack', function () {
+  $user = App\Farmer\Models\User::find(1);
+  $user->notify(new DailyStatsSummary);
+  return response('OK');
+});
 
 // Route::resource('devices', 'DevicesController')->only(['index', 'show', 'update', 'destroy']);
 // Route::resource('samples', 'SamplesController')->only(['index', 'show', 'update', 'destroy']);

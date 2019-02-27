@@ -2,8 +2,11 @@
 
 namespace App\Console;
 
+use App\Notifications\DailyStatsSummary;
 use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Farmer\Models\User;
 
 class Kernel extends ConsoleKernel
 {
@@ -23,8 +26,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->call(function() {
+            Notification::send(User::first(), new DailyStatsSummary);
+        })->everyFiveMinutes()
+          ->runInBackground();
     }
 
     /**

@@ -61,6 +61,17 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Route notifications for the Slack channel.
+     *
+     * @param  \Illuminate\Notifications\Notification  $notification
+     * @return string
+     */
+    public function routeNotificationForSlack($notification)
+    {
+        return env('SLACK_WEBHOOK_URL');
+    }
+
+    /**
      * A user may have multiple datasets.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
