@@ -187,9 +187,13 @@ class ProcessFailedUpload implements ShouldQueue
     {
         foreach ($permissions as $item) {
             $item = (array) $item;
-            $process->permissions()->attach(
-                AndroidPermission::firstOrCreate(['permission' => $item['permission']])
-            );
+            try {
+                $process->permissions()->attach(
+                    AndroidPermission::firstOrCreate(['permission' => $item['permission']])
+                );
+            } catch (QueryException $e) {
+                continue;
+            }
         }
     }
 }
