@@ -2,13 +2,13 @@
 
 namespace App\Notifications;
 
+use App\Farmer\Models\User;
 use Illuminate\Bus\Queueable;
+use App\Farmer\Models\Protocol\Device;
+use App\Farmer\Models\Protocol\Sample;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\SlackMessage;
-use App\Farmer\Models\Protocol\Sample;
-use App\Farmer\Models\Protocol\Device;
-use App\Farmer\Models\User;
 
 class DailyStatsSummary extends Notification implements ShouldQueue
 {
