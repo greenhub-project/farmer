@@ -39,7 +39,18 @@ class AccountController extends Controller
 
         DB::transaction(function () use ($attributes) {
             $user = auth()->user();
-            $user->update($attributes);
+            if ($attributes['password'] !== '') {
+                $user->update([
+                    'name' => $attributes['name'],
+                    'email' => $attributes['email'],
+                    'password' => bcrypt($attributes['password'])
+                ]);
+            } else {
+                $user->update([
+                    'name' => $attributes['name'],
+                    'email' => $attributes['email']
+                ]);
+            }
         });
 
         return redirect(route('home'))->with('status', 'Your profile has been updated successfully.');
