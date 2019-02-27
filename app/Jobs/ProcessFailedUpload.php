@@ -13,6 +13,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use App\Farmer\Models\Protocol\AndroidPermission;
+use Illuminate\Support\Facades\Redis;
 
 class ProcessFailedUpload implements ShouldQueue
 {
@@ -150,6 +151,7 @@ class ProcessFailedUpload implements ShouldQueue
                     }
                 }
                 $this->upload->delete();
+                $this->incrementStats();
             } catch (QueryException $e) {
                 Log::error("Failed for upload => $this->upload->id");
                 Log::error($e->getMessage());
@@ -195,5 +197,10 @@ class ProcessFailedUpload implements ShouldQueue
                 continue;
             }
         }
+    }
+
+    private function incrementStats() {
+        $date = today()->toDateString();
+        Redis::incr("samples:count:$date");
     }
 }

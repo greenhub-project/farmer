@@ -71,6 +71,8 @@ class ApiController extends Controller
             'is_root' => $request->isRoot,
         ]);
 
+        Redis::incr('devices:count:' . today()->toDateString());
+
         return $device->id;
     }
 

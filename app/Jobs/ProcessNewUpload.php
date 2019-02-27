@@ -13,6 +13,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use App\Farmer\Models\Protocol\AndroidPermission;
+use Illuminate\Support\Facades\Redis;
 
 class ProcessNewUpload implements ShouldQueue
 {
@@ -149,6 +150,7 @@ class ProcessNewUpload implements ShouldQueue
                 }
     
                 $upload->delete();
+                $this->incrementStats();
             } catch (QueryException $e) {
                 Log::error("Failed for device => $this->device->id");
                 Log::error($e->getMessage());
@@ -193,5 +195,10 @@ class ProcessNewUpload implements ShouldQueue
                 continue;
             }
         }
+    }
+
+    private function incrementStats() {
+        $date = today()->toDateString();
+        Redis::incr("samples:count:$date");
     }
 }
