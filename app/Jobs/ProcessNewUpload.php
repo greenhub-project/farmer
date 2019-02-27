@@ -185,9 +185,13 @@ class ProcessNewUpload implements ShouldQueue
     private function addAndroidPermissions($process, $permissions)
     {
         foreach ($permissions as $item) {
-            $process->permissions()->attach(
-                AndroidPermission::firstOrCreate(['permission' => $item['permission']])
-            );
+            try {
+                $process->permissions()->attach(
+                    AndroidPermission::firstOrCreate(['permission' => $item['permission']])
+                );
+            } catch (QueryException $e) {
+                continue;
+            }
         }
     }
 }
