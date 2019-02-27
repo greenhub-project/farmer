@@ -74,10 +74,12 @@
             >Toggle Role</span>
           </div>
           <div class="w-16 text-right block xs:hidden">
-            <span
-              class="text-red-dark hover:underline hover:cursor-pointer"
-              @click="deleteUser(user.id)"
-            >Delete</span>
+            <template v-if="auth !== user.id">
+              <span
+                class="text-red-dark hover:underline hover:cursor-pointer"
+                @click="deleteUser(user.id)"
+              >Delete</span>
+            </template>
           </div>
         </div>
       </div>
@@ -116,6 +118,12 @@ import UserService from "../../services/UserService";
 export default {
   name: "UsersTable",
   components: { Spinner },
+  props: {
+    auth: {
+      type: Number,
+      required: true
+    }
+  },
   data() {
     return {
       users: [],
