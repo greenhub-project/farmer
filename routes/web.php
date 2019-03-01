@@ -1,7 +1,5 @@
 <?php
 
-use App\Notifications\DailyStatsSummary;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes

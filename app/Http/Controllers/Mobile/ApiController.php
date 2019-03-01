@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Jobs\ProcessNewUpload;
 use App\Farmer\Models\MobileMessage;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redis;
 use App\Farmer\Models\Protocol\Device;
 
 class ApiController extends Controller
