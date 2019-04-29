@@ -120,6 +120,10 @@ return [
             'read_write_timeout' => 60,
         ],
 
+        'options' => [
+            'parameters' => ['password' => env('REDIS_PASSWORD', null)],
+        ],
+
         'cache' => [
             'host' => env('REDIS_HOST', '127.0.0.1'),
             'password' => env('REDIS_PASSWORD', null),
