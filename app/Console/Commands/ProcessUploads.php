@@ -39,9 +39,12 @@ class ProcessUploads extends Command
     public function handle()
     {
         $uploads = Upload::oldest()->take($this->arguments('bag'))->get();
+        echo 'Uploads fetched...';
 
         $uploads->each(function ($upload) {
-            dispatch(new ProcessFailedUpload($upload));
+            dispatch(new ProcessFailedUpload($upload))->delay(2);
+            echo 'Dispatched.';
         });
+        echo 'Done!';
     }
 }
