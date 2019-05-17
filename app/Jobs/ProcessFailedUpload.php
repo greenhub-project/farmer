@@ -19,20 +19,19 @@ class ProcessFailedUpload implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public $device;
     public $upload;
 
     private $data;
+    private $device;
 
     /**
      * Create a new job instance.
      *
-     * @param Device $device
      * @param Upload $upload
      */
-    public function __construct(Device $device, Upload $upload)
+    public function __construct(Upload $upload)
     {
-        $this->device = $device;
+        $this->device = null;
         $this->upload = $upload;
         $this->data = (array) json_decode($upload->data);
     }
@@ -45,6 +44,13 @@ class ProcessFailedUpload implements ShouldQueue
         DB::transaction(function () {
             try {
                 $child = null;
+
+                $this->device = Device::where('uuid', $this->data['uuId'])->first();
+
+                if (is_null($this->device)) {
+                    Log::error('[ProcessFailedUpload] Device with uuId:'.$this->data['uuId'].'not found');
+                    return;
+                }
     
                 $sample = $this->createSample();
     

@@ -10,6 +10,7 @@
     @include('dashboard.credentials')
 
     @admin
+        @include('dashboard.control')
         @include('dashboard.users')
     @else
         @include('partials.help')

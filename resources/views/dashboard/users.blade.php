@@ -4,4 +4,4 @@
         <div class="text-grey-dark text-sm tracking-wide">Manage users of the application</div>
     </div>
     <users-table :auth="{{ Auth::id() }}"></users-table>
-  </div>
+</div>
