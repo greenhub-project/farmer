@@ -27,9 +27,9 @@ class ProcessFailedUpload implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @param Upload $upload
+     * @param mixed $upload
      */
-    public function __construct(Upload $upload)
+    public function __construct($upload)
     {
         $this->device = null;
         $this->upload = $upload;
