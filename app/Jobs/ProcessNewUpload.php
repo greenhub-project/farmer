@@ -150,7 +150,7 @@ class ProcessNewUpload implements ShouldQueue
                 }
     
                 $upload->delete();
-                $this->incrementStats();
+                // $this->incrementStats();
             } catch (QueryException $e) {
                 Log::error("Failed for device => $this->device->id");
                 Log::error($e->getMessage());

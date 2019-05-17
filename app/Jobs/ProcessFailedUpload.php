@@ -151,7 +151,7 @@ class ProcessFailedUpload implements ShouldQueue
                     }
                 }
                 $this->upload->delete();
-                $this->incrementStats();
+                // $this->incrementStats();
             } catch (QueryException $e) {
                 Log::error("Failed for upload => $this->upload->id");
                 Log::error($e->getMessage());
