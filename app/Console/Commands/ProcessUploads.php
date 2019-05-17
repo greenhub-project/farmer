@@ -40,12 +40,12 @@ class ProcessUploads extends Command
     public function handle()
     {
         $uploads = DB::table('uploads')->take($this->arguments('bag'))->get();
-        echo 'Uploads fetched...';
 
-        $uploads->each(function ($upload) {
+        foreach ($uploads as $upload) {
             dispatch(new ProcessFailedUpload($upload));
-            echo 'Dispatched.';
-        });
-        echo 'Done!';
+            printf('Dispatched!');
+        }
+
+        printf('Done!');
     }
 }
