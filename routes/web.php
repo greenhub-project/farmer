@@ -19,6 +19,8 @@ Route::match(['put', 'patch'], '/account', 'AccountController@update')->name('ac
 Route::get('/stats', 'StatsController@index');
 Route::match(['put', 'patch'], '/token', 'TokenController@update');
 
+Route::post('/fix', 'ActionController@fix');
+
 Route::resource('users', 'UserController');
 
 // Route::resource('devices', 'DevicesController')->only(['index', 'show', 'update', 'destroy']);
