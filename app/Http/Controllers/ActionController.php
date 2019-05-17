@@ -17,18 +17,4 @@ class ActionController extends Controller
     {
         $this->middleware(['auth', 'verified']);
     }
-
-    public function fix(Request $request) {
-        $attributes = $request->validate([
-            'bag' => 'required|numeric|min:1',
-        ]);
-
-        $uploads = Upload::oldest()->take($attributes['bag'])->get();
-
-        $uploads->each(function ($upload) {
-            dispatch(new ProcessFailedUpload($upload));
-        });
-
-        return redirect()->back();
-    }
 }
