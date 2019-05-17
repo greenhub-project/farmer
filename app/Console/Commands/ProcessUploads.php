@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Farmer\Models\Upload;
+use Illuminate\Support\Facades\DB;
 
 class ProcessUploads extends Command
 {
@@ -38,11 +38,11 @@ class ProcessUploads extends Command
      */
     public function handle()
     {
-        $uploads = Upload::oldest()->take($this->arguments('bag'))->get();
+        $uploads = DB::table('uploads')->take($this->arguments('bag'))->get();
         echo 'Uploads fetched...';
 
         $uploads->each(function ($upload) {
-            dispatch(new ProcessFailedUpload($upload))->delay(2);
+            dispatch(new ProcessFailedUpload($upload));
             echo 'Dispatched.';
         });
         echo 'Done!';
