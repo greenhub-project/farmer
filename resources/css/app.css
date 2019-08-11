@@ -33,7 +33,7 @@
  */
 
 .table-item:nth-child(even) {
-    @apply bg-gray-200;
+    @apply bg-grey-lighter;
 }
 
 /**
