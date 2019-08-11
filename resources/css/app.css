@@ -5,7 +5,7 @@
  * You can see the styles here:
  * https://github.com/tailwindcss/tailwindcss/blob/master/css/preflight.css
  */
-@tailwind preflight;
+@tailwind base;
 
 /**
  * This injects any component classes registered by plugins.
@@ -33,7 +33,7 @@
  */
 
 .table-item:nth-child(even) {
-    @apply bg-grey-lighter;
+    @apply bg-gray-200;
 }
 
 /**

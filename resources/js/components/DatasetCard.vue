@@ -4,7 +4,7 @@
       <div class="p-4">
         <div class="text-blue-darker text-lg font-semibold">{{ title }}</div>
         <div class="text-grey-darkest my-4">{{ body }}</div>
-        <div class="text-grey-dark text-sm">Last updated: Dec 2018</div>
+        <div class="text-grey-dark text-sm">Last updated: Jul 2019</div>
       </div>
       <div class="bg-grey-lighter text-center py-2 rounded-b-lg">
         <div class="flex items-center justify-center">

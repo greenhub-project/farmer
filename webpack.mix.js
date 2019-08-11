@@ -17,7 +17,7 @@ mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css')
     .options({
         processCssUrls: false,
-        postCss: [tailwindcss('resources/js/tailwind.js')]
+        postCss: [tailwindcss('resources/js/tailwind.config.js')]
     })
     .purgeCss()
 
