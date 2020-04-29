@@ -3,8 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
 use App\Jobs\ProcessFailedUpload;
+use Illuminate\Support\Facades\DB;
 
 class ProcessUploads extends Command
 {

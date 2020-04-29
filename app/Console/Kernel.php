@@ -2,10 +2,7 @@
 
 namespace App\Console;
 
-use App\Farmer\Models\User;
-use App\Notifications\DailyStatsSummary;
 use Illuminate\Console\Scheduling\Schedule;
-use Illuminate\Support\Facades\Notification;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel

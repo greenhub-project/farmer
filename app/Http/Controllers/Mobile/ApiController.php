@@ -91,7 +91,7 @@ class ApiController extends Controller
         }
 
         // dispatch job with device
-        dispatch(new ProcessNewUpload($device, $data['sample']));
+        // dispatch(new ProcessNewUpload($device, $data['sample']));
 
         return (null == $device) ? 0 : 1;
     }
