@@ -11,8 +11,8 @@ services:
     ports:
       - "3307:3306"
     restart: always
-    #volumes:
-    #  - ./deploy/common/opt/honeywell/tman/scripts/database/mysql:/opt/honeywell/tman/scripts/database/mysql
+    volumes:
+      - "./create_tables.sql:/docker-entrypoint-initdb.d/1.sql"
     #  - ./deploy/development/database/scripts/mysql/install.sh:/docker-entrypoint-initdb.d/install.sh
     #  - ./deploy/development/database/scripts/mysql/data/:/dev-data/
     #  - ./deploy/development/database/scripts/mysql/dummy_inserts.sh/:/dummy_inserts.sh
