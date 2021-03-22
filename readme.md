@@ -1,6 +1,6 @@
 # GreenHub Farmer
 
-![workflow status](https://github.com/greenhub-project/farmer/docs/actions/workflows/laravel.yml/badge.svg)
+![workflow status](https://github.com/greenhub-project/farmer/actions/workflows/laravel.yml/badge.svg)
 
 
 > GreenHub's back-end and web dashboard module
