@@ -1,6 +1,7 @@
 # GreenHub Farmer
 
-[![Build Status](https://travis-ci.org/greenhub-project/farmer.svg?branch=master)](https://travis-ci.org/greenhub-project/farmer)
+![workflow status](https://github.com/greenhub-project/farmer/docs/actions/workflows/laravel.yml/badge.svg)
+
 
 > GreenHub's back-end and web dashboard module
 
