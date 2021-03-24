@@ -21,8 +21,8 @@ class ProcessFailedUpload implements ShouldQueue
 
     public $upload;
 
-    private $data;
-    private $device;
+    public $data;
+    public $device;
 
     /**
      * Create a new job instance.
