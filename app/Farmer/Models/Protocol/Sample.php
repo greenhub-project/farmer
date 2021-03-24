@@ -94,6 +94,11 @@ class Sample extends Model
         return $this->hasMany(AppProcess::class);
     }
 
+    public function sensors()
+    {
+        return $this->hasMany(SensorDetails::class);
+    }
+
     public function features()
     {
         return $this->hasMany(Feature::class);
@@ -111,6 +116,7 @@ class Sample extends Model
             'locationProviders',
             'processes',
             'processes.permissions',
+            'sensors',
             'features'
         );
     }

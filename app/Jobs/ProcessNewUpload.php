@@ -148,7 +148,35 @@ class ProcessNewUpload implements ShouldQueue
                         }
                     }
                 }
-    
+
+                if (array_key_exists('sensorDetailsList', $this->data)) {
+                    $child = $this->data['sensorDetailsList'];
+                    foreach ($child as $el) {
+                        $process = $sample->processes()->create([
+                            'name' => $el['name'],
+                            'fifo_max_event_count' => $el['fifoMaxEventCount'],
+                            'fifo_reserved_event_count' => $el['fifoReservedEventCount'],
+                            'highest_direct_report_rate_level' => $el['highestDirectReportRateLevel'],
+                            'max_delay' => $el['maxDelay'],
+                            'maximum_range' => $el['maximumRange'],
+                            'min_delay' => $el['minDelay'],
+                            'power' => $el['power'],
+                            'reporting_mode' => $el['reportingMode'],
+                            'resolution' => $el['resolution'],
+                            'string_type' => $el['stringType'],
+                            'code_type' => $el['codeType'],
+                            'vendor' => $el['vendor'],
+                            'version' => $el['version'],
+                            'is_additional_info_supported' => $el['isAdditionalInfoSupported'],
+                            'is_dynamic_sensor' => $el['isDynamicSensor'],
+                            'is_wake_up_sensor' => $el['isWakeUpSensor'],
+                            'frequency_of_use' => $el['frequencyOfUse'],
+                            'ini_timestamp' => $el['iniTimestamp'],
+                            'end_timestamp' => $el['endTimestamp'],
+                        ]);
+                    }
+                }
+
                 $upload->delete();
                 // $this->incrementStats();
             } catch (QueryException $e) {
