@@ -153,6 +153,7 @@ class ProcessNewUpload implements ShouldQueue
                     $child = $this->data['sensorDetailsList'];
                     foreach ($child as $el) {
                         $sensor = $sample->sensors()->create([
+
                             'name' => $el['name'],
                             'fifo_max_event_count' => $el['fifoMaxEventCount'],
                             'fifo_reserved_event_count' => $el['fifoReservedEventCount'],
