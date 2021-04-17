@@ -24,7 +24,7 @@ class CreateSensorDetailsTable extends Migration
             $table->decimal('maximum_range');
             $table->integer('min_delay');
             $table->string('name', 100);
-            $table->decimal('power');            
+            $table->double('power');            
             $table->integer('reporting_mode');
             $table->decimal('resolution');  
             $table->string('string_type', 100);            
