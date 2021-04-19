@@ -152,7 +152,8 @@ class ProcessNewUpload implements ShouldQueue
                 if (array_key_exists('sensorDetailsList', $this->data)) {
                     $child = $this->data['sensorDetailsList'];
                     foreach ($child as $el) {
-                        $process = $sample->processes()->create([
+                        $sensor = $sample->sensors()->create([
+
                             'name' => $el['name'],
                             'fifo_max_event_count' => $el['fifoMaxEventCount'],
                             'fifo_reserved_event_count' => $el['fifoReservedEventCount'],
